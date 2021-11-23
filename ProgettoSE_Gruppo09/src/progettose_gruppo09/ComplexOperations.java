@@ -4,6 +4,10 @@
  */
 package progettose_gruppo09;
 
+import static java.lang.Math.round;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  *
  * @author gruppo09
@@ -27,9 +31,15 @@ public class ComplexOperations {
     
     public static Complex complexDiv(Complex a, Complex b){
         
-        double real = (((a.getReal()*b.getReal())+(a.getImaginary()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary())));
-        double imaginary = (((a.getImaginary()*b.getReal())-(a.getReal()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary())));
-        return new Complex(real, imaginary);
+        double real = ((a.getReal()*b.getReal())+(a.getImaginary()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary()));
+        BigDecimal bdr = new BigDecimal(real).setScale(2, RoundingMode.HALF_UP);
+        double re = bdr.doubleValue();
+        
+        double imaginary = ((a.getImaginary()*b.getReal())-(a.getReal()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary()));
+        BigDecimal bdi = new BigDecimal(imaginary).setScale(2, RoundingMode.HALF_UP);
+        double imm = bdi.doubleValue();
+        
+        return new Complex(re, imm);
         
     }
     
