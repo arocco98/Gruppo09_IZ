@@ -21,7 +21,7 @@ public class ComplexOperations {
     
     public static Complex complexSub(Complex a, Complex b){
         
-        return new Complex(a.getReal() - b.getReal(), a.getImaginary() - b.getImaginary());
+        return new Complex((a.getReal() - b.getReal()), a.getImaginary() - b.getImaginary());
         
     }
     

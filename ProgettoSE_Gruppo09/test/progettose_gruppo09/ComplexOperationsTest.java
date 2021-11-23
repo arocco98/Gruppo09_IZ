@@ -24,6 +24,9 @@ public class ComplexOperationsTest {
     @Test
     public void testComplexSub(){
         
+        double result = 0;
+        double result2 = 0;
+        
         //sub with positive real part ≠0 and immag part =0 
         Complex a = new Complex(4.0, 0.0);
         Complex b = new Complex(3.0, 0.0);
@@ -73,27 +76,33 @@ public class ComplexOperationsTest {
         assertEquals(expected7, ComplexOperations.complexSub(a7, b7));
         
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with negative real part, with decimal part, and negative immag part
-        //Complex a8 = new Complex(4.1, 1.0);
-        //Complex b8 = new Complex(7.2, 8.0);
-        //Complex expected8 = new Complex(-3.1, -7.0);
-        //assertEquals(expected8, ComplexOperations.complexSub(a8, b8));
+        Complex a8 = new Complex(4.1, 1.0);
+        Complex b8 = new Complex(7.2, 8.0);
+        result = 4.1 - 7.2;
+        Complex expected8 = new Complex(result, -7.0);
+        assertEquals(expected8.getReal(), ComplexOperations.complexSub(a8, b8).getReal(),0);
         
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with positive real part, with decimal part, and positive immag part
         Complex a9 = new Complex(10.2, 8.0);
         Complex b9 = new Complex(7.1, 1.0);
-        Complex expected9 = new Complex(3.1, 7.0);
+        result = 10.2 - 7.1;
+        Complex expected9 = new Complex(result, 7.0);
         assertEquals(expected9, ComplexOperations.complexSub(a9, b9));
         
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with negative real part, with decimal part, and positive immag part, with decimal part
         Complex a10 = new Complex(4.1, 8.2);
         Complex b10 = new Complex(7.2, 1.1);
-        Complex expected10 = new Complex(-3.1, 7.1);
+        result = 4.1 - 7.2;
+        result2 = 8.2 - 1.1;
+        Complex expected10 = new Complex(result, result2);
         assertEquals(expected10, ComplexOperations.complexSub(a10, b10));
         
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with positive real part, with decimal part, and negative immag part, with decimal part
         Complex a11 = new Complex(10.2, 1.2);
         Complex b11 = new Complex(7.1, 7.1);
-        Complex expected11 = new Complex(3.1, -3.1);
+        result = 10.2 - 7.1;
+        result2 = 1.2 - 7.1;
+        Complex expected11 = new Complex(result, result2);
         assertEquals(expected11, ComplexOperations.complexSub(a11, b11));
     } 
 }
