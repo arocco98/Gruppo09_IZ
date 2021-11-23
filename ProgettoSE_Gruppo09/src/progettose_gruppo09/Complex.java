@@ -36,5 +36,26 @@ public class Complex {
     public void setImaginary(double imaginary) {
         this.imaginary = imaginary;
     }  
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Complex other = (Complex) obj;
+        if (Double.doubleToLongBits(this.real) != Double.doubleToLongBits(other.real)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.imaginary) != Double.doubleToLongBits(other.imaginary)) {
+            return false;
+        }
+        return true;
+    }
    
 }

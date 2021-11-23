@@ -15,12 +15,10 @@ public class ComplexOperationsTest {
 
     @Test
     public void testComplexSum(){
-        Complex a = new Complex(4.0, 0.0);
-        Complex b = new Complex(3.0, 0.0);
-        Complex c = new Complex(7.0, 1.0);
-        Complex d = ComplexOperations.complexSum(a, b);
-        assertEquals(c.getReal(), d.getReal(), 0);
-        assertEquals(c.getImaginary(), d.getImaginary(), 0);
+        Complex a = new Complex(4.0, 2.0);
+        Complex b = new Complex(3.0, 1.0);
+        Complex expected = new Complex(7.0, 3.0);
+        assertEquals(expected, ComplexOperations.complexSum(a, b));
     }  
 
     // TODO add test methods here.
