@@ -198,12 +198,12 @@ public class ComplexOperationsTest {
 
         Complex e = new Complex(4.0, 2.0);
         Complex f = new Complex(3.0, 0.0);
-        Complex expected3 = new Complex(1.33, 0.66);
+        Complex expected3 = new Complex(1.33, 0.67);
         assertEquals(expected3, ComplexOperations.complexDiv(e, f));
 
         Complex g = new Complex(-4.0, 2.0);
         Complex h = new Complex(3.0, 7.0);
-        Complex expected4 = new Complex(0.03, -0.58);
+        Complex expected4 = new Complex(0.03, 0.59);
         assertEquals(expected4, ComplexOperations.complexDiv(g, h));
 
         Complex i = new Complex(4.0, 2.0);
@@ -213,7 +213,7 @@ public class ComplexOperationsTest {
 
         Complex m = new Complex(7.0, -2.0);
         Complex n = new Complex(-3.0, 4.0);
-        Complex expected6 = new Complex(1.16, 1.36);
+        Complex expected6 = new Complex(-1.16, -0.88);
         assertEquals(expected6, ComplexOperations.complexDiv(m, n));
 
     } 
