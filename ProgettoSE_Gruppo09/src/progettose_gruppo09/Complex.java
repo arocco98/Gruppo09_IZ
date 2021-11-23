@@ -57,5 +57,24 @@ public class Complex {
         }
         return true;
     }
-   
+
+    @Override
+    public String toString() {
+        // real part and imaginary part is 0
+        if(this.getReal() == 0.0 && this.getImaginary() == 0.0)
+            return "0";
+        
+        // only imaginary part is 0
+        if(this.getReal() != 0.0 && this.getImaginary() == 0.0)
+            return Double.toString(this.getReal());
+        
+        // only real part is 0
+        if(this.getReal() == 0.0 && this.getImaginary() != 0.0)
+            return Double.toString(this.getImaginary()) + "j";
+        
+        if(this.getImaginary() > 0)
+            return Double.toString(this.getReal()) + "+" + Double.toString(this.getImaginary()) + "j";
+        
+        return Double.toString(this.getReal()) + Double.toString(this.getImaginary()) + "j";
+    }
 }
