@@ -21,19 +21,24 @@ public class ComplexOperations {
     
     public static Complex complexSub(Complex a, Complex b){
         
-         return null;
+        return new Complex((a.getReal() - b.getReal()), a.getImaginary() - b.getImaginary());
         
     }
     
     public static Complex complexDiv(Complex a, Complex b){
         
-        return null;
+        double real = (((a.getReal()*b.getReal())+(a.getImaginary()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary())));
+        double imaginary = (((a.getImaginary()*b.getReal())-(a.getReal()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary())));
+        return new Complex(real, imaginary);
         
     }
     
     public static Complex complexProd(Complex a, Complex b){
         
-        return null;
+        double real = ((a.getReal()*b.getReal()) - (a.getImaginary()*b.getImaginary()));
+        double imaginary = ((a.getReal()*b.getImaginary()) + (a.getImaginary()*b.getReal()));
+        return new Complex(real, imaginary);
+
         
     }
 

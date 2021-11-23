@@ -9,7 +9,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -18,21 +19,42 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    
+    private ListView<Complex> elementList;
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        label.setText("Hello World!");
-        System.out.println("Hello World! You clicked me!");
-        label.setText("Hello World2!");
-        System.out.println("Hello World From Matteo!");
+    private TextField elementTextField;
 
-        
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void insert(ActionEvent event) {
+        System.out.println("Hello World!");
+    }
+
+    @FXML
+    private void sum(ActionEvent event) {
+    }
+
+    @FXML
+    private void subtraction(ActionEvent event) {
+    }
+
+    @FXML
+    private void product(ActionEvent event) {
+    }
+
+    @FXML
+    private void division(ActionEvent event) {
+    }
+
+    @FXML
+    private void squareRoot(ActionEvent event) {
+    }
+
+    @FXML
+    private void inversionSign(ActionEvent event) {
+    }
     
 }
