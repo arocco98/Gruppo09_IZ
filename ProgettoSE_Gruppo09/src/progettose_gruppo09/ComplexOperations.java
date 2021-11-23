@@ -4,6 +4,10 @@
  */
 package progettose_gruppo09;
 
+import static java.lang.Math.round;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  *
  * @author gruppo09
@@ -19,6 +23,12 @@ public class ComplexOperations {
 
     }
     
+    /**
+     * 
+     * @param a First operand of the subtraction between complex numbers, it must be a complex number
+     * @param b Second operand of the subtraction between complex numbers, must be a complex number
+     * @return Complex number which is the subtraction between operand a and operand b
+     */
     public static Complex complexSub(Complex a, Complex b){
         
         return new Complex((a.getReal() - b.getReal()), a.getImaginary() - b.getImaginary());
@@ -27,9 +37,15 @@ public class ComplexOperations {
     
     public static Complex complexDiv(Complex a, Complex b){
         
-        double real = (((a.getReal()*b.getReal())+(a.getImaginary()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary())));
-        double imaginary = (((a.getImaginary()*b.getReal())-(a.getReal()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary())));
-        return new Complex(real, imaginary);
+        double real = ((a.getReal()*b.getReal())+(a.getImaginary()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary()));
+        BigDecimal bdr = new BigDecimal(real).setScale(2, RoundingMode.HALF_UP);
+        double re = bdr.doubleValue();
+        
+        double imaginary = ((a.getImaginary()*b.getReal())-(a.getReal()*b.getImaginary()))/((b.getReal()*b.getReal())+(b.getImaginary()*b.getImaginary()));
+        BigDecimal bdi = new BigDecimal(imaginary).setScale(2, RoundingMode.HALF_UP);
+        double imm = bdi.doubleValue();
+        
+        return new Complex(re, imm);
         
     }
     

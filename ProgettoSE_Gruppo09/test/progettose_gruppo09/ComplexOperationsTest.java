@@ -75,8 +75,11 @@ public class ComplexOperationsTest {
         //This case is used to test that the sum between a negative number and
         //a positive one with real part and imaginary part having decimal
         assertEquals(new Complex(-11.1, -6.2), ComplexOperations.complexSum(new Complex(-11.6, -7.0), new Complex(0.5, 0.8)));
-    }
-    
+    }  
+
+    /**
+     *  Test Function for sub operation
+     */
     @Test
     public void testComplexSub(){
         
