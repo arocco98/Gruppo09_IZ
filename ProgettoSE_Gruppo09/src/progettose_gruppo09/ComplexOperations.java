@@ -33,7 +33,10 @@ public class ComplexOperations {
     
     public static Complex complexProd(Complex a, Complex b){
         
-        return null;
+        double real = ((a.getReal()*b.getReal()) - (a.getImaginary()*b.getImaginary()));
+        double imaginary = ((a.getReal()*b.getImaginary()) + (a.getImaginary()*b.getReal()));
+        return new Complex(real, imaginary);
+
         
     }
 
