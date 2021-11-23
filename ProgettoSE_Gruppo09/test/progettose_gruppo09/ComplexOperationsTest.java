@@ -139,4 +139,39 @@ public class ComplexOperationsTest {
         Complex expected11 = new Complex(result, result2);
         assertEquals(expected11, ComplexOperations.complexSub(a11, b11));
     } 
+    
+    @Test
+    public void testComplexDiv(){
+
+        Complex a = new Complex(4.0, 2.0);
+        Complex b = new Complex(3.0, 1.0);
+        Complex expected = new Complex(1.4, 0.2);
+        assertEquals(expected, ComplexOperations.complexDiv(a, b));
+
+        Complex c = new Complex(0.0, 2.0);
+        Complex d = new Complex(3.0, 1.0);
+        Complex expected2 = new Complex(0.2, 0.6);
+        assertEquals(expected2, ComplexOperations.complexDiv(c, d));
+
+        Complex e = new Complex(4.0, 2.0);
+        Complex f = new Complex(3.0, 0.0);
+        Complex expected3 = new Complex(1.33, 0.66);
+        assertEquals(expected3, ComplexOperations.complexDiv(e, f));
+
+        Complex g = new Complex(-4.0, 2.0);
+        Complex h = new Complex(3.0, 7.0);
+        Complex expected4 = new Complex(0.03, -0.58);
+        assertEquals(expected4, ComplexOperations.complexDiv(g, h));
+
+        Complex i = new Complex(4.0, 2.0);
+        Complex l = new Complex(3.0, -3.0);
+        Complex expected5 = new Complex(0.33, 1.0);
+        assertEquals(expected5, ComplexOperations.complexDiv(i, l));
+
+        Complex m = new Complex(7.0, -2.0);
+        Complex n = new Complex(-3.0, 4.0);
+        Complex expected6 = new Complex(1.16, 1.36);
+        assertEquals(expected6, ComplexOperations.complexDiv(m, n));
+
+    } 
 }
