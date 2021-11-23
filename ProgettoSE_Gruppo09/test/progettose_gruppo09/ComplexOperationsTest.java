@@ -15,9 +15,9 @@ public class ComplexOperationsTest {
 
     @Test
     public void testComplexSum(){
-        Complex a = new Complex(4.0, 2.0);
-        Complex b = new Complex(3.0, 1.0);
-        Complex expected = new Complex(7.0, 3.0);
+        Complex a = new Complex(4.1, 2.0);
+        Complex b = new Complex(3.2, 1.0);
+        Complex expected = new Complex(7.3, 3.0);
         assertEquals(expected, ComplexOperations.complexSum(a, b));
     }  
 
