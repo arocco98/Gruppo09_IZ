@@ -13,6 +13,22 @@ import static org.junit.Assert.*;
  */
 public class ComplexOperationsTest {
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
+    }
+
     @Test
     public void testComplexSum(){
         
@@ -59,42 +75,8 @@ public class ComplexOperationsTest {
         //This case is used to test that the sum between a negative number and
         //a positive one with real part and imaginary part having decimal
         assertEquals(new Complex(-11.1, -6.2), ComplexOperations.complexSum(new Complex(-11.6, -7.0), new Complex(0.5, 0.8)));
-    }  
-    @Test
-    public void testComplexProd(){
-
-        Complex a = new Complex(4.0, 2.0);
-        Complex b = new Complex(3.0, 1.0);
-        Complex expected = new Complex(10.0, 10.0);
-        assertEquals(expected, ComplexOperations.complexProd(a, b));
-
-        Complex c = new Complex(0.0, 2.0);
-        Complex d = new Complex(3.0, 1.0);
-        Complex expected2 = new Complex(-2.0, 6.0);
-        assertEquals(expected2, ComplexOperations.complexProd(c, d));
-
-        Complex e = new Complex(4.0, 2.0);
-        Complex f = new Complex(3.0, 0.0);
-        Complex expected3 = new Complex(12.0, 6.0);
-        assertEquals(expected3, ComplexOperations.complexProd(e, f));
-
-        Complex g = new Complex(-4.0, 2.0);
-        Complex h = new Complex(3.0, 7.0);
-        Complex expected4 = new Complex(-26.0, -22.0);
-        assertEquals(expected4, ComplexOperations.complexProd(g, h));
-
-        Complex i = new Complex(4.0, 2.0);
-        Complex l = new Complex(3.0, -3.0);
-        Complex expected5 = new Complex(18.0, -6.0);
-        assertEquals(expected5, ComplexOperations.complexProd(i, l));
-
-        Complex m = new Complex(7.0, -2.0);
-        Complex n = new Complex(-3.0, 4.0);
-        Complex expected6 = new Complex(-13.0, 34.0);
-        assertEquals(expected6, ComplexOperations.complexProd(m, n));
-
-    } 
-
+    }
+    
     @Test
     public void testComplexSub(){
         
@@ -181,37 +163,59 @@ public class ComplexOperationsTest {
     } 
     
     @Test
-    public void testComplexDiv(){
+    public void testComplexProd(){
 
         Complex a = new Complex(4.0, 2.0);
         Complex b = new Complex(3.0, 1.0);
-        Complex expected = new Complex(1.4, 0.2);
-        assertEquals(expected, ComplexOperations.complexDiv(a, b));
+        Complex expected = new Complex(10.0, 10.0);
+        assertEquals(expected, ComplexOperations.complexProd(a, b));
 
         Complex c = new Complex(0.0, 2.0);
         Complex d = new Complex(3.0, 1.0);
-        Complex expected2 = new Complex(0.2, 0.6);
-        assertEquals(expected2, ComplexOperations.complexDiv(c, d));
+        Complex expected2 = new Complex(-2.0, 6.0);
+        assertEquals(expected2, ComplexOperations.complexProd(c, d));
 
         Complex e = new Complex(4.0, 2.0);
         Complex f = new Complex(3.0, 0.0);
-        Complex expected3 = new Complex(1.33, 0.66);
-        assertEquals(expected3, ComplexOperations.complexDiv(e, f));
+        Complex expected3 = new Complex(12.0, 6.0);
+        assertEquals(expected3, ComplexOperations.complexProd(e, f));
 
         Complex g = new Complex(-4.0, 2.0);
         Complex h = new Complex(3.0, 7.0);
-        Complex expected4 = new Complex(0.03, -0.58);
-        assertEquals(expected4, ComplexOperations.complexDiv(g, h));
+        Complex expected4 = new Complex(-26.0, -22.0);
+        assertEquals(expected4, ComplexOperations.complexProd(g, h));
 
         Complex i = new Complex(4.0, 2.0);
         Complex l = new Complex(3.0, -3.0);
-        Complex expected5 = new Complex(0.33, 1.0);
-        assertEquals(expected5, ComplexOperations.complexDiv(i, l));
+        Complex expected5 = new Complex(18.0, -6.0);
+        assertEquals(expected5, ComplexOperations.complexProd(i, l));
 
         Complex m = new Complex(7.0, -2.0);
         Complex n = new Complex(-3.0, 4.0);
-        Complex expected6 = new Complex(1.16, 1.36);
-        assertEquals(expected6, ComplexOperations.complexDiv(m, n));
+        Complex expected6 = new Complex(-13.0, 34.0);
+        assertEquals(expected6, ComplexOperations.complexProd(m, n));
 
     } 
+    /*
+    @Test
+    public void testComplexDiv(){
+
+        assertEquals(new Complex(1.4, 0.2), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, 1.0)));
+
+
+        assertEquals(new Complex(0.2, 0.6), ComplexOperations.complexDiv(new Complex(0.0, 2.0), new Complex(3.0, 1.0)));
+
+        
+        assertEquals(new Complex(1.33, 0.67), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, 0.0)));
+
+     
+        assertEquals(new Complex(0.03, 0.59), ComplexOperations.complexDiv(new Complex(-4.0, 2.0), new Complex(3.0, 7.0)));
+
+
+        assertEquals(new Complex(0.33, 1.0), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, -3.0)));
+
+
+        assertEquals(new Complex(-1.16, -0.88), ComplexOperations.complexDiv(new Complex(7.0, -2.0), new Complex(-3.0, 4.0)));
+
+    }*/ 
 }
