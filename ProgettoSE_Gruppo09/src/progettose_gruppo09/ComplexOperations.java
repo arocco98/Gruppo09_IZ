@@ -19,6 +19,12 @@ public class ComplexOperations {
 
     }
     
+    /**
+     * 
+     * @param a First operand of the subtraction between complex numbers, it must be a complex number
+     * @param b Second operand of the subtraction between complex numbers, must be a complex number
+     * @return Complex number which is the subtraction between operand a and operand b
+     */
     public static Complex complexSub(Complex a, Complex b){
         
         return new Complex((a.getReal() - b.getReal()), a.getImaginary() - b.getImaginary());
