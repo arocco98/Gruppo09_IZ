@@ -63,6 +63,10 @@ public class FXMLDocumentController implements Initializable {
         errorLabel.textProperty().set("");
     }
     
+    /**
+     * Shows in the GUI the string passed as argument and cleans the text field.
+     * @param errorString The string passed as argument.
+     */
     private void showError(String errorString) {
         elementTextField.clear();
         errorLabel.textProperty().set(errorString);
@@ -89,7 +93,7 @@ public class FXMLDocumentController implements Initializable {
             
             // matcher for real and imaginary part
             Matcher matcherRI = createMatcher(patternRI);
-            // matcher for real and imaginary part
+            // matcher for imaginary and real part
             Matcher matcherIR = createMatcher(patternIR);
             // matcher for only real part
             Matcher matcherR = createMatcher(patternR);
