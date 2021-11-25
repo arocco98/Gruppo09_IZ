@@ -24,7 +24,7 @@ public class Stack extends ArrayList<Complex>{
      * Function to push a Complex onto the stack
      * @param a complex value you want to put on the stack
      */
-    public void Push(Complex a) {
+    public void push(Complex a) {
 
         this.add(a);
         this.index++;
@@ -34,7 +34,7 @@ public class Stack extends ArrayList<Complex>{
      * Function for picking an item from the stack
      * @return item taken from the stack
      */
-    public Complex Pop() {
+    public Complex pop() {
         
         if (!this.isEmpty()) {
             Complex element = this.remove(this.index - 1);
@@ -51,7 +51,7 @@ public class Stack extends ArrayList<Complex>{
      * Function to display the last element of the stack
      * @return Element that you want to check out, without deleting it, from the stack
      */
-    public Complex Peek(){
+    public Complex peek(){
         
         if (!this.isEmpty()) {
             Complex element = this.get(this.index - 1);

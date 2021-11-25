@@ -29,7 +29,7 @@ public class StackTest {
     public void testPush() {
         System.out.println("Push");
         Complex a = new Complex(1.0, 2.0);
-        instance.Push(a);
+        instance.push(a);
         assertEquals(a,instance.get(instance.size()-1));
     }
 
@@ -40,13 +40,13 @@ public class StackTest {
     public void testPop() {
         System.out.println("Pop");
         Complex expResult = null;
-        Complex result = instance.Pop();
+        Complex result = instance.pop();
         assertEquals(expResult, result);
         
         Complex a = new Complex(1.0, 2.0);
-        instance.Push(a);
+        instance.push(a);
         Complex expResult1 = a;
-        Complex result1 = instance.Pop();
+        Complex result1 = instance.pop();
         assertEquals(expResult1, result1);
     }
 
@@ -57,13 +57,13 @@ public class StackTest {
     public void testPeek() {
         System.out.println("Peek");
         Complex expResult = null;
-        Complex result = instance.Peek();
+        Complex result = instance.peek();
         assertEquals(expResult, result);
         
         Complex a = new Complex(1.0, 2.0);
-        instance.Push(a);
+        instance.push(a);
         Complex expResult1 = a;
-        Complex result1 = instance.Peek();
+        Complex result1 = instance.peek();
         assertEquals(expResult1, result1);
     }
 
@@ -75,8 +75,8 @@ public class StackTest {
         System.out.println("toString");
         Complex a = new Complex(2.0, 2.0);
         Complex b = new Complex(1.0, 2.0);
-        instance.Push(a);
-        instance.Push(b);
+        instance.push(a);
+        instance.push(b);
         String expResult = "1.0+2.0j"+"\n"+"2.0+2.0j"+"\n";
         String result = instance.toString();
         System.out.println(result);

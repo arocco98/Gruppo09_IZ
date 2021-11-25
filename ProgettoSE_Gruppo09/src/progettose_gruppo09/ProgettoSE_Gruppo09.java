@@ -23,6 +23,7 @@ public class ProgettoSE_Gruppo09 extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
+        stage.setTitle("Stack Calculator");
         stage.show();
     }
 
