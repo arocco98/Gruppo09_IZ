@@ -94,10 +94,10 @@ public class Complex {
             return false;
         }
         final Complex other = (Complex) obj;
-        if (Double.doubleToLongBits(this.real) != Double.doubleToLongBits(other.real)) {
+        if (this.getReal() != other.getReal()) {
             return false;
         }
-        if (Double.doubleToLongBits(this.imaginary) != Double.doubleToLongBits(other.imaginary)) {
+        if (this.getImaginary() != other.getImaginary()) {
             return false;
         }
         return true;

@@ -29,7 +29,7 @@ public class SumCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
-        if (stack.getIndex() >= 2) {
+        if (stack.size() >= 2) {
             Complex c1 = stack.pop();
             Complex c2 = stack.pop();
 

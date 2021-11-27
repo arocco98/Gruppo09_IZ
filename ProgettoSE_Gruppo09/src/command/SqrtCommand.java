@@ -33,7 +33,7 @@ public class SqrtCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
-        if (stack.getIndex() >= 1) {
+        if (stack.size() >= 1) {
             Complex c1 = stack.pop();
 
             stack.push(ComplexOperations.sqrt(c1));
