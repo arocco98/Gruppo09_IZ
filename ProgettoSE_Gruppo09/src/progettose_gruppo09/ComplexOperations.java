@@ -115,7 +115,8 @@ public class ComplexOperations {
 
     /**
      * Complex square root (doesn't change this complex number). Computes the
-     * principal branch of the square root, which is the value with 0 <= arg < pi.
+     * principal branch of the square root, which is the value with 0 <= arg <
+     * pi.
      *
      * @return sqrt(z) where z is this Complex number.
      */
@@ -134,5 +135,5 @@ public class ComplexOperations {
 
         return new Complex(re, imm);
     }
-    
+
 }

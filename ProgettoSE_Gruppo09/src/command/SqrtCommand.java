@@ -8,13 +8,13 @@ import exceptions.*;
 import progettose_gruppo09.*;
 
 /**
- * This class implements Command interface and execute the sqrt of one
- * complex numbers in a stack
+ * This class implements Command interface and execute the sqrt of one complex
+ * numbers in a stack
  *
  * @author gruppo09
  */
-public class SqrtCommand implements Command{
-    
+public class SqrtCommand implements Command {
+
     private Stack stack;
 
     /**
@@ -41,5 +41,5 @@ public class SqrtCommand implements Command{
             throw new StackSizeException();
         }
     }
-    
+
 }

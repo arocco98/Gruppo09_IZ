@@ -16,7 +16,7 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class SqrtCommandTest {
-    
+
     private Stack stack;
     private Complex c1;
 
@@ -51,5 +51,5 @@ public class SqrtCommandTest {
         instance.execute();
         assertEquals(new Complex(3.533, 0.693), stack.peek());
     }
-    
+
 }
