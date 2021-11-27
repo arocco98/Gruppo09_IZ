@@ -43,6 +43,7 @@ public class FXMLDocumentController implements Initializable {
     private DivCommand divCommand = null;
     private InversionSignCommand inversionSignCommand = null;
     private ClearCommand clearCommand = null;
+    private DropCommand dropCommand = null;
     private DupCommand dupCommand = null;
 
     @Override
@@ -59,6 +60,7 @@ public class FXMLDocumentController implements Initializable {
         divCommand = new DivCommand(this.stack);
         inversionSignCommand =new InversionSignCommand(this.stack);
         clearCommand = new ClearCommand(this.stack);
+        dropCommand = new DropCommand(this.stack);
         dupCommand = new DupCommand(this.stack);
     }
 
@@ -205,7 +207,6 @@ public class FXMLDocumentController implements Initializable {
      * "+" is clicked
      *
      * @param event button '+' clicked
-     * @throws StackSizeException
      */
     @FXML
     private void sum(ActionEvent event) {
@@ -223,7 +224,6 @@ public class FXMLDocumentController implements Initializable {
      * button "-" is clicked
      *
      * @param event button '-' clicked
-     * @throws StackSizeException
      */
     @FXML
     private void subtraction(ActionEvent event) {
@@ -241,7 +241,6 @@ public class FXMLDocumentController implements Initializable {
      * button "*" is clicked
      *
      * @param event button '*' clicked
-     * @throws StackSizeException
      */
     @FXML
     private void product(ActionEvent event) {
@@ -259,7 +258,6 @@ public class FXMLDocumentController implements Initializable {
      * button "/" is clicked
      *
      * @param event button '/' clicked
-     * @throws StackSizeException
      */
     @FXML
     private void division(ActionEvent event) {
@@ -291,21 +289,29 @@ public class FXMLDocumentController implements Initializable {
      * Execute the clear of the stack when button "Clear" is clicked
      *
      * @param event button 'Clear' clicked
-     * @throws Exception
      */
     @FXML
     private void clear(ActionEvent event) {
         try {
             clearCommand.execute();
-        } catch (Exception ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (Exception ex) {}
         // refreshing the listView
         refresh();
     }
     
+    /**
+     * Execute the removal of the last element of the stack, if non-empty
+     * @param event button "Drop" clicked
+     */
     @FXML
     private void drop(ActionEvent event) {
+        try {
+            dropCommand.execute();
+        } catch(StackSizeException ex) {
+            showError("To perform drop, stack must be non-empty");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     /**
@@ -313,14 +319,13 @@ public class FXMLDocumentController implements Initializable {
      * "Dup" is clicked
      *
      * @param event button 'Dup' clicked
-     * @throws Exception
      */
     @FXML
     private void dup(ActionEvent event) {
         try {
             dupCommand.execute();
         } catch (Exception ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            showError("To perform dup, stack must be non-empty");
         }
         // refreshing the listView
         refresh();
@@ -332,45 +337,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void over(ActionEvent event) {
-    }
-
-    /**
-     * Execute the clear of the stack when button "Clear" is clicked
-     *
-     * @param event button 'Clear' clicked
-     * @throws Exception
-     */
-    @FXML
-    private void clear(ActionEvent event) {
-        try {
-            clearCommand.execute();
-        } catch (Exception ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // refreshing the listView
-        refresh();
-    }
-
-    @FXML
-    private void drop(ActionEvent event) {
-    }
-
-    /**
-     * Execute the push of a copy of the last element onto the stack when button
-     * "Dup" is clicked
-     *
-     * @param event button 'Dup' clicked
-     * @throws Exception
-     */
-    @FXML
-    private void dup(ActionEvent event) {
-        try {
-            dupCommand.execute();
-        } catch (Exception ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        // refreshing the listView
-        refresh();
     }
 
 }

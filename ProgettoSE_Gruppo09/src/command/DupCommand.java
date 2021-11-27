@@ -1,5 +1,6 @@
 package command;
 
+import exceptions.StackSizeException;
 import progettose_gruppo09.*;
 
 /**
@@ -24,12 +25,17 @@ public class DupCommand implements Command {
     /**
      * Execute the push a copy of the last element onto the stack
      *
-     * @throws Exception
+     * @throws StackSizeException
      */
     @Override
-    public void execute() throws Exception {
-        Complex c = stack.peek();
-        stack.push(c);
+    public void execute() throws StackSizeException {
+        if(!stack.isEmpty()) {
+            Complex c = stack.peek();
+            stack.push(c);
+        } else {
+            throw new StackSizeException();
+        }
+
     }
 
 }

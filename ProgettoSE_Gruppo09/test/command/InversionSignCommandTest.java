@@ -35,7 +35,7 @@ public class InversionSignCommandTest {
      * Test of execute method, of class InversionSignCommand.
      */
     @Test
-    public void testExecute() throws Exception {
+    public void testExecute() throws StackSizeException {
         System.out.println("Execute with non-empty stack");
 
         InversionSignCommand instance = new InversionSignCommand(this.stack);
