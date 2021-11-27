@@ -4,6 +4,8 @@
  */
 package progettose_gruppo09;
 
+import command.*;
+import exceptions.StackSizeException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -156,8 +158,9 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void sum(ActionEvent event) {
-        System.out.println("Printing stack: \n" + stack.toString());
+    private void sum(ActionEvent event) throws StackSizeException {
+        SumCommand sc = new SumCommand(this.stack);
+        sc.execute();
     }
 
     @FXML

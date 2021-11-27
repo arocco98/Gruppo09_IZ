@@ -20,6 +20,10 @@ public class Stack extends ArrayList<Complex>{
         this.index = 0;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     /**
      * Function to push a Complex onto the stack
      * @param a complex value you want to put on the stack

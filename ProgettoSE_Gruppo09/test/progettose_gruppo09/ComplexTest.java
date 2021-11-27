@@ -60,8 +60,8 @@ public class ComplexTest {
      */
     @Test
     public void testGetImaginary() {
-        double expResult = 5.6;
-        assertEquals(expResult, c1.getImaginary(), 0.0);        
+        double imaginary = 5.6;
+        assertEquals(imaginary, c1.getImaginary(), 0.0);        
     }
 
     /**
