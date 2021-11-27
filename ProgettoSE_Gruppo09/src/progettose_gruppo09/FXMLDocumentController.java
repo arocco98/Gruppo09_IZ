@@ -39,6 +39,7 @@ public class FXMLDocumentController implements Initializable {
     private SubCommand subCommand = null;
     private ProdCommand prodCommand = null;
     private DivCommand divCommand = null;
+    private InversionSignCommand inversionSignCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,6 +53,7 @@ public class FXMLDocumentController implements Initializable {
         subCommand = new SubCommand(this.stack);
         prodCommand = new ProdCommand(this.stack);
         divCommand = new DivCommand(this.stack);
+        inversionSignCommand =new InversionSignCommand(this.stack);
     }
 
     /**
@@ -250,6 +252,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void inversionSign(ActionEvent event) {
+        try {
+            inversionSignCommand.execute();
+        } catch (StackSizeException ex) {
+            showError("Cannot perform inversion sign with empty stack");
+        }
+        // refreshing the listView
+        refresh();
     }
 
 }

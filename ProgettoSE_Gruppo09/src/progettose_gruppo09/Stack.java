@@ -3,7 +3,7 @@ package progettose_gruppo09;
 import java.util.ArrayList;
 
 /**
- * Thic class implements a data structure having a stack behavior
+ * This class implements a data structure having a stack behavior
  *
  * @author gruppo09
  */
