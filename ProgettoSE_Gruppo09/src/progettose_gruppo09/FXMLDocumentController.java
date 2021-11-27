@@ -6,6 +6,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -39,6 +41,7 @@ public class FXMLDocumentController implements Initializable {
     private SubCommand subCommand = null;
     private ProdCommand prodCommand = null;
     private DivCommand divCommand = null;
+    private ClearCommand clearCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,6 +55,7 @@ public class FXMLDocumentController implements Initializable {
         subCommand = new SubCommand(this.stack);
         prodCommand = new ProdCommand(this.stack);
         divCommand = new DivCommand(this.stack);
+        clearCommand = new ClearCommand(this.stack);
     }
 
     /**
@@ -80,7 +84,7 @@ public class FXMLDocumentController implements Initializable {
     /**
      * Clears the text field and sets the error label to an empty string.
      */
-    private void clear() {
+    private void clearTextField() {
         elementTextField.clear();
         errorLabel.textProperty().set("");
     }
@@ -143,7 +147,7 @@ public class FXMLDocumentController implements Initializable {
                     Complex c = new Complex(real, imaginary);
 
                     // clearing textField and setting to empty string the errorLabel
-                    clear();
+                    clearTextField();
 
                     // pushing the just created element into the stack
                     stack.push(c);
@@ -154,7 +158,7 @@ public class FXMLDocumentController implements Initializable {
                     Complex c = new Complex(real, imaginary);
 
                     // clearing textField and setting to empty string the errorLabel
-                    clear();
+                    clearTextField();
 
                     // pushing the just created element into the stack
                     stack.push(c);
@@ -164,7 +168,7 @@ public class FXMLDocumentController implements Initializable {
                     Complex c = new Complex(real, 0.0);
 
                     // clearing textField and setting to empty string the errorLabel
-                    clear();
+                    clearTextField();
 
                     // pushing the just created element into the stack
                     stack.push(c);
@@ -174,7 +178,7 @@ public class FXMLDocumentController implements Initializable {
                     Complex c = new Complex(0.0, imaginary);
 
                     // clearing textField and setting to empty string the errorLabel
-                    clear();
+                    clearTextField();
 
                     // pushing the just created element into the stack
                     stack.push(c);
@@ -192,6 +196,13 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Execute the sum of the last two complex numbers in the stack when button
+     * "+" is clicked
+     *
+     * @param event button '+' clicked
+     * @throws StackSizeException
+     */
     @FXML
     private void sum(ActionEvent event) {
         try {
@@ -204,7 +215,6 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
-     *
      * Execute the subtraction of the last two complex numbers in the stack when
      * button "-" is clicked
      *
@@ -222,6 +232,13 @@ public class FXMLDocumentController implements Initializable {
         refresh();
     }
 
+    /**
+     * Execute the product of the last two complex numbers in the stack when
+     * button "*" is clicked
+     *
+     * @param event button '*' clicked
+     * @throws StackSizeException
+     */
     @FXML
     private void product(ActionEvent event) {
         try {
@@ -233,6 +250,13 @@ public class FXMLDocumentController implements Initializable {
         refresh();
     }
 
+    /**
+     * Execute the division of the last two complex numbers in the stack when
+     * button "/" is clicked
+     *
+     * @param event button '/' clicked
+     * @throws StackSizeException
+     */
     @FXML
     private void division(ActionEvent event) {
         try {
@@ -250,6 +274,31 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void inversionSign(ActionEvent event) {
+    }
+
+    /**
+     * Execute the clear of the stack when button "Clear" is clicked
+     *
+     * @param event button 'Clear' clicked
+     * @throws Exception
+     */
+    @FXML
+    private void clear(ActionEvent event) {
+        try {
+            clearCommand.execute();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // refreshing the listView
+        refresh();
+    }
+
+    @FXML
+    private void drop(ActionEvent event) {
+    }
+
+    @FXML
+    private void dup(ActionEvent event) {
     }
 
 }
