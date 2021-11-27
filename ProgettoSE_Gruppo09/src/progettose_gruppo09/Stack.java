@@ -9,23 +9,11 @@ import java.util.ArrayList;
  */
 public class Stack extends ArrayList<Complex> {
 
-    private int index;
-
     /**
      * Construct a new Stack object
      */
     public Stack() {
         super();
-        this.index = 0;
-    }
-
-    /**
-     * This method is used to get the index of the stack
-     *
-     * @return index of the stack
-     */
-    public int getIndex() {
-        return index;
     }
 
     /**
@@ -36,7 +24,6 @@ public class Stack extends ArrayList<Complex> {
     public void push(Complex a) {
 
         this.add(a);
-        this.index++;
     }
 
     /**
@@ -47,9 +34,7 @@ public class Stack extends ArrayList<Complex> {
     public Complex pop() {
 
         if (!this.isEmpty()) {
-            Complex element = this.remove(this.index - 1);
-            this.index--;
-
+            Complex element = this.remove(this.size() - 1);
             return element;
         } else {
             return null;
@@ -66,7 +51,7 @@ public class Stack extends ArrayList<Complex> {
     public Complex peek() {
 
         if (!this.isEmpty()) {
-            Complex element = this.get(this.index - 1);
+            Complex element = this.get(this.size() - 1);
 
             return element;
         } else {
