@@ -39,6 +39,7 @@ public class FXMLDocumentController implements Initializable {
     private SubCommand subCommand = null;
     private ProdCommand prodCommand = null;
     private DivCommand divCommand = null;
+    private SqrtCommand sqrtCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,6 +53,7 @@ public class FXMLDocumentController implements Initializable {
         subCommand = new SubCommand(this.stack);
         prodCommand = new ProdCommand(this.stack);
         divCommand = new DivCommand(this.stack);
+        sqrtCommand = new SqrtCommand(this.stack);
     }
 
     /**
@@ -246,6 +248,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void squareRoot(ActionEvent event) {
+        try {
+            sqrtCommand.execute();
+        } catch (StackSizeException ex) {
+            showError("Cannot perform sqrt with 0 element");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     @FXML

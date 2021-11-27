@@ -205,5 +205,111 @@ public class ComplexOperationsTest {
         assertEquals(new Complex(-1.16, -0.88), ComplexOperations.complexDiv(new Complex(7.0, -2.0), new Complex(-3.0, 4.0)));
 
     }
+    
+    /**
+     * Test of sqrt method, of class Complex.
+     */
+    @Test
+    public void testSqrt() {
+
+        //sqrt of number with positive real part and positive immag. part
+        assertEquals(new Complex(1.099, 0.455), ComplexOperations.sqrt(new Complex(1.0, 1.0)));
+
+        //sqrt of number with negative real part and negative immag. part
+        assertEquals(new Complex(0.455, -1.099), ComplexOperations.sqrt(new Complex(-1.0, -1.0)));
+
+        //sqrt of number with negative real part and positive immag. part
+        assertEquals(new Complex(0.455, 1.099), ComplexOperations.sqrt(new Complex(-1.0, 1.0)));
+
+        //sqrt of number with positive real part and negative immag. part
+        assertEquals(new Complex(1.099, -0.455), ComplexOperations.sqrt(new Complex(1.0, -1.0)));
+
+        //sqrt of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(1.685, 0.860), ComplexOperations.sqrt(new Complex(2.1, 2.9)));
+
+        //sqrt of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(0.860, -1.685), ComplexOperations.sqrt(new Complex(-2.1, -2.9)));
+
+        //sqrt of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(0.860, 1.685), ComplexOperations.sqrt(new Complex(-2.1, 2.9)));
+
+        //sqrt of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(1.685, -0.860), ComplexOperations.sqrt(new Complex(2.1, -2.9)));
+
+        //sqrt of number 0
+        assertEquals(new Complex(0.0, 0.0), ComplexOperations.sqrt(new Complex(0.0, 0.0)));
+    }
+    
+    /**
+     * Test of mod method, of class Complex.
+     */
+    @Test 
+    public void testMod() {
+        
+        //mod of number with positive real part and positive immag. part
+        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(1.0, 1.0)), 0);
+
+        //mod of number with negative real part and negative immag. part
+        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(-1.0, -1.0)), 0);
+
+        //mod of number with negative real part and positive immag. part
+        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(-1.0, 1.0)), 0);
+
+        //mod of number with positive real part and negative immag. part
+        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(1.0, -1.0)), 0);
+        
+        //mod of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(2.1, 2.9)), 0);
+
+        //mod of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(-2.1, -2.9)), 0);
+
+        //mod of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(-2.1, 2.9)), 0);
+
+        //mod of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(2.1, -2.9)), 0);
+
+        //mod of number 0
+        assertEquals(0.0, ComplexOperations.mod(new Complex(0.0, 0.0)), 0);
+        
+    }
+    
+    /**
+     * Test of arg method, of class Complex.
+     */
+    @Test 
+    public void testArg() {
+        
+        //arg of number with positive real part and positive immag. part
+        assertEquals(0.7853981633974483, ComplexOperations.arg(new Complex(1.0, 1.0)), 0);
+
+        //arg of number with negative real part and negative immag. part
+        assertEquals(-2.356194490192345, ComplexOperations.arg(new Complex(-1.0, -1.0)), 0);
+
+        //arg of number with negative real part and positive immag. part
+        assertEquals(2.356194490192345, ComplexOperations.arg(new Complex(-1.0, 1.0)), 0);
+
+        //arg of number with positive real part and negative immag. part
+        assertEquals(-0.7853981633974483, ComplexOperations.arg(new Complex(1.0, -1.0)), 0);
+        
+        //arg of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(0.9440534255838497, ComplexOperations.arg(new Complex(2.1, 2.9)), 0);
+
+        //arg of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(-2.1975392280059434, ComplexOperations.arg(new Complex(-2.1, -2.9)), 0);
+
+        //arg of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(2.1975392280059434, ComplexOperations.arg(new Complex(-2.1, 2.9)), 0);
+
+        //arg of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(-0.9440534255838497, ComplexOperations.arg(new Complex(2.1, -2.9)), 0);
+
+        //arg of number 0
+        assertEquals(0.0, ComplexOperations.arg(new Complex(0.0, 0.0)), 0);
+        
+    }
+    
+    
 
 }
