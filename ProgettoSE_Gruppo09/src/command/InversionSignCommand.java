@@ -31,7 +31,7 @@ public class InversionSignCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
-        if (stack.getIndex() >= 1) {
+        if (stack.size() >= 1) {
             Complex complex = stack.pop();
             stack.push(new Complex(-complex.getReal(), -complex.getImaginary()));
         } else {

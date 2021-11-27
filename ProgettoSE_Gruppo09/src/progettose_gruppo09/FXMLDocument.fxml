@@ -43,6 +43,19 @@
                               <Button mnemonicParsing="false" onAction="#inversionSign" prefHeight="30.0" prefWidth="50.0" text="+-" textAlignment="CENTER" />
                            </children>
                         </HBox>
+                        <HBox prefHeight="30.0" prefWidth="306.0" spacing="50.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#clear" prefHeight="30.0" prefWidth="50.0" text="Clear" />
+                              <Button mnemonicParsing="false" onAction="#drop" prefHeight="30.0" prefWidth="50.0" text="Drop" />
+                              <Button mnemonicParsing="false" onAction="#dup" prefHeight="30.0" prefWidth="50.0" text="Dup" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#swap" prefHeight="30.0" prefWidth="50.0" text="Swap" />
+                              <Button mnemonicParsing="false" onAction="#over" prefHeight="30.0" prefWidth="50.0" text="Over" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>
