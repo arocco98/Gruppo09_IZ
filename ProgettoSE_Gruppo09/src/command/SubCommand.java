@@ -29,10 +29,10 @@ public class SubCommand implements Command{
     @Override
     public void execute() throws StackSizeException{
         if(stack.getIndex() >= 2){
-            Complex c1 = stack.pop();
             Complex c2 = stack.pop();
+            Complex c1 = stack.pop();
 
-            stack.push(ComplexOperations.complexSub(c2, c1));
+            stack.push(ComplexOperations.complexSub(c1, c2));
         } else {
             throw new StackSizeException();
         }

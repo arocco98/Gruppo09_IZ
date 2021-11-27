@@ -178,8 +178,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void product(ActionEvent event) {
-        System.out.println(this.stack.toString());
+    private void product(ActionEvent event) throws StackSizeException {
+        ProdCommand pc = new ProdCommand(this.stack);
+        pc.execute();
     }
 
     @FXML
