@@ -15,7 +15,7 @@ import progettose_gruppo09.*;
 
 /**
  *
- * @author memol
+ * @author gruppo09
  */
 public class SumCommandTest {
     

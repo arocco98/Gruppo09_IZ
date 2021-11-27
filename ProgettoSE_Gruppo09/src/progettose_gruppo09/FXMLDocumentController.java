@@ -172,7 +172,9 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private void division(ActionEvent event) {
+    private void division(ActionEvent event) throws StackSizeException {
+        DivCommand dc = new DivCommand(this.stack);
+        dc.execute();
     }
 
     @FXML
