@@ -36,6 +36,9 @@ public class FXMLDocumentController implements Initializable {
 
     // Command variables
     private SumCommand sumCommand = null;
+    private SubCommand subCommand = null;
+    private ProdCommand prodCommand = null;
+    private DivCommand divCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -46,6 +49,9 @@ public class FXMLDocumentController implements Initializable {
 
         // initializing all commands
         sumCommand = new SumCommand(this.stack);
+        subCommand = new SubCommand(this.stack);
+        prodCommand = new ProdCommand(this.stack);
+        divCommand = new DivCommand(this.stack);
     }
 
     /**
@@ -197,16 +203,45 @@ public class FXMLDocumentController implements Initializable {
         refresh();
     }
 
+    /**
+     *
+     * Execute the subtraction of the last two complex numbers in the stack when
+     * button "-" is clicked
+     *
+     * @param event button '-' clicked
+     * @throws StackSizeException
+     */
     @FXML
     private void subtraction(ActionEvent event) {
+        try {
+            subCommand.execute();
+        } catch (StackSizeException ex) {
+            showError("Cannot perform subtraction with only one element");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     @FXML
     private void product(ActionEvent event) {
+        try {
+            prodCommand.execute();
+        } catch (StackSizeException ex) {
+            showError("Cannot perform product with only one element");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     @FXML
     private void division(ActionEvent event) {
+        try {
+            divCommand.execute();
+        } catch (StackSizeException ex) {
+            showError("Cannot perform division with only one element");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     @FXML

@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author andrearocco
+ * @author gruppo09
  */
 public class StackTest {
     private Stack instance;

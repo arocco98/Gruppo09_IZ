@@ -9,7 +9,7 @@ import progettose_gruppo09.*;
 
 /**
  * This class implements Command interface and execute the sum of two complex numbers in a stack
- * @author memol
+ * @author gruppo09
  */
 public class SumCommand implements Command {
     

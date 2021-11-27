@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package progettose_gruppo09;
 
 /**
@@ -9,7 +5,7 @@ package progettose_gruppo09;
  * @author gruppo09
  */
 public class Complex {
-    
+
     private double real;
     private double imaginary;
 
@@ -20,16 +16,19 @@ public class Complex {
     }
 
     /**
-     * Construct a new Complex object having real as real part 
+     * Construct a new Complex object having real as real part
+     *
      * @param real the complex real part
      */
     public Complex(double real) {
         this.real = real;
         this.imaginary = 0.0;
     }
-    
+
     /**
-     * Construct a new Complex object having real as real part and imaginary as imaginary part
+     * Construct a new Complex object having real as real part and imaginary as
+     * imaginary part
+     *
      * @param real the complex real part
      * @param imaginary the complex imaginary part
      */
@@ -40,6 +39,7 @@ public class Complex {
 
     /**
      * This method is used to get the real part of a complex number
+     *
      * @return the real part of the complex number
      */
     public double getReal() {
@@ -48,7 +48,8 @@ public class Complex {
 
     /**
      * This method is used to set the real part of a complex number
-     * @param real the value you want to set as real part    
+     *
+     * @param real the value you want to set as real part
      */
     public void setReal(double real) {
         this.real = real;
@@ -56,6 +57,7 @@ public class Complex {
 
     /**
      * This method is used to get the imaginary part of a complex number
+     *
      * @return the imaginary part of the complex number
      */
     public double getImaginary() {
@@ -64,16 +66,20 @@ public class Complex {
 
     /**
      * This method is used to get the imaginary part of a complex number
-     * @param imaginary the value you want to set as imaginary part 
+     *
+     * @param imaginary the value you want to set as imaginary part
      */
     public void setImaginary(double imaginary) {
         this.imaginary = imaginary;
-    }  
+    }
 
     /**
-     * This method is used to verify that a Complex object is equal to another one
+     * This method is used to verify that a Complex object is equal to another
+     * one
+     *
      * @param obj the reference object with which to compare
-     * @return true if this object is the same as the obj argument; false otherwise
+     * @return true if this object is the same as the obj argument; false
+     * otherwise
      */
     @Override
     public boolean equals(Object obj) {
@@ -98,25 +104,30 @@ public class Complex {
 
     /**
      * This method returns a string representation of the object
+     *
      * @return a string representation of the object
      */
     @Override
     public String toString() {
         // real part and imaginary part is 0
-        if(this.getReal() == 0.0 && this.getImaginary() == 0.0)
+        if (this.getReal() == 0.0 && this.getImaginary() == 0.0) {
             return "0";
-        
+        }
+
         // only imaginary part is 0
-        if(this.getReal() != 0.0 && this.getImaginary() == 0.0)
+        if (this.getReal() != 0.0 && this.getImaginary() == 0.0) {
             return Double.toString(this.getReal());
-        
+        }
+
         // only real part is 0
-        if(this.getReal() == 0.0 && this.getImaginary() != 0.0)
+        if (this.getReal() == 0.0 && this.getImaginary() != 0.0) {
             return Double.toString(this.getImaginary()) + "j";
-        
-        if(this.getImaginary() > 0)
+        }
+
+        if (this.getImaginary() > 0) {
             return Double.toString(this.getReal()) + "+" + Double.toString(this.getImaginary()) + "j";
-        
+        }
+
         return Double.toString(this.getReal()) + Double.toString(this.getImaginary()) + "j";
     }
 }

@@ -6,7 +6,7 @@ package exceptions;
 
 /**
  *
- * @author memol
+ * @author gruppo09
  */
 public class StackSizeException extends Exception {
 
