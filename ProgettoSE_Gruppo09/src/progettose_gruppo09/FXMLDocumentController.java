@@ -42,6 +42,7 @@ public class FXMLDocumentController implements Initializable {
     private ProdCommand prodCommand = null;
     private DivCommand divCommand = null;
     private ClearCommand clearCommand = null;
+    private DupCommand dupCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,6 +57,7 @@ public class FXMLDocumentController implements Initializable {
         prodCommand = new ProdCommand(this.stack);
         divCommand = new DivCommand(this.stack);
         clearCommand = new ClearCommand(this.stack);
+        dupCommand = new DupCommand(this.stack);
     }
 
     /**
@@ -297,8 +299,22 @@ public class FXMLDocumentController implements Initializable {
     private void drop(ActionEvent event) {
     }
 
+    /**
+     * Execute the push of a copy of the last element onto the stack when button
+     * "Dup" is clicked
+     *
+     * @param event button 'Dup' clicked
+     * @throws Exception
+     */
     @FXML
     private void dup(ActionEvent event) {
+        try {
+            dupCommand.execute();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // refreshing the listView
+        refresh();
     }
 
 }
