@@ -46,6 +46,7 @@ public class FXMLDocumentController implements Initializable {
     private ClearCommand clearCommand = null;
     private DropCommand dropCommand = null;
     private DupCommand dupCommand = null;
+    private OverCommand overCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,10 +61,11 @@ public class FXMLDocumentController implements Initializable {
         prodCommand = new ProdCommand(this.stack);
         divCommand = new DivCommand(this.stack);
         sqrtCommand = new SqrtCommand(this.stack);
-        inversionSignCommand =new InversionSignCommand(this.stack);
+        inversionSignCommand = new InversionSignCommand(this.stack);
         clearCommand = new ClearCommand(this.stack);
         dropCommand = new DropCommand(this.stack);
         dupCommand = new DupCommand(this.stack);
+        overCommand = new OverCommand(this.stack);
     }
 
     /**
@@ -303,20 +305,22 @@ public class FXMLDocumentController implements Initializable {
     private void clear(ActionEvent event) {
         try {
             clearCommand.execute();
-        } catch (Exception ex) {}
+        } catch (Exception ex) {
+        }
         // refreshing the listView
         refresh();
     }
-    
+
     /**
      * Execute the removal of the last element of the stack, if non-empty
+     *
      * @param event button "Drop" clicked
      */
     @FXML
     private void drop(ActionEvent event) {
         try {
             dropCommand.execute();
-        } catch(StackSizeException ex) {
+        } catch (StackSizeException ex) {
             showError("To perform drop, stack must be non-empty");
         }
         // refreshing the listView
@@ -344,7 +348,20 @@ public class FXMLDocumentController implements Initializable {
     private void swap(ActionEvent event) {
     }
 
+    /**
+     * Execute the push of a copy of the second last element into the stack when
+     * button "Over" is clicked
+     *
+     * @param event button 'Over' clicked
+     */
     @FXML
     private void over(ActionEvent event) {
+        try {
+            overCommand.execute();
+        } catch (Exception ex) {
+            showError("To perform over, stack must have at least two elements");
+        }
+        // refreshing the listView
+        refresh();
     }
 }

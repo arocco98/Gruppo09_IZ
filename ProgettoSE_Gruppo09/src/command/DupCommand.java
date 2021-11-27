@@ -5,7 +5,7 @@ import progettose_gruppo09.*;
 
 /**
  * This class implements Command interface and pushes a copy of the last element
- * onto the stack
+ * into the stack
  *
  * @author gruppo09
  */
@@ -23,13 +23,13 @@ public class DupCommand implements Command {
     }
 
     /**
-     * Execute the push a copy of the last element onto the stack
+     * Execute the push of a copy of the last element onto the stack
      *
      * @throws StackSizeException
      */
     @Override
     public void execute() throws StackSizeException {
-        if(!stack.isEmpty()) {
+        if (!stack.isEmpty()) {
             Complex c = stack.peek();
             stack.push(c);
         } else {
