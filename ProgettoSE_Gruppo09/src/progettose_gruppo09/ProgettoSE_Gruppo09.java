@@ -24,6 +24,7 @@ public class ProgettoSE_Gruppo09 extends Application {
 
         stage.setScene(scene);
         stage.setTitle("Stack Calculator");
+        stage.setResizable(false);
         stage.show();
     }
 
