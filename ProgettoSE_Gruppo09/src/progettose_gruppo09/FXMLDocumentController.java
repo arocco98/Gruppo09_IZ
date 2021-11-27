@@ -41,6 +41,7 @@ public class FXMLDocumentController implements Initializable {
     private SubCommand subCommand = null;
     private ProdCommand prodCommand = null;
     private DivCommand divCommand = null;
+    private SqrtCommand sqrtCommand = null;
     private InversionSignCommand inversionSignCommand = null;
     private ClearCommand clearCommand = null;
     private DropCommand dropCommand = null;
@@ -58,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
         subCommand = new SubCommand(this.stack);
         prodCommand = new ProdCommand(this.stack);
         divCommand = new DivCommand(this.stack);
+        sqrtCommand = new SqrtCommand(this.stack);
         inversionSignCommand =new InversionSignCommand(this.stack);
         clearCommand = new ClearCommand(this.stack);
         dropCommand = new DropCommand(this.stack);
@@ -272,6 +274,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void squareRoot(ActionEvent event) {
+        try {
+            sqrtCommand.execute();
+        } catch (StackSizeException ex) {
+            showError("Cannot perform sqrt with 0 element");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     @FXML
@@ -338,5 +347,4 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void over(ActionEvent event) {
     }
-
 }
