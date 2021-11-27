@@ -46,6 +46,7 @@ public class FXMLDocumentController implements Initializable {
     private ClearCommand clearCommand = null;
     private DropCommand dropCommand = null;
     private DupCommand dupCommand = null;
+    private SwapCommand swapCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,6 +65,7 @@ public class FXMLDocumentController implements Initializable {
         clearCommand = new ClearCommand(this.stack);
         dropCommand = new DropCommand(this.stack);
         dupCommand = new DupCommand(this.stack);
+        swapCommand = new SwapCommand(this.stack);
     }
 
     /**
@@ -342,6 +344,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void swap(ActionEvent event) {
+        try {
+            swapCommand.execute();
+        } catch (Exception ex) {
+            showError("To perform swap, in stack must be at least two elements");
+        }
+        // refreshing the listView
+        refresh();
     }
 
     @FXML
