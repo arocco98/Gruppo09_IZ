@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package command;
 
 import exceptions.*;
 import progettose_gruppo09.*;
 
 /**
+ * This class implements Command interface and execute the subtraction of two
+ * complex numbers in a stack
  *
  * @author gruppo09
  */

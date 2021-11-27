@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package command;
 
 import static org.junit.Assert.*;
@@ -10,16 +6,17 @@ import exceptions.StackSizeException;
 import org.junit.Before;
 import org.junit.Test;
 import progettose_gruppo09.*;
+
 /**
  *
  * @author gruppo09
  */
 public class SubCommandTest {
-    
+
     private Stack stack;
     private Complex c1;
-    private Complex c2;    
-            
+    private Complex c2;
+
     @Before
     public void setUp() {
         stack = new Stack();
@@ -28,20 +25,23 @@ public class SubCommandTest {
     }
 
     /**
-     * Test of execute method with a stack size smaller than 2, of class SubCommand.
+     * Test of execute method with a stack size smaller than 2, of class
+     * SubCommand.
      */
-    @Test (expected = StackSizeException.class)
+    @Test(expected = StackSizeException.class)
     public void testExecute1() throws StackSizeException {
         System.out.println("Execute1");
         SubCommand instance = new SubCommand(stack);
         instance.execute();
     }
-    
+
     /**
-     * Test of execute method with a stack size greater than 2 or equal, of class SubCommand.
+     * Test of execute method with a stack size greater than 2 or equal, of
+     * class SubCommand.
+     *
      * @throws exceptions.StackSizeException
      */
-    @Test 
+    @Test
     public void testExecute2() throws StackSizeException {
         System.out.println("Execute2");
         stack.push(c1);
@@ -53,5 +53,5 @@ public class SubCommandTest {
         Complex expected1 = new Complex(result, result1);
         assertEquals(expected1, stack.peek());
     }
-    
+
 }

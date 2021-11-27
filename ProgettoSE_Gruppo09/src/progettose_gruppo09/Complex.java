@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 /**
+ * This class allows the use of complex numbers in Cartesian notation
  *
  * @author gruppo09
  */
