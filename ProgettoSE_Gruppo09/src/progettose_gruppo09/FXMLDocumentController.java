@@ -334,4 +334,43 @@ public class FXMLDocumentController implements Initializable {
     private void over(ActionEvent event) {
     }
 
+    /**
+     * Execute the clear of the stack when button "Clear" is clicked
+     *
+     * @param event button 'Clear' clicked
+     * @throws Exception
+     */
+    @FXML
+    private void clear(ActionEvent event) {
+        try {
+            clearCommand.execute();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // refreshing the listView
+        refresh();
+    }
+
+    @FXML
+    private void drop(ActionEvent event) {
+    }
+
+    /**
+     * Execute the push of a copy of the last element onto the stack when button
+     * "Dup" is clicked
+     *
+     * @param event button 'Dup' clicked
+     * @throws Exception
+     */
+    @FXML
+    private void dup(ActionEvent event) {
+        try {
+            dupCommand.execute();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // refreshing the listView
+        refresh();
+    }
+
 }
