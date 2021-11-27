@@ -342,6 +342,12 @@ public class FXMLDocumentController implements Initializable {
         refresh();
     }
 
+    /**
+     * Execute the swap of the last two elements in the stack when the button
+     * "Swap" is clicked
+     *
+     * @param event button 'Swap' clicked
+     */
     @FXML
     private void swap(ActionEvent event) {
         try {

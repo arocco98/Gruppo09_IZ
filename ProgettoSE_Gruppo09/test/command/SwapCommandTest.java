@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
 
 /**
  *
- * @author andrearocco
+ * @author gruppo09
  */
 public class SwapCommandTest {
     

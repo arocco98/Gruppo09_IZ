@@ -20,7 +20,7 @@ public class SwapCommand implements Command{
     /**
      * Construct a new SwapCommand object that operates on a stack
      *
-     * @param stack The stack on which ClearCommand operates
+     * @param stack The stack on which SwapCommand operates
      */
     public SwapCommand(Stack stack) {
         this.stack = stack;
