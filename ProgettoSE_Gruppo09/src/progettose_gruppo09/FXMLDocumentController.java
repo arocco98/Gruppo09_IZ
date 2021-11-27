@@ -32,11 +32,14 @@ public class FXMLDocumentController implements Initializable {
 
     // elements stack
     private Stack stack = null;
+    private SubCommand subCommand = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         stack = new Stack();
+        subCommand = new SubCommand(this.stack);
+        
     }
 
     /**
@@ -163,12 +166,20 @@ public class FXMLDocumentController implements Initializable {
         sc.execute();
     }
 
+    /**
+     * 
+     * Execute the subtraction of the last two complex numbers in the stack when button "-" is clicked
+     * @param event button '-' clicked
+     * @throws StackSizeException 
+     */
     @FXML
-    private void subtraction(ActionEvent event) {
+    private void subtraction(ActionEvent event) throws StackSizeException {
+        subCommand.execute();
     }
 
     @FXML
     private void product(ActionEvent event) {
+        System.out.println(this.stack.toString());
     }
 
     @FXML
