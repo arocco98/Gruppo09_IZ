@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 /**
+ * This class allows the use of complex numbers in Cartesian notation
  *
  * @author gruppo09
  */
@@ -93,10 +94,10 @@ public class Complex {
             return false;
         }
         final Complex other = (Complex) obj;
-        if (Double.doubleToLongBits(this.real) != Double.doubleToLongBits(other.real)) {
+        if (this.getReal() != other.getReal()) {
             return false;
         }
-        if (Double.doubleToLongBits(this.imaginary) != Double.doubleToLongBits(other.imaginary)) {
+        if (this.getImaginary() != other.getImaginary()) {
             return false;
         }
         return true;

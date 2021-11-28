@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package command;
 
 import exceptions.*;
@@ -35,7 +30,7 @@ public class DivCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException, OperationDenied {
-        if (stack.getIndex() >= 2) {
+        if (stack.size()>= 2) {
             Complex c2 = stack.pop();
             Complex c1 = stack.pop();
 

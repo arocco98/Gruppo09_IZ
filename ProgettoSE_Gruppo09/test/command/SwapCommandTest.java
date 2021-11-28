@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
+ */
 package command;
 
 import exceptions.StackSizeException;
@@ -10,8 +14,8 @@ import progettose_gruppo09.*;
  *
  * @author gruppo09
  */
-public class ProdCommandTest {
-
+public class SwapCommandTest {
+    
     private Stack stack;
     private Complex c1;
     private Complex c2;
@@ -25,26 +29,26 @@ public class ProdCommandTest {
 
     /**
      * Test of execute method with a stack size smaller than 2, of class
-     * ProdCommand.
+     * SwapCommand.
      */
     @Test(expected = StackSizeException.class)
     public void testExecute1() throws StackSizeException {
         System.out.println("Execute1");
-        ProdCommand instance = new ProdCommand(stack);
+        SwapCommand instance = new SwapCommand(stack);
         instance.execute();
     }
-
     /**
-     * Test of execute method with a stack size greater than 2 or equal, of
-     * class ProdCommand.
+     * Test of execute method, of class SwapCommand.
      */
     @Test
     public void testExecute2() throws StackSizeException {
-        System.out.println("Execute2");
         stack.push(c1);
         stack.push(c2);
-        ProdCommand instance = new ProdCommand(stack);
+        System.out.println("execute2");
+        SwapCommand instance = new SwapCommand(stack);
         instance.execute();
-        assertEquals(new Complex(2.8099999999999987, 44.550000000000004), stack.peek());
+        assertEquals(c1, stack.pop());
+        assertEquals(c2, stack.pop());
     }
+    
 }

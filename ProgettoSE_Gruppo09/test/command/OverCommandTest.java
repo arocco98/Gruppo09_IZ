@@ -10,7 +10,7 @@ import progettose_gruppo09.*;
  *
  * @author gruppo09
  */
-public class SumCommandTest {
+public class OverCommandTest {
 
     private Stack stack;
     private Complex c1;
@@ -24,28 +24,27 @@ public class SumCommandTest {
     }
 
     /**
-     * Test of execute method with a stack size smaller than 2, of class
-     * SumCommand.
+     * Test of execute method, of class OverCommand, with an empty stack
      */
     @Test(expected = StackSizeException.class)
-    public void testExecute1() throws StackSizeException {
-        System.out.println("Execute1");
-        SumCommand instance = new SumCommand(stack);
+    public void testExecute1() throws Exception {
+        System.out.println("execute");
+        OverCommand instance = new OverCommand(stack);
         instance.execute();
+
     }
 
     /**
-     * Test of execute method with a stack size greater than 2 or equal, of
-     * class SumCommand.
+     * Test of execute method, of class OverCommand.
      */
     @Test
-    public void testExecute2() throws StackSizeException {
-        System.out.println("Execute2");
+    public void testExecute2() throws Exception {
+        System.out.println("execute");
         stack.push(c1);
         stack.push(c2);
-        SumCommand instance = new SumCommand(stack);
+        OverCommand instance = new OverCommand(stack);
         instance.execute();
-        assertEquals(new Complex(13.5, 8), stack.peek());
+        assertEquals(c1, stack.peek());
     }
 
 }

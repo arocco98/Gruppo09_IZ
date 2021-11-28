@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package command;
 
 import exceptions.*;
 import progettose_gruppo09.*;
 
 /**
+ * This class implements Command interface and execute the subtraction of two
+ * complex numbers in a stack
  *
  * @author gruppo09
  */
@@ -31,7 +29,7 @@ public class SubCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
-        if (stack.getIndex() >= 2) {
+        if (stack.size() >= 2) {
             Complex c2 = stack.pop();
             Complex c1 = stack.pop();
 
