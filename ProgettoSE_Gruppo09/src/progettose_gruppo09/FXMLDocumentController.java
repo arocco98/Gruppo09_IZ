@@ -7,8 +7,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -220,7 +218,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             sumCommand.execute();
         } catch (StackSizeException ex) {
-            showError("Cannot perform sum with only one element");
+            showError("Cannot perform sum, insufficient number of elements");
         }
         // refreshing the listView
         refresh();
@@ -237,7 +235,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             subCommand.execute();
         } catch (StackSizeException ex) {
-            showError("Cannot perform subtraction with only one element");
+            showError("Cannot perform subtraction, insufficient number of elements");
         }
         // refreshing the listView
         refresh();
@@ -254,7 +252,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             prodCommand.execute();
         } catch (StackSizeException ex) {
-            showError("Cannot perform product with only one element");
+            showError("Cannot perform product, insufficient number of elements");
         }
         // refreshing the listView
         refresh();
@@ -271,7 +269,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             divCommand.execute();
         } catch (StackSizeException ex) {
-            showError("Cannot perform division with only one element");
+            showError("Cannot perform division, insufficient number of elements");
         } catch (OperationDenied od) {
             showError("Cannot divide a number by zero");
         }
@@ -279,17 +277,29 @@ public class FXMLDocumentController implements Initializable {
         refresh();
     }
 
+    /**
+     * Execute the square root of the last complex number in the stack when
+     * button "sqrt" is clicked
+     *
+     * @param event button 'sqrt' clicked
+     */
     @FXML
     private void squareRoot(ActionEvent event) {
         try {
             sqrtCommand.execute();
         } catch (StackSizeException ex) {
-            showError("Cannot perform sqrt with 0 element");
+            showError("Cannot perform square root with empty stack");
         }
         // refreshing the listView
         refresh();
     }
 
+    /**
+     * Execute the inversion sign of the last complex number in the stack when
+     * button "+-" is clicked
+     *
+     * @param event button '+-' clicked
+     */
     @FXML
     private void inversionSign(ActionEvent event) {
         try {
@@ -342,7 +352,7 @@ public class FXMLDocumentController implements Initializable {
     private void dup(ActionEvent event) {
         try {
             dupCommand.execute();
-        } catch (Exception ex) {
+        } catch (StackSizeException ex) {
             showError("To perform dup, stack must be non-empty");
         }
         // refreshing the listView
@@ -359,8 +369,8 @@ public class FXMLDocumentController implements Initializable {
     private void swap(ActionEvent event) {
         try {
             swapCommand.execute();
-        } catch (Exception ex) {
-            showError("To perform swap, in stack must be at least two elements");
+        } catch (StackSizeException ex) {
+            showError("To perform swap, stack must have at least two elements");
         }
         // refreshing the listView
         refresh();

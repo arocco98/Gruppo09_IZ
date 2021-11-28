@@ -35,6 +35,8 @@ public class DivCommand implements Command {
             Complex c1 = stack.pop();
 
             if (c2.getImaginary() == 0 && c2.getReal() == 0) {
+                stack.push(c1);
+                stack.push(c2);
                 throw new OperationDenied();
             } else {
                 stack.push(ComplexOperations.complexDiv(c1, c2));
