@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 import command.*;
+import exceptions.OperationDenied;
 import exceptions.StackSizeException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -239,6 +240,8 @@ public class FXMLDocumentController implements Initializable {
             divCommand.execute();
         } catch (StackSizeException ex) {
             showError("Cannot perform division with only one element");
+        } catch (OperationDenied od) {
+            showError("Cannot divide a number by zero");
         }
         // refreshing the listView
         refresh();
