@@ -74,6 +74,7 @@ public class FXMLDocumentController implements Initializable {
         stack = new Stack();
         observableStack = FXCollections.observableList(stack);
         elementList.setItems(observableStack);
+        
         // initializing variables 
         observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
         variablesComboBox.setItems(observableCharacterList);
@@ -138,7 +139,7 @@ public class FXMLDocumentController implements Initializable {
      * Sets elementList's items to a new observablArrayList obtained by
      * reverting the stack elements.
      */
-    private void refresh() {
+    private void refreshStack() {
         ArrayList<Complex> tmpStack = new ArrayList<>(stack);
         Collections.reverse(tmpStack);
         elementList.setItems(FXCollections.observableArrayList(tmpStack));
@@ -225,7 +226,7 @@ public class FXMLDocumentController implements Initializable {
                 showError("Use the notation: a+bj");
             }
             // refreshing the listView
-            refresh();
+            refreshStack();
         } else {
             showError("Text field must not be empty");
         }
@@ -245,7 +246,7 @@ public class FXMLDocumentController implements Initializable {
             showError("Cannot perform sum, insufficient number of elements");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -262,7 +263,7 @@ public class FXMLDocumentController implements Initializable {
             showError("Cannot perform subtraction, insufficient number of elements");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -279,7 +280,7 @@ public class FXMLDocumentController implements Initializable {
             showError("Cannot perform product, insufficient number of elements");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -298,7 +299,7 @@ public class FXMLDocumentController implements Initializable {
             showError("Cannot divide a number by zero");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -315,7 +316,7 @@ public class FXMLDocumentController implements Initializable {
             showError("Cannot perform square root with empty stack");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -332,7 +333,7 @@ public class FXMLDocumentController implements Initializable {
             showError("Cannot perform inversion sign with empty stack");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -347,7 +348,7 @@ public class FXMLDocumentController implements Initializable {
         } catch (Exception ex) {
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -363,7 +364,7 @@ public class FXMLDocumentController implements Initializable {
             showError("To perform drop, stack must be non-empty");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -380,7 +381,7 @@ public class FXMLDocumentController implements Initializable {
             showError("To perform dup, stack must be non-empty");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -397,7 +398,7 @@ public class FXMLDocumentController implements Initializable {
             showError("To perform swap, stack must have at least two elements");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     /**
@@ -414,7 +415,7 @@ public class FXMLDocumentController implements Initializable {
             showError("To perform over, stack must have at least two elements");
         }
         // refreshing the listView
-        refresh();
+        refreshStack();
     }
 
     @FXML
@@ -425,16 +426,28 @@ public class FXMLDocumentController implements Initializable {
             inVC.execute();
         } catch (VariablesNameException ex) {
         } catch (StackSizeException ex) {
-            showError("To perform "+">"+", stack must have at least one elements");
+            showError("To perform " + ">" + variablesComboBox.getValue().getKey() + ", stack must have at least one elements");
         }
+        refreshVariables();
     }
 
     private void updateText(Button button, String string) {
         button.setText(string + variablesComboBox.getValue().getKey());
     }
-
+        
+    /**
+     * This function update in the GUI the combo box showing the latest updates.
+     */
+    private void refreshVariables() {
+        observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
+        int index = variablesComboBox.getSelectionModel().getSelectedIndex();
+        variablesComboBox.setItems(null);
+        variablesComboBox.setItems(observableCharacterList);
+        variablesComboBox.getSelectionModel().select(index);
+    }
+    
     @FXML
-    private void selecteditemChanged(ActionEvent event) {
+    private void selectedItemChanged(ActionEvent event) {
         updateText(inVarBtn, ">");
         updateText(outVarBtn, "<");
         updateText(sumVarBtn, "+");
@@ -443,6 +456,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void saveInStack(ActionEvent event) {
+        System.out.println(variables);
     }
 
     @FXML
