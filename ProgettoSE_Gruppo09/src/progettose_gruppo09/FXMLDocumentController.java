@@ -4,6 +4,7 @@ import command.*;
 import exceptions.OperationDenied;
 import exceptions.StackSizeException;
 import exceptions.VariablesNameException;
+import exceptions.VariablesValueException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,7 +67,7 @@ public class FXMLDocumentController implements Initializable {
     private OverCommand overCommand = null;
 
     // variables 
-    Variables variables = new Variables();
+    private Variables variables = new Variables();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -425,7 +426,7 @@ public class FXMLDocumentController implements Initializable {
             inVC.execute();
         } catch (VariablesNameException ex) {
         } catch (StackSizeException ex) {
-            showError("To perform "+">"+", stack must have at least one elements");
+            showError("To perform " + ">" + ", stack must have at least one element");
         }
     }
 
@@ -447,9 +448,31 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void sumVariable(ActionEvent event) {
+        Character key = variablesComboBox.getValue().getKey();
+        SumVariableCommand sum_vc = new SumVariableCommand(stack, variables, key);
+        try {
+            sum_vc.execute();
+        } catch (VariablesValueException ex) {
+            showError("No value associated with the variable");
+        } catch (VariablesNameException ex) {
+            showError("Chosen variable not present");
+        } catch (StackSizeException ex) {
+            showError("To perform this action, stack must be non-empty");
+        }
     }
 
     @FXML
     private void subVariable(ActionEvent event) {
+        Character key = variablesComboBox.getValue().getKey();
+        SubVariableCommand sub_vc = new SubVariableCommand(stack, variables, key);
+        try {
+            sub_vc.execute();
+        } catch (VariablesValueException ex) {
+            showError("No value associated with the variable");
+        } catch (VariablesNameException ex) {
+            showError("Chosen variable not present");
+        } catch (StackSizeException ex) {
+            showError("To perform this action, stack must be non-empty");
+        }
     }
 }
