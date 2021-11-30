@@ -3,11 +3,14 @@ package progettose_gruppo09;
 import command.*;
 import exceptions.OperationDenied;
 import exceptions.StackSizeException;
+import exceptions.VariablesNameException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -416,7 +419,14 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void saveInVariable(ActionEvent event) {
-        System.out.println("Hello!");
+        Character variable = variablesComboBox.getValue().getKey();
+        InVariableCommand inVC = new InVariableCommand(variable, this.stack, this.variables);
+        try {
+            inVC.execute();
+        } catch (VariablesNameException ex) {
+        } catch (StackSizeException ex) {
+            showError("To perform "+">"+", stack must have at least one elements");
+        }
     }
 
     private void updateText(Button button, String string) {
