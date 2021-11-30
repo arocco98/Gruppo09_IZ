@@ -8,6 +8,7 @@ import exceptions.VariablesValueException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -28,7 +29,7 @@ import javafx.scene.control.TextField;
  * @author gruppo09
  */
 public class FXMLDocumentController implements Initializable {
-
+  
     @FXML
     private ListView<Complex> elementList;
     @FXML
@@ -417,19 +418,6 @@ public class FXMLDocumentController implements Initializable {
         refreshStack();
     }
 
-    @FXML
-    private void saveInVariable(ActionEvent event) {
-        Character variable = variablesComboBox.getValue().getKey();
-        InVariableCommand inVC = new InVariableCommand(variable, this.stack, this.variables);
-        try {
-            inVC.execute();
-        } catch (VariablesNameException ex) {
-        } catch (StackSizeException ex) {
-            showError("To perform >" + variablesComboBox.getValue().getKey() + ", stack must have at least one elements");
-        }
-        refreshVariables();
-    }
-
     /**
      * This function update the button's text.
      *
@@ -465,13 +453,31 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
+    private void saveInVariable(ActionEvent event) {
+        Character variable = variablesComboBox.getValue().getKey();
+        InVariableCommand inVC = new InVariableCommand(variable, this.stack, this.variables);
+        try {
+            inVC.execute();
+            refreshVariables();
+            clearTextField();
+        } catch (VariablesNameException ex) {
+        } catch (StackSizeException ex) {
+            showError("To perform >" + variablesComboBox.getValue().getKey() + ", stack must have at least one elements");
+        }
+
+    }
+
+    @FXML
     private void saveInStack(ActionEvent event) {
         Character key = variablesComboBox.getValue().getKey();
         OutVariableCommand ovc = new OutVariableCommand(stack, variables, key);
-         try {
+        try {
             ovc.execute();
+            refreshStack();
+            clearTextField();
         } catch (VariablesNameException ex) {
         } catch (VariablesValueException ex) {
+            showError("No value associated with the variable");
         }
     }
 
@@ -481,6 +487,8 @@ public class FXMLDocumentController implements Initializable {
         SumVariableCommand sum_vc = new SumVariableCommand(stack, variables, key);
         try {
             sum_vc.execute();
+            refreshVariables();
+            clearTextField();
         } catch (VariablesValueException ex) {
             showError("No value associated with the variable");
         } catch (VariablesNameException ex) {
@@ -488,7 +496,6 @@ public class FXMLDocumentController implements Initializable {
         } catch (StackSizeException ex) {
             showError("To perform this action, stack must be non-empty");
         }
-        refreshVariables();
     }
 
     @FXML
@@ -497,6 +504,8 @@ public class FXMLDocumentController implements Initializable {
         SubVariableCommand sub_vc = new SubVariableCommand(stack, variables, key);
         try {
             sub_vc.execute();
+            refreshVariables();
+            clearTextField();
         } catch (VariablesValueException ex) {
             showError("No value associated with the variable");
         } catch (VariablesNameException ex) {
@@ -504,6 +513,5 @@ public class FXMLDocumentController implements Initializable {
         } catch (StackSizeException ex) {
             showError("To perform this action, stack must be non-empty");
         }
-        refreshVariables();
     }
 }
