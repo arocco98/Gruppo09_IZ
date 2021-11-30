@@ -466,6 +466,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void saveInStack(ActionEvent event) {
+        Character key = variablesComboBox.getValue().getKey();
+        OutVariableCommand ovc = new OutVariableCommand(stack, variables, key);
+         try {
+            ovc.execute();
+        } catch (VariablesNameException ex) {
+        } catch (VariablesValueException ex) {
+        }
     }
 
     @FXML
