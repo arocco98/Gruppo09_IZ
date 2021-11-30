@@ -1,6 +1,6 @@
 package progettose_gruppo09;
 
-import exceptions.VariablesException;
+import exceptions.VariablesNameException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,13 +38,13 @@ public class Variables {
      * @param character The key of the value to get.
      * @return The variable associated to the key or null, if the variable was
      * not instantiated.
-     * @throws VariablesException If the character is not between 'a' and 'z'.
+     * @throws VariablesNameException If the character is not between 'a' and 'z'.
      */
-    public Complex getVariable(Character character) throws VariablesException {
+    public Complex getVariable(Character character) throws VariablesNameException {
         if (character >= 'a' && character <= 'z') {
             return variables.get(character);
         } else {
-            throw new VariablesException();
+            throw new VariablesNameException();
         }
     }
 
@@ -54,13 +54,13 @@ public class Variables {
      *
      * @param character The character to whom associate the variable.
      * @param complex The variable to associate.
-     * @throws VariablesException If the character is not between 'a' and 'z'.
+     * @throws VariablesNameException If the character is not between 'a' and 'z'.
      */
-    public void setVariable(Character character, Complex complex) throws VariablesException {
+    public void setVariable(Character character, Complex complex) throws VariablesNameException {
         if (character >= 'a' && character <= 'z') {
             variables.put(character, complex);
         } else {
-            throw new VariablesException();
+            throw new VariablesNameException();
         }
     }
 

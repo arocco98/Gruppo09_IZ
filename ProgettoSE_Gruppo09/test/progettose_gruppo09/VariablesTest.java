@@ -1,6 +1,6 @@
 package progettose_gruppo09;
 
-import exceptions.VariablesException;
+import exceptions.VariablesNameException;
 import java.util.HashMap;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -27,7 +27,7 @@ public class VariablesTest {
         // populating variables
         try {
             instance.setVariable('i', new Complex(1.2, 3.4));
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
 
         HashMap<Character, Complex> result = instance.getVariables();
@@ -42,7 +42,7 @@ public class VariablesTest {
             try {
                 instance.setVariable(character, new Complex(1.2, 3.4));
                 expResult.put(character, new Complex(1.2, 3.4));
-            } catch (VariablesException ex) {
+            } catch (VariablesNameException ex) {
             }
         }
 
@@ -62,7 +62,7 @@ public class VariablesTest {
         Complex result = null;
         try {
             result = instance.getVariable('a');
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
         // expected null
         assertEquals(expResult, result);
@@ -70,7 +70,7 @@ public class VariablesTest {
         try {
             instance.setVariable('a', new Complex(1.2, 3.4));
             result = instance.getVariable('a');
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
 
         expResult = new Complex(1.2, 3.4);
@@ -83,8 +83,8 @@ public class VariablesTest {
      * Test of getVariable method, of class Variables, when it throws an
      * exception.
      */
-    @Test(expected = VariablesException.class)
-    public void testGetVariableThrowsException() throws VariablesException {
+    @Test(expected = VariablesNameException.class)
+    public void testGetVariableThrowsException() throws VariablesNameException {
         System.out.println("getVariable throws exception");
         Variables instance = new Variables();
         instance.getVariable('A');
@@ -100,13 +100,13 @@ public class VariablesTest {
         Variables instance = new Variables();
         try {
             instance.setVariable('i', complex);
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
 
         Complex result = null;
         try {
             result = instance.getVariable('i');
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
 
         // expected equals
@@ -116,7 +116,7 @@ public class VariablesTest {
         try {
             instance.setVariable('i', complex);
             result = instance.getVariable('i');
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
 
         // expected equals
@@ -127,8 +127,8 @@ public class VariablesTest {
      * Test of setVariable method, of class Variables, when it throws an
      * exception.
      */
-    @Test(expected = VariablesException.class)
-    public void testSetVariableThrowsException() throws VariablesException {
+    @Test(expected = VariablesNameException.class)
+    public void testSetVariableThrowsException() throws VariablesNameException {
         System.out.println("setVariable throws exception");
         Variables instance = new Variables();
         instance.setVariable('A', new Complex(1.2, 3.4));
@@ -152,7 +152,7 @@ public class VariablesTest {
         Complex complex = new Complex(1.2, 3.4);
         try {
             instance.setVariable('a', complex);
-        } catch (VariablesException ex) {
+        } catch (VariablesNameException ex) {
         }
         expResult = "a: " + complex + "\n";
 
