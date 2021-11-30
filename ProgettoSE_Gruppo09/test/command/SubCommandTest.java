@@ -48,9 +48,7 @@ public class SubCommandTest {
         stack.push(c2);
         SubCommand instance = new SubCommand(stack);
         instance.execute();
-        double result = 12 - 1.5;
-        double result1 = 4.9 - 3.1;
-        Complex expected1 = new Complex(result, result1);
+        Complex expected1 = new Complex(10.5, 1.8);
         assertEquals(expected1, stack.peek());
     }
 

@@ -66,9 +66,6 @@ public class ComplexOperationsTest {
     @Test
     public void testComplexSub() {
 
-        double result = 0;
-        double result2 = 0;
-
         //sub with positive real part ≠0 and immag part =0 
         Complex a = new Complex(4.0, 0.0);
         Complex b = new Complex(3.0, 0.0);
@@ -120,31 +117,25 @@ public class ComplexOperationsTest {
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with negative real part, with decimal part, and negative immag part
         Complex a8 = new Complex(4.1, 1.0);
         Complex b8 = new Complex(7.2, 8.0);
-        result = 4.1 - 7.2;
-        Complex expected8 = new Complex(result, -7.0);
+        Complex expected8 = new Complex(-3.1, -7.0);
         assertEquals(expected8.getReal(), ComplexOperations.complexSub(a8, b8).getReal(), 0);
 
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with positive real part, with decimal part, and positive immag part
         Complex a9 = new Complex(10.2, 8.0);
         Complex b9 = new Complex(7.1, 1.0);
-        result = 10.2 - 7.1;
-        Complex expected9 = new Complex(result, 7.0);
+        Complex expected9 = new Complex(3.1, 7.0);
         assertEquals(expected9, ComplexOperations.complexSub(a9, b9));
 
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with negative real part, with decimal part, and positive immag part, with decimal part
         Complex a10 = new Complex(4.1, 8.2);
         Complex b10 = new Complex(7.2, 1.1);
-        result = 4.1 - 7.2;
-        result2 = 8.2 - 1.1;
-        Complex expected10 = new Complex(result, result2);
+        Complex expected10 = new Complex(-3.1, 7.1);
         assertEquals(expected10, ComplexOperations.complexSub(a10, b10));
 
         //sub with real positive part ≠0 and immag positive part ≠0 but the result should be with positive real part, with decimal part, and negative immag part, with decimal part
         Complex a11 = new Complex(10.2, 1.2);
         Complex b11 = new Complex(7.1, 7.1);
-        result = 10.2 - 7.1;
-        result2 = 1.2 - 7.1;
-        Complex expected11 = new Complex(result, result2);
+        Complex expected11 = new Complex(3.1, -5.9);
         assertEquals(expected11, ComplexOperations.complexSub(a11, b11));
     }
 
@@ -196,11 +187,11 @@ public class ComplexOperationsTest {
 
         assertEquals(new Complex(0.2, 0.6), ComplexOperations.complexDiv(new Complex(0.0, 2.0), new Complex(3.0, 1.0)));
 
-        assertEquals(new Complex(1.33, 0.67), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, 0.0)));
+        assertEquals(new Complex(1.3333333, 0.6666667), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, 0.0)));
 
-        assertEquals(new Complex(0.03, 0.59), ComplexOperations.complexDiv(new Complex(-4.0, 2.0), new Complex(3.0, 7.0)));
+        assertEquals(new Complex(0.0344828, 0.5862069), ComplexOperations.complexDiv(new Complex(-4.0, 2.0), new Complex(3.0, 7.0)));
 
-        assertEquals(new Complex(0.33, 1.0), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, -3.0)));
+        assertEquals(new Complex(0.3333333, 1.0), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, -3.0)));
 
         assertEquals(new Complex(-1.16, -0.88), ComplexOperations.complexDiv(new Complex(7.0, -2.0), new Complex(-3.0, 4.0)));
 
@@ -213,28 +204,28 @@ public class ComplexOperationsTest {
     public void testSqrt() {
 
         //sqrt of number with positive real part and positive immag. part
-        assertEquals(new Complex(1.099, 0.455), ComplexOperations.sqrt(new Complex(1.0, 1.0)));
+        assertEquals(new Complex(1.0986841, 0.4550899), ComplexOperations.sqrt(new Complex(1.0, 1.0)));
 
         //sqrt of number with negative real part and negative immag. part
-        assertEquals(new Complex(0.455, -1.099), ComplexOperations.sqrt(new Complex(-1.0, -1.0)));
+        assertEquals(new Complex(0.4550899, -1.0986841), ComplexOperations.sqrt(new Complex(-1.0, -1.0)));
 
         //sqrt of number with negative real part and positive immag. part
-        assertEquals(new Complex(0.455, 1.099), ComplexOperations.sqrt(new Complex(-1.0, 1.0)));
+        assertEquals(new Complex(0.4550899, 1.0986841), ComplexOperations.sqrt(new Complex(-1.0, 1.0)));
 
         //sqrt of number with positive real part and negative immag. part
-        assertEquals(new Complex(1.099, -0.455), ComplexOperations.sqrt(new Complex(1.0, -1.0)));
+        assertEquals(new Complex(1.0986841, -0.4550899), ComplexOperations.sqrt(new Complex(1.0, -1.0)));
 
         //sqrt of number,with decimal part, with positive real part and positive immag. part
-        assertEquals(new Complex(1.685, 0.860), ComplexOperations.sqrt(new Complex(2.1, 2.9)));
+        assertEquals(new Complex(1.6853045, 0.8603786), ComplexOperations.sqrt(new Complex(2.1, 2.9)));
 
         //sqrt of number,with decimal part, with negative real part and negative immag. part
-        assertEquals(new Complex(0.860, -1.685), ComplexOperations.sqrt(new Complex(-2.1, -2.9)));
+        assertEquals(new Complex(0.8603786, -1.6853045), ComplexOperations.sqrt(new Complex(-2.1, -2.9)));
 
         //sqrt of number,with decimal part, with negative real part and positive immag. part
-        assertEquals(new Complex(0.860, 1.685), ComplexOperations.sqrt(new Complex(-2.1, 2.9)));
+        assertEquals(new Complex(0.8603786, 1.6853045), ComplexOperations.sqrt(new Complex(-2.1, 2.9)));
 
         //sqrt of number,with decimal part, with positive real part and negative immag. part
-        assertEquals(new Complex(1.685, -0.860), ComplexOperations.sqrt(new Complex(2.1, -2.9)));
+        assertEquals(new Complex(1.6853045, -0.8603786), ComplexOperations.sqrt(new Complex(2.1, -2.9)));
 
         //sqrt of number 0
         assertEquals(new Complex(0.0, 0.0), ComplexOperations.sqrt(new Complex(0.0, 0.0)));
