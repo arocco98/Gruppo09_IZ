@@ -15,13 +15,12 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class OutVariableCommandTest {
-    
+
     private Stack stack;
     private Variables variables;
     private Character variable;
     private Complex complex;
-    
-    
+
     @Before
     public void setUp() {
         stack = new Stack();
@@ -36,7 +35,7 @@ public class OutVariableCommandTest {
     @Test
     public void testExecute() throws VariablesNameException, VariablesValueException, StackSizeException {
         System.out.println("execute OutVariableCommandTest");
-        complex = variables.getVariable(variable);
+        variables.setVariable(variable, complex);
         OutVariableCommand instance = new OutVariableCommand(stack, variables, variable);
         instance.execute();
         Complex result = stack.peek();
@@ -44,17 +43,28 @@ public class OutVariableCommandTest {
         // expected equals
         assertEquals(expectedResult, result);
     }
-    
+
     /**
-     * Test of testExecute method, of class OutVariableCommand, when it throws an
-     * VariablesException.
+     * Test of testExecute method, of class OutVariableCommand, when it throws
+     * an VariablesNameException.
      */
     @Test(expected = VariablesNameException.class)
     public void testExecuteThrowsException1() throws VariablesNameException, StackSizeException, VariablesValueException {
-        System.out.println("testExecute throws exception VariablesException");
-        variables.getVariable(variable);
+        System.out.println("testExecute throws exception VariablesNameException");
         OutVariableCommand instance = new OutVariableCommand(stack, variables, 'A');
         instance.execute();
     }
-    
+
+    /**
+     * Test of testExecute method, of class OutVariableCommand, when it throws
+     * an VariablesValueException.
+     */
+    @Test(expected = VariablesValueException.class)
+    public void testExecuteThrowsException2() throws VariablesNameException, StackSizeException, VariablesValueException {
+        System.out.println("testExecute throws exception VariablesValueException");
+        variables.setVariable(variable, null);
+        OutVariableCommand instance = new OutVariableCommand(stack, variables, variable);
+        instance.execute();
+    }
+
 }
