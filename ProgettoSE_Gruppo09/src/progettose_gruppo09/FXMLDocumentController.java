@@ -457,7 +457,6 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void saveInStack(ActionEvent event) {
-        System.out.println(variables);
     }
 
     @FXML
@@ -473,6 +472,7 @@ public class FXMLDocumentController implements Initializable {
         } catch (StackSizeException ex) {
             showError("To perform this action, stack must be non-empty");
         }
+        refreshVariables();
     }
 
     @FXML
@@ -488,5 +488,6 @@ public class FXMLDocumentController implements Initializable {
         } catch (StackSizeException ex) {
             showError("To perform this action, stack must be non-empty");
         }
+        refreshVariables();
     }
 }
