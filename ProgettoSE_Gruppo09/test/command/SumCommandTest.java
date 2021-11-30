@@ -19,8 +19,8 @@ public class SumCommandTest {
     @Before
     public void setUp() {
         stack = new Stack();
-        c1 = new Complex(12, 4.9);
-        c2 = new Complex(1.5, 3.1);
+        c1 = new Complex(5.2, 4.9);
+        c2 = new Complex(18.9, 3.1);
     }
 
     /**
@@ -45,7 +45,7 @@ public class SumCommandTest {
         stack.push(c2);
         SumCommand instance = new SumCommand(stack);
         instance.execute();
-        assertEquals(new Complex(13.5, 8), stack.peek());
+        assertEquals(new Complex(24.1, 8), stack.peek());
     }
 
 }

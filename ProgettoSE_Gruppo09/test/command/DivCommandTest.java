@@ -48,7 +48,7 @@ public class DivCommandTest {
         stack.push(c2);
         DivCommand instance = new DivCommand(stack);
         instance.execute();
-        assertEquals(new Complex(2.8, -2.52), stack.peek());
+        assertEquals(new Complex(2.7984823, -2.5168634), stack.peek());
     }
 
     /**
