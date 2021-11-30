@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -75,7 +73,7 @@ public class FXMLDocumentController implements Initializable {
         stack = new Stack();
         observableStack = FXCollections.observableList(stack);
         elementList.setItems(observableStack);
-        
+
         // initializing variables 
         observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
         variablesComboBox.setItems(observableCharacterList);
@@ -427,26 +425,37 @@ public class FXMLDocumentController implements Initializable {
             inVC.execute();
         } catch (VariablesNameException ex) {
         } catch (StackSizeException ex) {
-            showError("To perform " + ">" + variablesComboBox.getValue().getKey() + ", stack must have at least one elements");
+            showError("To perform >" + variablesComboBox.getValue().getKey() + ", stack must have at least one elements");
         }
         refreshVariables();
     }
 
+    /**
+     * This function update the button's text.
+     *
+     * @param button The button to change the text to.
+     * @param string The string representing the operation of the button.
+     */
     private void updateText(Button button, String string) {
-        button.setText(string + variablesComboBox.getValue().getKey());
+        if (variablesComboBox.getValue() != null) {
+            button.setText(string + variablesComboBox.getValue().getKey());
+        }
     }
-        
+
     /**
      * This function update in the GUI the combo box showing the latest updates.
      */
     private void refreshVariables() {
+        // instantiating a new one observableList in order to insert the new variables changes
         observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
         int index = variablesComboBox.getSelectionModel().getSelectedIndex();
+        // setting items to null and then to observableCharacterList in order to refresh the variables list
         variablesComboBox.setItems(null);
         variablesComboBox.setItems(observableCharacterList);
+        // setting the selected cell to the previous one selected
         variablesComboBox.getSelectionModel().select(index);
     }
-    
+
     @FXML
     private void selectedItemChanged(ActionEvent event) {
         updateText(inVarBtn, ">");
