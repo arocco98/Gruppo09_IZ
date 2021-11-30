@@ -76,7 +76,7 @@ public class InVariableCommandTest {
      */
     @Test(expected = StackSizeException.class)
     public void testExecuteThrowsException2() throws VariablesNameException, StackSizeException {
-        System.out.println("testExecute throws exception VariablesException");
+        System.out.println("testExecute throws exception StackSizeException");
         InVariableCommand instance = new InVariableCommand('a',stack, variables);
         instance.execute();
     }
