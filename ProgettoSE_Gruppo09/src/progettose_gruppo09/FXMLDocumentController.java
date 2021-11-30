@@ -6,6 +6,7 @@ import exceptions.StackSizeException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -30,10 +33,21 @@ public class FXMLDocumentController implements Initializable {
     private TextField elementTextField;
     @FXML
     private Label errorLabel;
+    @FXML
+    private ComboBox<Entry<Character, Complex>> variablesComboBox;
+    @FXML
+    private Button inVarBtn;
+    @FXML
+    private Button outVarBtn;
+    @FXML
+    private Button sumVarBtn;
+    @FXML
+    private Button subVarBtn;
 
     // elements stack
     private Stack stack = null;
     private ObservableList<Complex> observableStack = null;
+    private ObservableList<Entry<Character, Complex>> observableCharacterList = null;
 
     // Command variables
     private SumCommand sumCommand = null;
@@ -48,12 +62,19 @@ public class FXMLDocumentController implements Initializable {
     private SwapCommand swapCommand = null;
     private OverCommand overCommand = null;
 
+    // variables 
+    Variables variables = new Variables();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // initializing stack and elementList variables
         stack = new Stack();
         observableStack = FXCollections.observableList(stack);
         elementList.setItems(observableStack);
+        // initializing variables 
+        observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
+        variablesComboBox.setItems(observableCharacterList);
+        variablesComboBox.getSelectionModel().selectFirst();
 
         // initializing all commands
         sumCommand = new SumCommand(this.stack);
@@ -391,5 +412,22 @@ public class FXMLDocumentController implements Initializable {
         }
         // refreshing the listView
         refresh();
+    }
+
+    @FXML
+    private void saveInVariable(ActionEvent event) {
+        System.out.println("Hello!");
+    }
+
+    private void updateText(Button button, String string) {
+        button.setText(string + variablesComboBox.getValue().getKey());
+    }
+
+    @FXML
+    private void selecteditemChanged(ActionEvent event) {
+        updateText(inVarBtn, ">");
+        updateText(outVarBtn, "<");
+        updateText(sumVarBtn, "+");
+        updateText(subVarBtn, "-");
     }
 }
