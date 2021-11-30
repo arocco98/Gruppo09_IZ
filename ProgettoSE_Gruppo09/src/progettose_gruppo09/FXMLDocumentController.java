@@ -430,4 +430,16 @@ public class FXMLDocumentController implements Initializable {
         updateText(sumVarBtn, "+");
         updateText(subVarBtn, "-");
     }
+
+    @FXML
+    private void saveInStack(ActionEvent event) {
+    }
+
+    @FXML
+    private void sumVariable(ActionEvent event) {
+    }
+
+    @FXML
+    private void subVariable(ActionEvent event) {
+    }
 }
