@@ -45,6 +45,6 @@ public class ProdCommandTest {
         stack.push(c2);
         ProdCommand instance = new ProdCommand(stack);
         instance.execute();
-        assertEquals(new Complex(2.8099999999999987, 44.550000000000004), stack.peek());
+        assertEquals(new Complex(2.81, 44.55), stack.peek());
     }
 }
