@@ -550,6 +550,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             sum_vc.execute();
             refreshVariables();
+            refreshStack();
             clearTextField();
         } catch (VariablesValueException ex) {
             showError("No value associated with the variable");
@@ -567,6 +568,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             sub_vc.execute();
             refreshVariables();
+            refreshStack();
             clearTextField();
         } catch (VariablesValueException ex) {
             showError("No value associated with the variable");
