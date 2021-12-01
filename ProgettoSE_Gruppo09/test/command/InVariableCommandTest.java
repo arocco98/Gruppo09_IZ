@@ -47,6 +47,7 @@ public class InVariableCommandTest {
         // expected equals
         assertEquals(expectedResult, result);
         
+        stack.push(complex);
         InVariableCommand instance2 = new InVariableCommand(variable2, stack, variables);
         instance2.execute();
         result = variables.getVariable(variable2);
