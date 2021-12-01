@@ -459,6 +459,7 @@ public class FXMLDocumentController implements Initializable {
         try {
             inVC.execute();
             refreshVariables();
+            refreshStack();
             clearTextField();
         } catch (VariablesNameException ex) {
         } catch (StackSizeException ex) {

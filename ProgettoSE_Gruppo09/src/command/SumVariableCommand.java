@@ -46,7 +46,7 @@ public class SumVariableCommand implements Command {
         if (variables.getVariable(x) == null) {
             throw new VariablesValueException();
         } else {
-            variables.setVariable(x, ComplexOperations.complexSum(variables.getVariable(x), stack.peek()));
+            variables.setVariable(x, ComplexOperations.complexSum(variables.getVariable(x), stack.pop()));
         }
 
     }

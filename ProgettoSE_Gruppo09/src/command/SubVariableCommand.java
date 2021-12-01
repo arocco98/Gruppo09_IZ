@@ -47,7 +47,7 @@ public class SubVariableCommand implements Command {
         if (variables.getVariable(x) == null) {
             throw new VariablesValueException();
         } else {
-            variables.setVariable(x, ComplexOperations.complexSub(variables.getVariable(x), stack.peek()));
+            variables.setVariable(x, ComplexOperations.complexSub(variables.getVariable(x), stack.pop()));
         }
 
     }
