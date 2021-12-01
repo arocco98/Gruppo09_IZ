@@ -8,9 +8,11 @@ import exceptions.VariablesValueException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
@@ -30,6 +32,61 @@ import javafx.scene.control.TextField;
  */
 public class FXMLDocumentController implements Initializable {
   
+    private class MyEntry<Character, Complex> implements Map.Entry<Character, Complex>, Comparable<Character>{
+
+        private Character key;
+        private Complex value;
+
+        
+        public MyEntry() {
+            this.key = null;
+            this.value = null;
+        }
+        
+        public MyEntry(Character character, Complex complex) {
+            this.key = character;
+            this.value = complex;
+        }
+        
+        public Set<MyEntry<Character, Complex>> fromEntrySet(Set<Entry<Character, Complex>> entrySet) {
+            Set<MyEntry<Character, Complex>> set = new HashSet<>();
+            for(Entry<Character, Complex> entry: entrySet) {
+                set.add(new MyEntry<>(entry.getKey(), entry.getValue()));
+            }
+            return set;
+        }
+        
+        @Override
+        public Character getKey() {
+            return this.key;
+        }
+
+        @Override
+        public Complex getValue() {
+            return this.value;
+        }
+
+        @Override
+        public Complex setValue(Complex value) {
+            this.value = value;
+            return this.getValue();
+        }
+        
+        @Override
+        public String toString() {
+            if(this.getValue() == null) {
+                return this.getKey() + ":\t...";
+            }
+            return this.getKey() + ":\t" + this.getValue();
+        }
+
+        @Override
+        public int compareTo(Character o) {
+            return this.key.toString().compareTo(o.toString());
+        }
+
+    }
+    
     @FXML
     private ListView<Complex> elementList;
     @FXML
@@ -51,7 +108,7 @@ public class FXMLDocumentController implements Initializable {
     private Stack stack = null;
     private ObservableList<Complex> observableStack = null;
     private ObservableList<Entry<Character, Complex>> observableCharacterList = null;
-
+    
     // Command variables
     private SumCommand sumCommand = null;
     private SubCommand subCommand = null;
@@ -76,10 +133,12 @@ public class FXMLDocumentController implements Initializable {
         elementList.setItems(observableStack);
 
         // initializing variables 
-        observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
+        MyEntry<Character, Complex> myEntry = new MyEntry<>();
+        observableCharacterList = FXCollections.observableList(new ArrayList<>(myEntry.fromEntrySet(variables.getVariables().entrySet())));
+        observableCharacterList.sort(null);
         variablesComboBox.setItems(observableCharacterList);
         variablesComboBox.getSelectionModel().selectFirst();
-
+        
         // initializing all commands
         sumCommand = new SumCommand(this.stack);
         subCommand = new SubCommand(this.stack);
@@ -435,7 +494,9 @@ public class FXMLDocumentController implements Initializable {
      */
     private void refreshVariables() {
         // instantiating a new one observableList in order to insert the new variables changes
-        observableCharacterList = FXCollections.observableList(new ArrayList<>(variables.getVariables().entrySet()));
+        MyEntry<Character, Complex> myEntry = new MyEntry<>();
+        observableCharacterList = FXCollections.observableList(new ArrayList<>(myEntry.fromEntrySet(variables.getVariables().entrySet())));
+        observableCharacterList.sort(null);
         int index = variablesComboBox.getSelectionModel().getSelectedIndex();
         // setting items to null and then to observableCharacterList in order to refresh the variables list
         variablesComboBox.setItems(null);

@@ -38,7 +38,7 @@ public class InVariableCommand implements Command{
     @Override
     public void execute() throws VariablesNameException, StackSizeException {
         if (stack.size() >= 1) {
-            variables.setVariable(variable, stack.peek());
+            variables.setVariable(variable, stack.pop());
         } else {
             throw new StackSizeException();
         }
