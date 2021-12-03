@@ -28,6 +28,7 @@ public class ClearCommand implements Command {
      */
     @Override
     public void execute() throws Exception {
+        //using the method removeAll of ArrayList in order to empty the stack
         stack.removeAll(stack);
     }
 

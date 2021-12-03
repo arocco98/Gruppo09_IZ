@@ -29,10 +29,14 @@ public class SumCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
+        //check that the stack has at least two elements so that
+        //sum should be executed
         if (stack.size() >= 2) {
             Complex c1 = stack.pop();
             Complex c2 = stack.pop();
 
+            //pushing into the stack the sum between c1 and c2 calling
+            //complexSum function
             stack.push(ComplexOperations.complexSum(c1, c2));
         } else {
             throw new StackSizeException();

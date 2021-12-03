@@ -29,8 +29,11 @@ public class DupCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
+        //check that the stack is not empty so that duplication should be executed
         if (!stack.isEmpty()) {
+            //saving the value of the element to duplicate
             Complex c = stack.peek();
+            //pushing a copy of the last element into the stack
             stack.push(c);
         } else {
             throw new StackSizeException();

@@ -30,10 +30,16 @@ public class DivCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException, OperationDenied {
-        if (stack.size()>= 2) {
+
+        //check that the stack has at least two elements so that
+        //division should be executed
+        if (stack.size() >= 2) {
             Complex c2 = stack.pop();
             Complex c1 = stack.pop();
 
+            //check that the divider has a real part and an imaginary part other
+            //than zero, otherwise the operation is not allowed and the last
+            //operands taken from the stack are reinserted
             if (c2.getImaginary() == 0 && c2.getReal() == 0) {
                 stack.push(c1);
                 stack.push(c2);
