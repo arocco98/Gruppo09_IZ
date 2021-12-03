@@ -30,6 +30,12 @@ public class InsertCommand implements Command {
         Pattern patternR = createPattern("([+|-]?\\d+(\\.\\d+)?)$");
         // pattern for only imaginary part
         Pattern patternI = createPattern("([+|-]?\\d+(\\.\\d+)?)j$");
+        // pattern for real and imaginary part using only 'j'
+        Pattern patternRJ = createPattern("([+|-]?\\d+(\\.\\d+)?)([+|-]j)$");
+        // pattern for imaginary and real part using only 'j'
+        Pattern patternJR = createPattern("([+|-]?j)([+|-]\\d+(\\.\\d+)?)$");
+        // pattern for imaginary part using only 'j'
+        Pattern patternJ = createPattern("([+|-]?j)$");
 
         // defining real and imaginary variable
         double real = 0.0, imaginary = 0.0;
@@ -42,6 +48,12 @@ public class InsertCommand implements Command {
         Matcher matcherR = createMatcher(patternR);
         // matcher for only imaginary part
         Matcher matcherI = createMatcher(patternI);
+        // matcher for real and imaginary part using only 'j'
+        Matcher matcherRJ = createMatcher(patternRJ);
+        // matcher for imaginary and real part using only 'j'
+        Matcher matcherJR = createMatcher(patternJR);
+        // matcher for imaginary part using only 'j'
+        Matcher matcherJ = createMatcher(patternJ);
 
         if (matcherRI.matches()) { // if the user input matches the first pattern
             real = Double.parseDouble(matcherRI.group(1)); // extract the real part
@@ -73,6 +85,45 @@ public class InsertCommand implements Command {
 
             // pushing the just created element into the stack
             stack.push(c);
+        } else if (matcherRJ.matches()) {
+            real = Double.parseDouble(matcherRJ.group(1)); // extract the real part
+            
+            // extracting the imaginary part
+            char firstChar = matcherRJ.group(3).charAt(0);
+            if (firstChar == '-') {
+                imaginary = -1.0;
+            } else {
+                imaginary = 1.0;
+            }
+
+            Complex c = new Complex(real, imaginary);
+            
+            // pushing the just created element into the stack
+            stack.push(c);
+        } else if (matcherJR.matches()) {
+            real = Double.parseDouble(matcherJR.group(2)); // extract the real part
+            
+            // extracting the imaginary part
+            char firstChar = matcherJR.group(1).charAt(0);
+            if (firstChar == '-') {
+                imaginary = -1.0;
+            } else {
+                imaginary = 1.0;
+            }
+
+            Complex c = new Complex(real, imaginary);
+            
+            // pushing the just created element into the stack
+            stack.push(c);
+        } else if (matcherJ.matches()) {
+            char firstChar = matcherJ.group(1).charAt(0);
+            if (firstChar == '-') {
+                Complex c = new Complex(0.0, -1.0);
+                stack.push(c);
+            } else {
+                Complex c = new Complex(0.0, 1.0);
+                stack.push(c);
+            }
         } else {
             throw new NoMatchFoundException();
         }
