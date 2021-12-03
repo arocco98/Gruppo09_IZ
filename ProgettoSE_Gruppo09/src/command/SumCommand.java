@@ -33,6 +33,8 @@ public class SumCommand implements Command {
             Complex c1 = stack.pop();
             Complex c2 = stack.pop();
 
+            //pushing into the stack the sum between c1 and c2 calling
+            //complexSum function
             stack.push(ComplexOperations.complexSum(c1, c2));
         } else {
             throw new StackSizeException();

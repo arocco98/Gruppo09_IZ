@@ -33,6 +33,8 @@ public class SubCommand implements Command {
             Complex c2 = stack.pop();
             Complex c1 = stack.pop();
 
+            //pushing into the stack the difference between c1 and c2 calling
+            //complexSub function
             stack.push(ComplexOperations.complexSub(c1, c2));
         } else {
             throw new StackSizeException();

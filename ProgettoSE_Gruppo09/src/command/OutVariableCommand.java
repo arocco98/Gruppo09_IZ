@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package command;
 
 import exceptions.*;
@@ -10,24 +5,25 @@ import progettose_gruppo09.*;
 
 /**
  *
- * This class implements Command interface and execute the save on the top of the stack the element in the indicate variable
- * 
+ * This class implements Command interface and execute the save on the top of
+ * the stack the element in the indicate variable
+ *
  * @author gruppo09
  */
-public class OutVariableCommand implements Command{
+public class OutVariableCommand implements Command {
 
     private Stack stack;
     private Variables variables;
     private Character variable;
 
     /**
-     * Construct a new InVariableCommand object that operates on a stack and variables
-     * 
+     * Construct a new InVariableCommand object that operates on a stack and
+     * variables
+     *
      * @param variable variable on which InVariableCommand operates
      * @param stack stack on which InVariableCommand operates
      * @param variables variables on which InVariableCommand operates
      */
-    
     public OutVariableCommand(Stack stack, Variables variables, Character variable) {
         this.stack = stack;
         this.variables = variables;
@@ -35,21 +31,21 @@ public class OutVariableCommand implements Command{
     }
 
     /**
-     * saves the last element on the stack in the variable 
-     * 
+     * Pushes into the stack the value associated with a variable 
+     *
      * @throws VariablesNameException
      * @throws VariablesValueException
      */
-    
     @Override
-    public void execute() throws VariablesValueException, VariablesNameException{
-        if(variables.getVariable(variable)==null)
+    public void execute() throws VariablesValueException, VariablesNameException {
+        //check that the value associated with 'variable' is not null so that
+        //the OutVariable operation should be executed
+        if (variables.getVariable(variable) == null) {
             throw new VariablesValueException();
+        }
         
+        //pushing into the stack the value associated with 'variable'
         stack.push(variables.getVariable(variable));
     }
 
-    
-    
-    
 }

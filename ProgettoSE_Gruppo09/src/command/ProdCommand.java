@@ -33,6 +33,8 @@ public class ProdCommand implements Command {
             Complex c2 = stack.pop();
             Complex c1 = stack.pop();
 
+            //pushing into the stack the product between c1 and c2 calling
+            //complexProd function
             stack.push(ComplexOperations.complexProd(c1, c2));
         } else {
             throw new StackSizeException();

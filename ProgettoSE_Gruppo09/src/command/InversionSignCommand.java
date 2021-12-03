@@ -33,6 +33,9 @@ public class InversionSignCommand implements Command {
     public void execute() throws StackSizeException {
         if (stack.size() >= 1) {
             Complex complex = stack.pop();
+            
+            //pushing into the stack the value of c1 reversing the sign of real
+            //part and imaginary part
             stack.push(new Complex(-complex.getReal(), -complex.getImaginary()));
         } else {
             throw new StackSizeException();

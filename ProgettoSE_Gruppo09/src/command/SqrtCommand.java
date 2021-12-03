@@ -32,6 +32,7 @@ public class SqrtCommand implements Command {
         if (stack.size() >= 1) {
             Complex c1 = stack.pop();
 
+            //pushing into the stack the square root of c1 calling sqrt function
             stack.push(ComplexOperations.sqrt(c1));
         } else {
             throw new StackSizeException();
