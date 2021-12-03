@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 import command.*;
+import exceptions.NoMatchFoundException;
 import exceptions.OperationDenied;
 import exceptions.StackSizeException;
 import exceptions.VariablesNameException;
@@ -31,31 +32,37 @@ import javafx.scene.control.TextField;
  * @author gruppo09
  */
 public class FXMLDocumentController implements Initializable {
-  
-    private class MyEntry<Character, Complex> implements Map.Entry<Character, Complex>, Comparable<Character>{
+
+    /**
+     * This inner class has been created in order to change the classic Entry
+     * toString.
+     *
+     * @param <Character> The key of MyEntry.
+     * @param <Complex> The value of MyEntry.
+     */
+    private class MyEntry<Character, Complex> implements Map.Entry<Character, Complex>, Comparable<Character> {
 
         private Character key;
         private Complex value;
 
-        
         public MyEntry() {
             this.key = null;
             this.value = null;
         }
-        
+
         public MyEntry(Character character, Complex complex) {
             this.key = character;
             this.value = complex;
         }
-        
+
         public Set<MyEntry<Character, Complex>> fromEntrySet(Set<Entry<Character, Complex>> entrySet) {
             Set<MyEntry<Character, Complex>> set = new HashSet<>();
-            for(Entry<Character, Complex> entry: entrySet) {
+            for (Entry<Character, Complex> entry : entrySet) {
                 set.add(new MyEntry<>(entry.getKey(), entry.getValue()));
             }
             return set;
         }
-        
+
         @Override
         public Character getKey() {
             return this.key;
@@ -71,10 +78,10 @@ public class FXMLDocumentController implements Initializable {
             this.value = value;
             return this.getValue();
         }
-        
+
         @Override
         public String toString() {
-            if(this.getValue() == null) {
+            if (this.getValue() == null) {
                 return this.getKey() + ":\t...";
             }
             return this.getKey() + ":\t" + this.getValue();
@@ -86,7 +93,7 @@ public class FXMLDocumentController implements Initializable {
         }
 
     }
-    
+
     @FXML
     private ListView<Complex> elementList;
     @FXML
@@ -108,7 +115,7 @@ public class FXMLDocumentController implements Initializable {
     private Stack stack = null;
     private ObservableList<Complex> observableStack = null;
     private ObservableList<Entry<Character, Complex>> observableCharacterList = null;
-    
+
     // Command variables
     private SumCommand sumCommand = null;
     private SubCommand subCommand = null;
@@ -125,6 +132,9 @@ public class FXMLDocumentController implements Initializable {
     // variables 
     private Variables variables = new Variables();
 
+    // user-defined functions
+    private ArrayList<FunctionCommand> functionsCommands = null;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // initializing stack and elementList variables
@@ -138,7 +148,7 @@ public class FXMLDocumentController implements Initializable {
         observableCharacterList.sort(null);
         variablesComboBox.setItems(observableCharacterList);
         variablesComboBox.getSelectionModel().selectFirst();
-        
+
         // initializing all commands
         sumCommand = new SumCommand(this.stack);
         subCommand = new SubCommand(this.stack);
@@ -151,29 +161,9 @@ public class FXMLDocumentController implements Initializable {
         dupCommand = new DupCommand(this.stack);
         swapCommand = new SwapCommand(this.stack);
         overCommand = new OverCommand(this.stack);
-    }
 
-    /**
-     * Creates and returns a Pattern object by using the string passed as
-     * argument.
-     *
-     * @param stringPattern The string that contains the pattern.
-     * @return A Pattern object created by using the string passed as argument.
-     */
-    private Pattern createPattern(String stringPattern) {
-        return Pattern.compile(stringPattern);
-    }
-
-    /**
-     * Creates and returns a Matcher object using the Pattern object passed as
-     * argument.
-     *
-     * @param pattern The pattern with which to create the matcher.
-     * @return A Matcher object created by using the "matcher" method of Pattern
-     * and by passing the text contained in the text field (spaces excluded).
-     */
-    private Matcher createMatcher(Pattern pattern) {
-        return pattern.matcher(elementTextField.getText().replaceAll("\\s+", ""));
+        // initializing functionsCommands array
+        functionsCommands = new ArrayList<>(); // DA MODIFICARE
     }
 
     /**
@@ -213,79 +203,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void insert(ActionEvent event) {
         if (elementTextField.textProperty().isNotEmpty().get()) {
-            // pattern for real and imaginary part
-            Pattern patternRI = createPattern("([+|-]?\\d+(\\.\\d+)?)([+|-]\\d+(\\.\\d+)?)j$");
-            // pattern for imaginary and real part
-            Pattern patternIR = createPattern("([+|-]?\\d+(\\.\\d+)?)j([+|-]\\d+(\\.\\d+)?)$");
-            // pattern for only real part
-            Pattern patternR = createPattern("([+|-]?\\d+(\\.\\d+)?)$");
-            // pattern for only imaginary part
-            Pattern patternI = createPattern("([+|-]?\\d+(\\.\\d+)?)j$");
-
-            // defining real and imaginary variable
-            double real = 0.0, imaginary = 0.0;
-
-            // matcher for real and imaginary part
-            Matcher matcherRI = createMatcher(patternRI);
-            // matcher for imaginary and real part
-            Matcher matcherIR = createMatcher(patternIR);
-            // matcher for only real part
-            Matcher matcherR = createMatcher(patternR);
-            // matcher for only imaginary part
-            Matcher matcherI = createMatcher(patternI);
-
+            InsertCommand insertCommand = new InsertCommand(stack, elementTextField.getText());
             try {
-                if (matcherRI.matches()) { // if the user input matches the first pattern
-                    real = Double.parseDouble(matcherRI.group(1)); // extract the real part
-                    imaginary = Double.parseDouble(matcherRI.group(3)); // extract the imaginary part
-
-                    Complex c = new Complex(real, imaginary);
-
-                    // clearing textField and setting to empty string the errorLabel
-                    clearTextField();
-
-                    // pushing the just created element into the stack
-                    stack.push(c);
-                } else if (matcherIR.matches()) { // if the user input matches the second pattern
-                    real = Double.parseDouble(matcherIR.group(3)); // extract the real part
-                    imaginary = Double.parseDouble(matcherIR.group(1)); // extract the imaginary part
-
-                    Complex c = new Complex(real, imaginary);
-
-                    // clearing textField and setting to empty string the errorLabel
-                    clearTextField();
-
-                    // pushing the just created element into the stack
-                    stack.push(c);
-                } else if (matcherR.matches()) { // if the user input matches the third pattern
-                    real = Double.parseDouble(matcherR.group(1)); // extract the real part
-
-                    Complex c = new Complex(real, 0.0);
-
-                    // clearing textField and setting to empty string the errorLabel
-                    clearTextField();
-
-                    // pushing the just created element into the stack
-                    stack.push(c);
-                } else if (matcherI.matches()) { // if the user input matches the fourth pattern
-                    imaginary = Double.parseDouble(matcherI.group(1)); // extract the imaginary part
-
-                    Complex c = new Complex(0.0, imaginary);
-
-                    // clearing textField and setting to empty string the errorLabel
-                    clearTextField();
-
-                    // pushing the just created element into the stack
-                    stack.push(c);
-                } else {
-                    showError("Use the notation: a+bj");
-
-                }
-            } catch (NumberFormatException e) {
-                showError("Use the notation: a+bj");
+                insertCommand.execute();
+                refreshStack();
+                clearTextField();
+            } catch (NoMatchFoundException ex) {
+                clearTextField();
+                showError("Use the notation a+bj or bj+a");
             }
-            // refreshing the listView
-            refreshStack();
         } else {
             showError("Text field must not be empty");
         }
