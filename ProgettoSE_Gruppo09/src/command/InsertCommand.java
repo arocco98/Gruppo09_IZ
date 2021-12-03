@@ -7,6 +7,9 @@ import progettose_gruppo09.Complex;
 import progettose_gruppo09.Stack;
 
 /**
+ * This class implements Command interface and execute the insertion of a
+ * Complex number by analyzing the string passed as parameter and pushing the
+ * number, if the string represent a Complex number, into the stack
  *
  * @author gruppo09
  */
@@ -15,11 +18,24 @@ public class InsertCommand implements Command {
     Stack stack;
     String patternString;
 
+    /**
+     * Constructor of InsertCommand class, it takes two parameters: a Stack
+     * object and a String object.
+     *
+     * @param stack The stack to push the element into.
+     * @param patternString The string to check.
+     */
     public InsertCommand(Stack stack, String patternString) {
         this.stack = stack;
         this.patternString = patternString;
     }
 
+    /**
+     * Checks if the string matches a pattern, if so it pushes the just created
+     * element into the stack, else it throws a NoMatchFoundException.
+     *
+     * @throws NoMatchFoundException The Exception throwed when patternString doesn't match any pattern.
+     */
     @Override
     public void execute() throws NoMatchFoundException {
         // pattern for real and imaginary part
@@ -85,9 +101,9 @@ public class InsertCommand implements Command {
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherRJ.matches()) {
+        } else if (matcherRJ.matches()) { // if the user input matches the fifth pattern
             real = Double.parseDouble(matcherRJ.group(1)); // extract the real part
-            
+
             // extracting the imaginary part
             char firstChar = matcherRJ.group(3).charAt(0);
             if (firstChar == '-') {
@@ -97,12 +113,12 @@ public class InsertCommand implements Command {
             }
 
             Complex c = new Complex(real, imaginary);
-            
+
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherJR.matches()) {
+        } else if (matcherJR.matches()) { // if the user input matches the sixth pattern
             real = Double.parseDouble(matcherJR.group(2)); // extract the real part
-            
+
             // extracting the imaginary part
             char firstChar = matcherJR.group(1).charAt(0);
             if (firstChar == '-') {
@@ -112,10 +128,11 @@ public class InsertCommand implements Command {
             }
 
             Complex c = new Complex(real, imaginary);
-            
+
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherJ.matches()) {
+        } else if (matcherJ.matches()) { // if the user input matches the seventh pattern
+            // extracting the imaginary part
             char firstChar = matcherJ.group(1).charAt(0);
             if (firstChar == '-') {
                 Complex c = new Complex(0.0, -1.0);
