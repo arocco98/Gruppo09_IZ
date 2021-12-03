@@ -39,14 +39,16 @@ public class SubVariableCommand implements Command {
      */
     @Override
     public void execute() throws VariablesValueException, VariablesNameException, StackSizeException {
-
+        //check that the stack is not empty so that operation should be executed
         if (stack.isEmpty()) {
             throw new StackSizeException();
         }
 
+        //check that the variable chosen is not null
         if (variables.getVariable(x) == null) {
             throw new VariablesValueException();
         } else {
+            //inserts the result of the transaction into the variable chosen
             variables.setVariable(x, ComplexOperations.complexSub(variables.getVariable(x), stack.pop()));
         }
 
