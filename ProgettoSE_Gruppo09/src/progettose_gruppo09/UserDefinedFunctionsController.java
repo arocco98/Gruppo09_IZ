@@ -30,7 +30,7 @@ public class UserDefinedFunctionsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        functions = FXMLDocumentController.readFunctions();
+        //functions = FXMLDocumentController.readFunctions();
         functions = FXCollections.observableArrayList();
         
         functionsTable.setItems(functions);

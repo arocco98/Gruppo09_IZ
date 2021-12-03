@@ -9,13 +9,11 @@ import exceptions.VariablesValueException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.TreeSet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +30,10 @@ import javafx.scene.control.TextField;
  * @author gruppo09
  */
 public class FXMLDocumentController implements Initializable {
+
+    @FXML
+    private void function(ActionEvent event) {
+    }
 
     /**
      * This inner class has been created in order to change the classic Entry
@@ -56,7 +58,7 @@ public class FXMLDocumentController implements Initializable {
         }
 
         public Set<MyEntry<Character, Complex>> fromEntrySet(Set<Entry<Character, Complex>> entrySet) {
-            Set<MyEntry<Character, Complex>> set = new HashSet<>();
+            Set<MyEntry<Character, Complex>> set = new TreeSet<>();
             for (Entry<Character, Complex> entry : entrySet) {
                 set.add(new MyEntry<>(entry.getKey(), entry.getValue()));
             }
@@ -422,11 +424,12 @@ public class FXMLDocumentController implements Initializable {
         // instantiating a new one observableList in order to insert the new variables changes
         MyEntry<Character, Complex> myEntry = new MyEntry<>();
         observableCharacterList = FXCollections.observableList(new ArrayList<>(myEntry.fromEntrySet(variables.getVariables().entrySet())));
-        observableCharacterList.sort(null);
         int index = variablesComboBox.getSelectionModel().getSelectedIndex();
+
         // setting items to null and then to observableCharacterList in order to refresh the variables list
         variablesComboBox.setItems(null);
         variablesComboBox.setItems(observableCharacterList);
+        
         // setting the selected cell to the previous one selected
         variablesComboBox.getSelectionModel().select(index);
     }

@@ -34,41 +34,54 @@ public class InsertCommand implements Command {
      * Checks if the string matches a pattern, if so it pushes the just created
      * element into the stack, else it throws a NoMatchFoundException.
      *
-     * @throws NoMatchFoundException The Exception throwed when patternString doesn't match any pattern.
+     * @throws NoMatchFoundException The Exception throwed when patternString
+     * doesn't match any pattern.
      */
     @Override
     public void execute() throws NoMatchFoundException {
-        // pattern for real and imaginary part
+        // pattern for real and imaginary part: a+bj
         Pattern patternRI = createPattern("([+|-]?\\d+(\\.\\d+)?)([+|-]\\d+(\\.\\d+)?)j$");
-        // pattern for imaginary and real part
+        // pattern for real and imaginary part: a+jb
+        Pattern patternRI2 = createPattern("([+|-]?\\d+(\\.\\d+)?)([+|-]j\\d+(\\.\\d+)?)$");
+        // pattern for imaginary and real part: bj+a
         Pattern patternIR = createPattern("([+|-]?\\d+(\\.\\d+)?)j([+|-]\\d+(\\.\\d+)?)$");
-        // pattern for only real part
+        // pattern for imaginary and real part: jb+a
+        Pattern patternIR2 = createPattern("([+|-]?j\\d+(\\.\\d+)?)([+|-]\\d+(\\.\\d+)?)$");
+        // pattern for only real part: a
         Pattern patternR = createPattern("([+|-]?\\d+(\\.\\d+)?)$");
-        // pattern for only imaginary part
+        // pattern for only imaginary part: bj
         Pattern patternI = createPattern("([+|-]?\\d+(\\.\\d+)?)j$");
-        // pattern for real and imaginary part using only 'j'
+        // pattern for only imaginary part: jb
+        Pattern patternI2 = createPattern("([+|-]?j\\d+(\\.\\d+)?)$");
+        // pattern for real and imaginary part using only 'j': a+j
         Pattern patternRJ = createPattern("([+|-]?\\d+(\\.\\d+)?)([+|-]j)$");
-        // pattern for imaginary and real part using only 'j'
+        // pattern for imaginary and real part using only 'j': j+a
         Pattern patternJR = createPattern("([+|-]?j)([+|-]\\d+(\\.\\d+)?)$");
-        // pattern for imaginary part using only 'j'
+        // pattern for imaginary part using only 'j': j
         Pattern patternJ = createPattern("([+|-]?j)$");
 
         // defining real and imaginary variable
         double real = 0.0, imaginary = 0.0;
 
-        // matcher for real and imaginary part
+        // matcher for real and imaginary part: a+bj
         Matcher matcherRI = createMatcher(patternRI);
-        // matcher for imaginary and real part
+        // matcher for real and imaginary part: a+jb
+        Matcher matcherRI2 = createMatcher(patternRI2);
+        // matcher for imaginary and real part: bj+a
         Matcher matcherIR = createMatcher(patternIR);
-        // matcher for only real part
+        // matcher for imaginary and real part: jb+a
+        Matcher matcherIR2 = createMatcher(patternIR2);
+        // matcher for only real part: a
         Matcher matcherR = createMatcher(patternR);
-        // matcher for only imaginary part
+        // matcher for only imaginary part: bj
         Matcher matcherI = createMatcher(patternI);
-        // matcher for real and imaginary part using only 'j'
+        // matcher for only imaginary part: jb
+        Matcher matcherI2 = createMatcher(patternI2);
+        // matcher for real and imaginary part using only 'j': a+j
         Matcher matcherRJ = createMatcher(patternRJ);
-        // matcher for imaginary and real part using only 'j'
+        // matcher for imaginary and real part using only 'j': j+a
         Matcher matcherJR = createMatcher(patternJR);
-        // matcher for imaginary part using only 'j'
+        // matcher for imaginary part using only 'j': j
         Matcher matcherJ = createMatcher(patternJ);
 
         if (matcherRI.matches()) { // if the user input matches the first pattern
@@ -79,7 +92,15 @@ public class InsertCommand implements Command {
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherIR.matches()) { // if the user input matches the second pattern
+        } else if (matcherRI2.matches()) { // if the user input matches the second pattern
+            real = Double.parseDouble(matcherRI2.group(1)); // extract the real part
+            imaginary = Double.parseDouble(matcherRI2.group(3).replace("j", "")); // extract the imaginary part
+
+            Complex c = new Complex(real, imaginary);
+
+            // pushing the just created element into the stack
+            stack.push(c);
+        } else if (matcherIR.matches()) { // if the user input matches the third pattern
             real = Double.parseDouble(matcherIR.group(3)); // extract the real part
             imaginary = Double.parseDouble(matcherIR.group(1)); // extract the imaginary part
 
@@ -87,21 +108,37 @@ public class InsertCommand implements Command {
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherR.matches()) { // if the user input matches the third pattern
+        } else if (matcherIR2.matches()) { // if the user input matches the fourth pattern
+            real = Double.parseDouble(matcherIR2.group(3)); // extract the real part
+            imaginary = Double.parseDouble(matcherIR2.group(1).replace("j", "")); // extract the imaginary part
+
+            Complex c = new Complex(real, imaginary);
+
+            // pushing the just created element into the stack
+            stack.push(c);
+
+        } else if (matcherR.matches()) { // if the user input matches the fifth pattern
             real = Double.parseDouble(matcherR.group(1)); // extract the real part
 
             Complex c = new Complex(real, 0.0);
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherI.matches()) { // if the user input matches the fourth pattern
+        } else if (matcherI.matches()) { // if the user input matches the sixth pattern
             imaginary = Double.parseDouble(matcherI.group(1)); // extract the imaginary part
 
             Complex c = new Complex(0.0, imaginary);
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherRJ.matches()) { // if the user input matches the fifth pattern
+        } else if (matcherI2.matches()) { // if the user input matches the seventh pattern
+            imaginary = Double.parseDouble(matcherI2.group(1).replace("j", "")); 
+            
+            Complex c = new Complex(0.0, imaginary);
+            
+            // pushing the just created element into the stack
+            stack.push(c);
+        } else if (matcherRJ.matches()) { // if the user input matches the eighth pattern
             real = Double.parseDouble(matcherRJ.group(1)); // extract the real part
 
             // extracting the imaginary part
@@ -116,7 +153,7 @@ public class InsertCommand implements Command {
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherJR.matches()) { // if the user input matches the sixth pattern
+        } else if (matcherJR.matches()) { // if the user input matches the ninth pattern
             real = Double.parseDouble(matcherJR.group(2)); // extract the real part
 
             // extracting the imaginary part
@@ -131,7 +168,7 @@ public class InsertCommand implements Command {
 
             // pushing the just created element into the stack
             stack.push(c);
-        } else if (matcherJ.matches()) { // if the user input matches the seventh pattern
+        } else if (matcherJ.matches()) { // if the user input matches the tenth pattern
             // extracting the imaginary part
             char firstChar = matcherJ.group(1).charAt(0);
             if (firstChar == '-') {

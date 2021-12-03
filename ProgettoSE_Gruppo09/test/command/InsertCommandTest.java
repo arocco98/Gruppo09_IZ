@@ -46,8 +46,18 @@ public class InsertCommandTest {
         assertEquals(complex, stack.peek());
         // checking if the element has been inserted correctly by analyzing the size of the stack
         assertEquals(size, stack.size());
+        
+        // checking second pattern: a+jb
+        instance = new InsertCommand(stack, "1.23+j4.56");
+        complex = new Complex(1.23, 4.56);
+        instance.execute();
+        size++;
+        // checking if the inserted element is correct
+        assertEquals(complex, stack.peek());
+        // checking if the element has been inserted correctly by analyzing the size of the stack
+        assertEquals(size, stack.size());
 
-        // checking second pattern: bj+a
+        // checking third pattern: bj+a
         instance = new InsertCommand(stack, "1.2j-3.4");
         complex = new Complex(-3.4, 1.2);
         instance.execute();
@@ -56,8 +66,18 @@ public class InsertCommandTest {
         assertEquals(complex, stack.peek());
         // checking if the element has been inserted correctly by analyzing the size of the stack
         assertEquals(size, stack.size());
+        
+        // checking fourth pattern: jb+a
+        instance = new InsertCommand(stack, "-j1.23+4.56");
+        complex = new Complex(4.56, -1.23);
+        instance.execute();
+        size++;
+        // checking if the inserted element is correct
+        assertEquals(complex, stack.peek());
+        // checking if the element has been inserted correctly by analyzing the size of the stack
+        assertEquals(size, stack.size());
 
-        // checking third pattern: a
+        // checking fifth pattern: a
         instance = new InsertCommand(stack, "1.23");
         complex = new Complex(1.23, 0.0);
         instance.execute();
@@ -67,7 +87,7 @@ public class InsertCommandTest {
         // checking if the element has been inserted correctly by analyzing the size of the stack
         assertEquals(size, stack.size());
 
-        // checking fourth pattern: bj
+        // checking sixth pattern: bj
         instance = new InsertCommand(stack, "-1.23j");
         complex = new Complex(0.0, -1.23);
         instance.execute();
@@ -76,8 +96,18 @@ public class InsertCommandTest {
         assertEquals(complex, stack.peek());
         // checking if the element has been inserted correctly by analyzing the size of the stack
         assertEquals(size, stack.size());
+        
+        // checking seventh pattern: jb
+        instance = new InsertCommand(stack, "-j1.23");
+        complex = new Complex(0.0, -1.23);
+        instance.execute();
+        size++;
+        // checking if the inserted element is correct
+        assertEquals(complex, stack.peek());
+        // checking if the element has been inserted correctly by analyzing the size of the stack
+        assertEquals(size, stack.size());
 
-        // checking fifth pattern: a+j
+        // checking eighth pattern: a+j
         instance = new InsertCommand(stack, "1.23-j");
         complex = new Complex(1.23, -1.0);
         instance.execute();
@@ -87,7 +117,7 @@ public class InsertCommandTest {
         // checking if the element has been inserted correctly by analyzing the size of the stack
         assertEquals(size, stack.size());
 
-        // checking sixth pattern: j+a
+        // checking ninth pattern: j+a
         instance = new InsertCommand(stack, "j+1.23");
         complex = new Complex(1.23, 1.0);
         instance.execute();
@@ -97,7 +127,7 @@ public class InsertCommandTest {
         // checking if the element has been inserted correctly by analyzing the size of the stack
         assertEquals(size, stack.size());
 
-        // checking seventh pattern: j
+        // checking tenth pattern: j
         instance = new InsertCommand(stack, "-j");
         complex = new Complex(0.0, -1.0);
         instance.execute();
