@@ -29,6 +29,8 @@ public class ProdCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
+        //check that the stack has at least two elements so that
+        //product should be executed
         if (stack.size() >= 2) {
             Complex c2 = stack.pop();
             Complex c1 = stack.pop();

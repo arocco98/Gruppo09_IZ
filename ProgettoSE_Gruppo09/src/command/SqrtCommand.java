@@ -29,6 +29,8 @@ public class SqrtCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
+        //check that the stack has at least one element so that
+        //square root should be executed
         if (stack.size() >= 1) {
             Complex c1 = stack.pop();
 

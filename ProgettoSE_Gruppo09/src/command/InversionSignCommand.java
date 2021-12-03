@@ -31,6 +31,8 @@ public class InversionSignCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException {
+        //check that the stack has at least one element so that
+        //inversion sign should be executed
         if (stack.size() >= 1) {
             Complex complex = stack.pop();
             

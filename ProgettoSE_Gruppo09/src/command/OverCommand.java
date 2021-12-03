@@ -29,6 +29,8 @@ public class OverCommand implements Command {
      */
     @Override
     public void execute() throws Exception {
+        //check that the stack has at least two elements so that
+        //over funcion should be executed
         if (stack.size() >= 2) {
             
             //saving the top element in a temporary variable and remove it from
