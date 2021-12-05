@@ -1,6 +1,8 @@
 package exceptions;
 
 /**
+ * This exception is called when an operation is not allowed when an operand
+ * does not conform to the requirements
  *
  * @author gruppo09
  */

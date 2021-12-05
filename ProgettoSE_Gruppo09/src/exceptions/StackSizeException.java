@@ -1,6 +1,8 @@
 package exceptions;
 
 /**
+ * This exception is called when the size of the stack not allow the execution
+ * of an operation
  *
  * @author gruppo09
  */

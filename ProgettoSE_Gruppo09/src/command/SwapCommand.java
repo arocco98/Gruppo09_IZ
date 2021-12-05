@@ -34,7 +34,7 @@ public class SwapCommand implements Command {
         if (stack.size() >= 2) {
             Complex c1 = stack.pop();
             Complex c2 = stack.pop();
-            
+
             //push the last two numbers taken in reverse order
             stack.push(c1);
             stack.push(c2);

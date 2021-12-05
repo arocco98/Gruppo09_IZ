@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author gruppo09
  */
 public class Stack extends ArrayList<Complex> {
-
+    
     /**
      * Construct a new Stack object
      */

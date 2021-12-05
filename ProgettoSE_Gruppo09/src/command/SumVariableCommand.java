@@ -42,7 +42,7 @@ public class SumVariableCommand implements Command {
         if (stack.isEmpty()) {
             throw new StackSizeException();
         }
-        
+
         //check that the variable chosen is not null
         if (variables.getVariable(x) == null) {
             throw new VariablesValueException();

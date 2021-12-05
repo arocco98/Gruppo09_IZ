@@ -429,7 +429,7 @@ public class FXMLDocumentController implements Initializable {
         // setting items to null and then to observableCharacterList in order to refresh the variables list
         variablesComboBox.setItems(null);
         variablesComboBox.setItems(observableCharacterList);
-        
+
         // setting the selected cell to the previous one selected
         variablesComboBox.getSelectionModel().select(index);
     }
@@ -442,6 +442,11 @@ public class FXMLDocumentController implements Initializable {
         updateText(subVarBtn, "-");
     }
 
+    /**
+     * Takes the top of the stack and saves it into a selected variable
+     *
+     * @param event Button ">x" clicked
+     */
     @FXML
     private void saveInVariable(ActionEvent event) {
         Character variable = variablesComboBox.getValue().getKey();
@@ -458,6 +463,11 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     * Pushes into the stack the value associated with the selected variable
+     *
+     * @param event Button "<x" clicked
+     */
     @FXML
     private void saveInStack(ActionEvent event) {
         Character key = variablesComboBox.getValue().getKey();
@@ -472,6 +482,12 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Takes the top of the stack and sums its value with the value associated
+     * with the selected variable saving the result into the variable
+     *
+     * @param event Button "+x" clicked
+     */
     @FXML
     private void sumVariable(ActionEvent event) {
         Character key = variablesComboBox.getValue().getKey();
@@ -490,6 +506,12 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Takes the top of the stack and subtracts its value from the value
+     * associated with the selected variable saving the result into the variable
+     *
+     * @param event Button "-x" clicked
+     */
     @FXML
     private void subVariable(ActionEvent event) {
         Character key = variablesComboBox.getValue().getKey();

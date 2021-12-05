@@ -25,12 +25,13 @@ public class DropCommand implements Command {
 
     /**
      * Execute the removal of the last element of the stack.
-     * @throws StackSizeException 
+     *
+     * @throws StackSizeException
      */
     @Override
     public void execute() throws StackSizeException {
         //check that the stack is not empty so that drop function should be executed
-        if(!stack.isEmpty()) {
+        if (!stack.isEmpty()) {
             //taking the last element and removing it
             stack.pop();
         } else {

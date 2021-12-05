@@ -31,7 +31,7 @@ public class OutVariableCommand implements Command {
     }
 
     /**
-     * Pushes into the stack the value associated with a variable 
+     * Pushes into the stack the value associated with a variable
      *
      * @throws VariablesNameException
      * @throws VariablesValueException
@@ -43,7 +43,7 @@ public class OutVariableCommand implements Command {
         if (variables.getVariable(variable) == null) {
             throw new VariablesValueException();
         }
-        
+
         //pushing into the stack the value associated with 'variable'
         stack.push(variables.getVariable(variable));
     }

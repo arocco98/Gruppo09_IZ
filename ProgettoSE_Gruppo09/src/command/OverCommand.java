@@ -32,16 +32,16 @@ public class OverCommand implements Command {
         //check that the stack has at least two elements so that
         //over funcion should be executed
         if (stack.size() >= 2) {
-            
+
             //saving the top element in a temporary variable and remove it from
             //the stack
             Complex top = stack.pop();
-            
+
             //saving the value of the element to copy in the top of the stack 
             Complex c = stack.peek();
-            
+
             //restoring the top element in the stack
-            stack.push(top);            
+            stack.push(top);
             //pushing the copy of second last element in the top of the stack
             stack.push(c);
         } else {

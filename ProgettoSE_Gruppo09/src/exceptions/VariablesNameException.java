@@ -1,6 +1,7 @@
 package exceptions;
 
 /**
+ * This exception is called when the name of a variable is not in the set range
  *
  * @author gruppo09
  */
