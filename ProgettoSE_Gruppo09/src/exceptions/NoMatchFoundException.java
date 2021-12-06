@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * This excpetion is called when the string does not match any pattern
+ * This exception is called when the string does not match any pattern
  *
  * @author gruppo09
  */

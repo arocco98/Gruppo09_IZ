@@ -1,7 +1,6 @@
 package command;
 
 import java.util.ArrayList;
-import progettose_gruppo09.Stack;
 
 /**
  *
@@ -13,15 +12,10 @@ public class FunctionCommand implements Command {
     private String sequenceString;
     private ArrayList<Command> sequenceCommands;
 
-    public FunctionCommand(String name, String sequenceString) {
+    public FunctionCommand(String name, String sequenceString, ArrayList<Command> sequenceCommands) {
         this.name = name;
         this.sequenceString = sequenceString;
-        sequenceCommands = new ArrayList<>();
-    }
-
-    public FunctionCommand(String name, String sequenceString, Stack stack) {
-        this.name = name;
-        this.sequenceString = sequenceString;
+        this.sequenceCommands = sequenceCommands;
     }
 
     @Override
@@ -53,6 +47,11 @@ public class FunctionCommand implements Command {
 
     public void setSequenceCommands(ArrayList<Command> sequenceCommands) {
         this.sequenceCommands = sequenceCommands;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + ": " + this.sequenceString;
     }
 
 }

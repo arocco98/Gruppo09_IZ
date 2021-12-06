@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 import command.*;
+import exceptions.FunctionNameAlreadyExistsException;
 import exceptions.NoMatchFoundException;
 import exceptions.OperationDenied;
 import exceptions.StackSizeException;
@@ -14,6 +15,8 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -135,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
     private Variables variables = new Variables();
 
     // user-defined functions
-    private ArrayList<FunctionCommand> functionsCommands = null;
+    private ArrayList<FunctionCommand> functionCommands = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -164,8 +167,8 @@ public class FXMLDocumentController implements Initializable {
         swapCommand = new SwapCommand(this.stack);
         overCommand = new OverCommand(this.stack);
 
-        // initializing functionsCommands array
-        functionsCommands = new ArrayList<>(); // DA MODIFICARE
+        // initializing functionCommands array
+        functionCommands = new ArrayList<>(); // DA MODIFICARE
     }
 
     /**
@@ -214,6 +217,18 @@ public class FXMLDocumentController implements Initializable {
                 clearTextField();
                 showError("Use the notation a+bj or bj+a");
             }
+            /*InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(elementTextField.getText().split("\\s")[0], elementTextField.getText().substring(2), functionCommands, stack, variables);
+            try {
+                insertFunctionCommand.execute();
+            } catch (NoMatchFoundException ex) {
+                System.out.println("Not a valid input");
+            } catch (FunctionNameAlreadyExistsException ex) {
+                showError("Function name already exists, use a different name");
+            }
+            for(FunctionCommand fc: functionCommands) {
+                System.out.println(fc);
+            }
+            System.out.println("\n");*/
         } else {
             showError("Text field must not be empty");
         }
