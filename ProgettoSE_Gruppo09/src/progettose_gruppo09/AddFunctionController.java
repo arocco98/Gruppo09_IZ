@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -37,6 +38,8 @@ public class AddFunctionController implements Initializable {
     private TextField nameTxt;
     @FXML
     private TextField sequenceTxt;
+    @FXML
+    private Label errorLbl;
 
     public AddFunctionController(FXMLDocumentController controller) {
         this.controller = controller;
@@ -68,6 +71,17 @@ public class AddFunctionController implements Initializable {
     public void showStage() {
         thisStage.showAndWait();
     }
+    
+    /**
+     * Shows in the GUI the string passed as argument.
+     *
+     * @param errorString The string passed as argument.
+     */
+    private void showError(String errorString) {
+        
+        errorLbl.textProperty().set(errorString);
+    }
+    
 
     /**
      * Initializes the controller class.
@@ -89,13 +103,13 @@ public class AddFunctionController implements Initializable {
         InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(name, sequence, functionCommands, stack, variables);
         try {
             insertFunctionCommand.execute();
+            this.thisStage.close();
         } catch (NoMatchFoundException ex) {
-            System.out.println("Not a valid input");
+            showError("Not a valid input");
         } catch (FunctionNameAlreadyExistsException ex) {
-            System.out.println("Function name already exists, use a different name");
+            showError("Function name already exists, use a different name");
         }
         
-        this.thisStage.close();
     }
 
 }
