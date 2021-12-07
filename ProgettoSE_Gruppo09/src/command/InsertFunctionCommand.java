@@ -53,7 +53,7 @@ public class InsertFunctionCommand implements Command {
     public void execute() throws NoMatchFoundException, FunctionNameAlreadyExistsException {
         // checking if the function name already exists, if so throw a FunctionNameAlreadyExistsException
         for (FunctionCommand functionCommand : functionCommands) {
-            if (functionCommand.getName().toLowerCase().equals(name)) {
+            if (functionCommand.getName().toLowerCase().equals(name.trim())) {
                 throw new FunctionNameAlreadyExistsException();
             }
         }
@@ -111,7 +111,7 @@ public class InsertFunctionCommand implements Command {
         }
 
         // if no exceptions were thrown, add a new FunctionCommand to the functionCommands array
-        functionCommands.add(new FunctionCommand(name.toLowerCase(), sequence.toLowerCase().replaceAll("\\s+", " "), commands));
+        functionCommands.add(new FunctionCommand(name.toLowerCase().trim(), sequence.toLowerCase().replaceAll("\\s+", " "), commands));
     }
 
     /**

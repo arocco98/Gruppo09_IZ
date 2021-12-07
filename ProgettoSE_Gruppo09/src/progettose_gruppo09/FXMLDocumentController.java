@@ -7,6 +7,9 @@ import exceptions.OperationDenied;
 import exceptions.StackSizeException;
 import exceptions.VariablesNameException;
 import exceptions.VariablesValueException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,16 +30,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 /**
  *
  * @author gruppo09
  */
 public class FXMLDocumentController implements Initializable {
-
-    @FXML
-    private void function(ActionEvent event) {
-    }
 
     /**
      * This inner class has been created in order to change the classic Entry
@@ -171,6 +171,22 @@ public class FXMLDocumentController implements Initializable {
         functionCommands = new ArrayList<>(); // DA MODIFICARE
     }
 
+    public Stack getStack() {
+        return stack;
+    }
+
+    public Variables getVariables() {
+        return variables;
+    }
+
+    public ArrayList<FunctionCommand> getFunctionCommands() {
+        return functionCommands;
+    }
+
+    public void setFunctionCommands(ArrayList<FunctionCommand> functionCommands) {
+        this.functionCommands = functionCommands;
+    }
+
     /**
      * Clears the text field and sets the error label to an empty string.
      */
@@ -217,18 +233,6 @@ public class FXMLDocumentController implements Initializable {
                 clearTextField();
                 showError("Use the notation a+bj or bj+a");
             }
-            /*InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(elementTextField.getText().split("\\s")[0], elementTextField.getText().substring(2), functionCommands, stack, variables);
-            try {
-                insertFunctionCommand.execute();
-            } catch (NoMatchFoundException ex) {
-                System.out.println("Not a valid input");
-            } catch (FunctionNameAlreadyExistsException ex) {
-                showError("Function name already exists, use a different name");
-            }
-            for(FunctionCommand fc: functionCommands) {
-                System.out.println(fc);
-            }
-            System.out.println("\n");*/
         } else {
             showError("Text field must not be empty");
         }
@@ -544,4 +548,89 @@ public class FXMLDocumentController implements Initializable {
             showError("To perform this action, stack must be non-empty");
         }
     }
+
+    /**
+     * Opens a window in which it is possible to add a new user-defined
+     * operation
+     *
+     * @param event MenuIem "Add" clicked
+     */
+    @FXML
+    private void addFunction(ActionEvent event) {
+
+        AddFunctionController addFunctionController = new AddFunctionController(this);
+
+        addFunctionController.showStage();
+
+    }
+
+    /**
+     * Opens a window in which it is possible to see the available user-defined
+     * operations
+     *
+     * @param event MenuIem "Available" clicked
+     */
+    @FXML
+    private void availableFunctions(ActionEvent event) {
+
+        AvailableFunctionsController availableFunctionsController = new AvailableFunctionsController(this);
+
+        availableFunctionsController.showStage();
+
+    }
+
+    /**
+     * Opens a window where it is possible to choose a file in which to save the
+     * available user-defined operations
+     *
+     * @param event MenuIem "Save" clicked
+     */
+    @FXML
+    private void saveFunctions(ActionEvent event) {
+
+        SaveFunctionCommands saveCommand = null;
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showSaveDialog(this.inVarBtn.getScene().getWindow());
+        if (file != null) {
+            saveCommand = new SaveFunctionCommands(functionCommands, file);
+
+            try {
+                saveCommand.execute();
+            } catch (IOException ex) {
+                showError("Errore nel salvataggio su file");
+            }
+        }
+
+    }
+
+    /**
+     * Opens a window where it is possible to choose a file from which to load
+     * user-defined operations
+     *
+     * @param event MenuIem "Load" clicked
+     */
+    @FXML
+    private void loadFunctions(ActionEvent event) {
+
+        LoadFunctionsCommand loadCommand = null;
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(this.inVarBtn.getScene().getWindow());
+        if (file != null) {
+            loadCommand = new LoadFunctionsCommand(functionCommands, stack, variables, file);
+
+            try {
+                loadCommand.execute();
+            } catch (FileNotFoundException ex) {
+                showError("File not found");
+            } catch (IOException ex) {
+                showError("Error during loading file");
+            } catch (NoMatchFoundException ex) {
+                showError("Not a valid input");
+            } catch (FunctionNameAlreadyExistsException ex) {
+                showError("Function name already exists, use a different name");
+            }
+        }
+
+    }
+
 }
