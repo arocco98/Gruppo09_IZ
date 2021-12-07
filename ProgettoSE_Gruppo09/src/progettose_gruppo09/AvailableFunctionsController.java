@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -40,6 +42,10 @@ public class AvailableFunctionsController implements Initializable {
     private TableColumn<FunctionCommand, String> nameClm;
     @FXML
     private TableColumn<FunctionCommand, String> sequenceClm;
+    @FXML
+    private Button modifyButton;
+    @FXML
+    private Button deleteButton;
 
     public AvailableFunctionsController(FXMLDocumentController controller) {
         this.controller = controller;
@@ -86,7 +92,10 @@ public class AvailableFunctionsController implements Initializable {
         sequenceClm.setCellValueFactory(new PropertyValueFactory<FunctionCommand, String>("sequenceString"));
 
         functionsTable.setItems(functionCommands);
+        functionsTable.setPlaceholder(new Label("No functions available"));
 
+        modifyButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
+        deleteButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
     }
 
     @FXML

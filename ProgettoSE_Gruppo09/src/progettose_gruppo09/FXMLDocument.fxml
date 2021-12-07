@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="progettose_gruppo09.FXMLDocumentController">
@@ -22,15 +23,19 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <ListView fx:id="elementList" fixedCellSize="40.0" layoutX="18.0" layoutY="36.0" prefHeight="702.0" prefWidth="276.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0" />
-                  <MenuButton layoutX="11.0" layoutY="1.0" mnemonicParsing="false" text="Functions" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="1.0">
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#addFunction" text="Add " />
-                      <MenuItem mnemonicParsing="false" onAction="#availableFunctions" text="Available " />
-                        <MenuItem mnemonicParsing="false" onAction="#saveFunctions" text="Save " />
-                        <MenuItem mnemonicParsing="false" onAction="#loadFunctions" text="Load " />
-                    </items>
-                  </MenuButton>
+                  <VBox layoutX="10.0" layoutY="10.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <MenuButton mnemonicParsing="false" text="Functions">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#addFunction" text="Add " />
+                            <MenuItem mnemonicParsing="false" onAction="#availableFunctions" text="Available " />
+                              <MenuItem mnemonicParsing="false" onAction="#saveFunctions" text="Save " />
+                              <MenuItem mnemonicParsing="false" onAction="#loadFunctions" text="Load " />
+                          </items>
+                        </MenuButton>
+                        <ListView fx:id="elementList" fixedCellSize="40.0" prefHeight="702.0" prefWidth="276.0" />
+                     </children>
+                  </VBox>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

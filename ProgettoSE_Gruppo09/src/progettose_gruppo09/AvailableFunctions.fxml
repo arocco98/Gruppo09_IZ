@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <!--fx:controller="progettose_gruppo09.AvailableFunctionsController"-->
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="functionsTable" layoutX="56.0" layoutY="48.0" prefHeight="250.0" prefWidth="285.0">
-        <columns>
-          <TableColumn fx:id="nameClm" prefWidth="100.0" resizable="false" text="Name" />
-            <TableColumn fx:id="sequenceClm" prefWidth="185.0" resizable="false" text="Sequence" />
-        </columns>
-      </TableView>
-      <Button layoutX="174.0" layoutY="314.0" mnemonicParsing="false" onAction="#modifyFunction" prefHeight="25.0" prefWidth="55.0" text="Modify" />
-      <Button layoutX="258.0" layoutY="314.0" mnemonicParsing="false" onAction="#deleteFunction" prefWidth="55.0" text="Delete" />
-      <Label layoutX="129.0" layoutY="14.0" text="AVAILABLE FUNCTIONS">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
+      <GridPane layoutX="56.0" layoutY="48.0" prefWidth="360.0" vgap="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="180.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="180.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TableView fx:id="functionsTable" prefHeight="250.0" prefWidth="360.0" GridPane.columnSpan="2">
+              <columns>
+                <TableColumn fx:id="nameClm" prefWidth="120.0" resizable="false" text="Name" />
+                  <TableColumn fx:id="sequenceClm" maxWidth="1.7976931348623157E308" prefWidth="240.0" resizable="false" text="Sequence" />
+              </columns>
+            </TableView>
+            <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#modifyFunction" prefHeight="40.0" prefWidth="100.0" text="Modify" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteFunction" prefHeight="40.0" prefWidth="100.0" text="Delete" textFill="RED" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
