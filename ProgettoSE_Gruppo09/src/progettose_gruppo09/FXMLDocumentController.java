@@ -1,7 +1,6 @@
 package progettose_gruppo09;
 
 import command.*;
-import exceptions.FunctionNameAlreadyExistsException;
 import exceptions.NoMatchFoundException;
 import exceptions.OperationDenied;
 import exceptions.StackSizeException;
@@ -15,8 +14,6 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,10 +30,6 @@ import javafx.scene.control.TextField;
  * @author gruppo09
  */
 public class FXMLDocumentController implements Initializable {
-
-    @FXML
-    private void function(ActionEvent event) {
-    }
 
     /**
      * This inner class has been created in order to change the classic Entry
@@ -171,6 +164,22 @@ public class FXMLDocumentController implements Initializable {
         functionCommands = new ArrayList<>(); // DA MODIFICARE
     }
 
+    public Stack getStack() {
+        return stack;
+    }
+
+    public Variables getVariables() {
+        return variables;
+    }
+
+    public ArrayList<FunctionCommand> getFunctionCommands() {
+        return functionCommands;
+    }
+
+    public void setFunctionCommands(ArrayList<FunctionCommand> functionCommands) {
+        this.functionCommands = functionCommands;
+    }
+
     /**
      * Clears the text field and sets the error label to an empty string.
      */
@@ -217,18 +226,6 @@ public class FXMLDocumentController implements Initializable {
                 clearTextField();
                 showError("Use the notation a+bj or bj+a");
             }
-            /*InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(elementTextField.getText().split("\\s")[0], elementTextField.getText().substring(2), functionCommands, stack, variables);
-            try {
-                insertFunctionCommand.execute();
-            } catch (NoMatchFoundException ex) {
-                System.out.println("Not a valid input");
-            } catch (FunctionNameAlreadyExistsException ex) {
-                showError("Function name already exists, use a different name");
-            }
-            for(FunctionCommand fc: functionCommands) {
-                System.out.println(fc);
-            }
-            System.out.println("\n");*/
         } else {
             showError("Text field must not be empty");
         }
@@ -544,4 +541,31 @@ public class FXMLDocumentController implements Initializable {
             showError("To perform this action, stack must be non-empty");
         }
     }
+
+    @FXML
+    private void addFunction(ActionEvent event) {
+
+        AddFunctionController addFunctionController = new AddFunctionController(this);
+
+        addFunctionController.showStage();
+
+    }
+
+    @FXML
+    private void availableFunctions(ActionEvent event) {
+ 
+        AvailableFunctionsController availableFunctionsController = new AvailableFunctionsController(this);
+
+        availableFunctionsController.showStage();
+        
+    }
+    
+        @FXML
+    private void saveFunctions(ActionEvent event) {
+    }
+
+    @FXML
+    private void loadFunctions(ActionEvent event) {
+    }
+
 }
