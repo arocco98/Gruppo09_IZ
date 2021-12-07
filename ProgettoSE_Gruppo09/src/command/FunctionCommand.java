@@ -54,4 +54,22 @@ public class FunctionCommand implements Command {
         return this.name + ": " + this.sequenceString;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if(!(object instanceof FunctionCommand))
+            return false;
+       
+        if(this == object)
+            return true;
+       
+        FunctionCommand other = (FunctionCommand) object;
+       
+        if(!this.getName().equals(other.getName()))
+            return false;
+       
+        if(!this.getSequenceString().equals(other.sequenceString))
+            return false;
+       
+        return true;
+    }
 }

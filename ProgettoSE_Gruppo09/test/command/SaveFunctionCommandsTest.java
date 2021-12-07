@@ -81,7 +81,7 @@ public class SaveFunctionCommandsTest {
             //questo mi permette di leggere linee intere
             BufferedReader lineReader = new BufferedReader(reader);
 
-            //Leggo una linea alla volta e la stampo finchè non arrivo alla fine del file
+            //Leggo una linea alla volta
             String linea = lineReader.readLine();
 
             ArrayList<String> result = new ArrayList<>();
