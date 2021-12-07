@@ -45,8 +45,9 @@ public class InsertFunctionCommand implements Command {
      * This method checks if the name of the new Function is not taken and
      * checks if the string passed as parameter contains only valid operation.
      *
-     * @throws NoMatchFoundException
-     * @throws FunctionNameAlreadyExistsException
+     * @throws NoMatchFoundException When the string doesn't match any pattern.
+     * @throws FunctionNameAlreadyExistsException When the function name already
+     * exists.
      */
     @Override
     public void execute() throws NoMatchFoundException, FunctionNameAlreadyExistsException {
