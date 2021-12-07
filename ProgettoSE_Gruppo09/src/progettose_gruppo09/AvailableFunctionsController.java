@@ -43,7 +43,7 @@ public class AvailableFunctionsController implements Initializable {
 
     public AvailableFunctionsController(FXMLDocumentController controller) {
         this.controller = controller;
-        
+
         // Create the new stage
         thisStage = new Stage();
 
@@ -81,7 +81,7 @@ public class AvailableFunctionsController implements Initializable {
         this.functionCommands = FXCollections.observableArrayList();
 
         this.functionCommands.addAll(controller.getFunctionCommands());
-        
+
         nameClm.setCellValueFactory(new PropertyValueFactory<FunctionCommand, String>("name"));
         sequenceClm.setCellValueFactory(new PropertyValueFactory<FunctionCommand, String>("sequenceString"));
 
@@ -95,8 +95,6 @@ public class AvailableFunctionsController implements Initializable {
 
     @FXML
     private void deleteFunction(ActionEvent event) {
-        /*FunctionCommand fc = functionsTable.getSelectionModel().getSelectedItem();
-        functions.remove(fc);*/
     }
 
 }

@@ -71,24 +71,23 @@ public class AddFunctionController implements Initializable {
     public void showStage() {
         thisStage.showAndWait();
     }
-    
+
     /**
      * Shows in the GUI the string passed as argument.
      *
      * @param errorString The string passed as argument.
      */
     private void showError(String errorString) {
-        
+
         errorLbl.textProperty().set(errorString);
     }
-    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         this.functionCommands = controller.getFunctionCommands();
         this.stack = controller.getStack();
         this.variables = controller.getVariables();
@@ -107,9 +106,9 @@ public class AddFunctionController implements Initializable {
         } catch (NoMatchFoundException ex) {
             showError("Not a valid input");
         } catch (FunctionNameAlreadyExistsException ex) {
-            showError("Function name already exists, use a different name");
+            showError("Function name '" + name + "' already exists, use a different name");
         }
-        
+
     }
 
 }

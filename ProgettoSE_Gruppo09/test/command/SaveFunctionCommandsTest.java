@@ -16,6 +16,7 @@ import progettose_gruppo09.Stack;
  * @author gruppo09
  */
 public class SaveFunctionCommandsTest {
+
     private ArrayList<FunctionCommand> functions;
     private ArrayList<Command> sequenceCommands;
     private ArrayList<Command> sequenceCommands2;
@@ -28,21 +29,20 @@ public class SaveFunctionCommandsTest {
     private SubCommand sub;
     private ProdCommand prod;
     private File file1;
-    
-    
+
     public SaveFunctionCommandsTest() {
     }
-    
+
     @Before
     public void setUp() {
         functions = new ArrayList<>();
         sequenceCommands = new ArrayList<>();
         sequenceCommands2 = new ArrayList<>();
         stack = new Stack();
-        n1 = new Complex (1.0, 1.0);
-        n2 = new Complex (2.0, 2.0);
-        n3 = new Complex (1.0, 1.0);
-        n4 = new Complex (1.0, 1.0);
+        n1 = new Complex(1.0, 1.0);
+        n2 = new Complex(2.0, 2.0);
+        n3 = new Complex(1.0, 1.0);
+        n4 = new Complex(1.0, 1.0);
         stack.push(n1);
         stack.push(n2);
         stack.push(n3);
@@ -64,13 +64,13 @@ public class SaveFunctionCommandsTest {
     @Test
     public void testExecute() throws Exception {
         System.out.println("Save Test");
-        
+
         file1 = new File("file1");
         FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
         FunctionCommand fun2 = new FunctionCommand("op2", "- + *", sequenceCommands2);
         functions.add(fun1);
         functions.add(fun2);
-        
+
         SaveFunctionCommands instance = new SaveFunctionCommands(functions, file1);
         instance.execute();
 
@@ -105,24 +105,25 @@ public class SaveFunctionCommandsTest {
             System.out.println("Errore durante la lettura: " + e);
         }
     }
-    
+
     /**
-     * Test of execute method, of class SaveFunctionCommands, that generate an IOException
-     * 
-     * @throws IOException 
+     * Test of execute method, of class SaveFunctionCommands, that generate an
+     * IOException
+     *
+     * @throws IOException
      */
     @Test(expected = IOException.class)
     public void testExecute2() throws IOException {
         System.out.println("Save Test 2");
-        
+
         file1 = new File("src");
         FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
         FunctionCommand fun2 = new FunctionCommand("op2", "- + *", sequenceCommands2);
         functions.add(fun1);
         functions.add(fun2);
-        
+
         SaveFunctionCommands instance = new SaveFunctionCommands(functions, file1);
         instance.execute();
     }
-    
+
 }

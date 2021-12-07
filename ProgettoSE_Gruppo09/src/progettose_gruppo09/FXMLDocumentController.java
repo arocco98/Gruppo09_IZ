@@ -1,11 +1,15 @@
 package progettose_gruppo09;
 
 import command.*;
+import exceptions.FunctionNameAlreadyExistsException;
 import exceptions.NoMatchFoundException;
 import exceptions.OperationDenied;
 import exceptions.StackSizeException;
 import exceptions.VariablesNameException;
 import exceptions.VariablesValueException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +18,8 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +30,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 /**
  *
@@ -542,6 +549,12 @@ public class FXMLDocumentController implements Initializable {
         }
     }
 
+    /**
+     * Opens a window in which it is possible to add a new user-defined
+     * operation
+     *
+     * @param event MenuIem "Add" clicked
+     */
     @FXML
     private void addFunction(ActionEvent event) {
 
@@ -551,21 +564,73 @@ public class FXMLDocumentController implements Initializable {
 
     }
 
+    /**
+     * Opens a window in which it is possible to see the available user-defined
+     * operations
+     *
+     * @param event MenuIem "Available" clicked
+     */
     @FXML
     private void availableFunctions(ActionEvent event) {
- 
+
         AvailableFunctionsController availableFunctionsController = new AvailableFunctionsController(this);
 
         availableFunctionsController.showStage();
-        
-    }
-    
-        @FXML
-    private void saveFunctions(ActionEvent event) {
+
     }
 
+    /**
+     * Opens a window where it is possible to choose a file in which to save the
+     * available user-defined operations
+     *
+     * @param event MenuIem "Save" clicked
+     */
+    @FXML
+    private void saveFunctions(ActionEvent event) {
+
+        SaveFunctionCommands saveCommand = null;
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showSaveDialog(this.inVarBtn.getScene().getWindow());
+        if (file != null) {
+            saveCommand = new SaveFunctionCommands(functionCommands, file);
+
+            try {
+                saveCommand.execute();
+            } catch (IOException ex) {
+                showError("Errore nel salvataggio su file");
+            }
+        }
+
+    }
+
+    /**
+     * Opens a window where it is possible to choose a file from which to load
+     * user-defined operations
+     *
+     * @param event MenuIem "Load" clicked
+     */
     @FXML
     private void loadFunctions(ActionEvent event) {
+
+        LoadFunctionsCommand loadCommand = null;
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(this.inVarBtn.getScene().getWindow());
+        if (file != null) {
+            loadCommand = new LoadFunctionsCommand(functionCommands, stack, variables, file);
+
+            try {
+                loadCommand.execute();
+            } catch (FileNotFoundException ex) {
+                showError("File not found");
+            } catch (IOException ex) {
+                showError("Error during loading file");
+            } catch (NoMatchFoundException ex) {
+                showError("Not a valid input");
+            } catch (FunctionNameAlreadyExistsException ex) {
+                showError("Function name already exists, use a different name");
+            }
+        }
+
     }
 
 }
