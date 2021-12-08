@@ -18,8 +18,6 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,8 +26,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
 /**
@@ -100,13 +101,19 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    private ListView<Complex> elementList;
+    private TableView<Complex> elementList;
+    @FXML
+    private TableColumn<Complex, Complex> stackColumn;
     @FXML
     private TextField elementTextField;
     @FXML
     private Label errorLabel;
     @FXML
     private ComboBox<Entry<Character, Complex>> variablesComboBox;
+    @FXML
+    private ComboBox<FunctionCommand> functionsComboBox;
+    @FXML
+    private MenuItem saveFunctionButton; // BIND!!!
     @FXML
     private Button inVarBtn;
     @FXML
@@ -115,6 +122,8 @@ public class FXMLDocumentController implements Initializable {
     private Button sumVarBtn;
     @FXML
     private Button subVarBtn;
+    @FXML
+    private Button executeFunctionButton;
 
     // elements stack
     private Stack stack = null;
@@ -139,11 +148,15 @@ public class FXMLDocumentController implements Initializable {
 
     // user-defined functions
     private ArrayList<FunctionCommand> functionCommands = null;
+    private ObservableList<FunctionCommand> observableFunctionCommands = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // initializing stack and elementList variables
         stack = new Stack();
+        elementList.setPlaceholder(new Label("No value present"));
+        stackColumn.setCellValueFactory(new PropertyValueFactory<>("complex"));
+        stackColumn.setSortable(false);
         observableStack = FXCollections.observableList(stack);
         elementList.setItems(observableStack);
 
@@ -168,7 +181,12 @@ public class FXMLDocumentController implements Initializable {
         overCommand = new OverCommand(this.stack);
 
         // initializing functionCommands array
-        functionCommands = new ArrayList<>(); // DA MODIFICARE
+        functionCommands = new ArrayList<>();
+        observableFunctionCommands = FXCollections.observableArrayList(functionCommands);
+        functionsComboBox.setItems(observableFunctionCommands);
+        // binding the button to the combobox, if no value is selected then the button must be disabled
+        executeFunctionButton.disableProperty().bind(functionsComboBox.valueProperty().isNull());
+
     }
 
     public Stack getStack() {
@@ -550,6 +568,44 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
+     * Execute the selected user-defined function. If errors occurs, restore the
+     * previous state of stack and variables.
+     *
+     * @param event Button "Execute" clicked.
+     */
+    @FXML
+    private void executeFunction(ActionEvent event) {
+        // creating the new executeFunctionCommand object
+        ExecuteFunctionCommand executeFunctionCommand = new ExecuteFunctionCommand(functionsComboBox.getValue(), stack, variables);
+
+        clearTextField();
+        try { // try executing all the commands
+            executeFunctionCommand.execute();
+        } catch (Exception ex) { // if errors occurs, show a new error    
+            // showing an error label
+            showError("Error during the execution of the function");
+        }
+
+        // refresh stack and variables in order to get the update visible in the gui
+        refreshStack();
+        refreshVariables();
+    }
+
+    /**
+     * Refresh in the GUI the visualization of the available function commands
+     * in the combo box.
+     */
+    private void refreshFunctionCommands() {
+        // clear the selected item in the combo box
+        functionsComboBox.getSelectionModel().clearSelection();
+        // refresh the observable array list
+        observableFunctionCommands.clear();
+        observableFunctionCommands.addAll(functionCommands);
+        // set the items in the combobox
+        functionsComboBox.setItems(observableFunctionCommands);
+    }
+
+    /**
      * Opens a window in which it is possible to add a new user-defined
      * operation
      *
@@ -561,7 +617,7 @@ public class FXMLDocumentController implements Initializable {
         AddFunctionController addFunctionController = new AddFunctionController(this);
 
         addFunctionController.showStage();
-
+        refreshFunctionCommands();
     }
 
     /**
@@ -577,6 +633,7 @@ public class FXMLDocumentController implements Initializable {
 
         availableFunctionsController.showStage();
 
+        refreshFunctionCommands();
     }
 
     /**
@@ -590,6 +647,8 @@ public class FXMLDocumentController implements Initializable {
 
         SaveFunctionCommands saveCommand = null;
         FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(this.inVarBtn.getScene().getWindow());
         if (file != null) {
             saveCommand = new SaveFunctionCommands(functionCommands, file);
@@ -597,7 +656,7 @@ public class FXMLDocumentController implements Initializable {
             try {
                 saveCommand.execute();
             } catch (IOException ex) {
-                showError("Errore nel salvataggio su file");
+                showError("Error during save to the file");
             }
         }
 
@@ -617,9 +676,9 @@ public class FXMLDocumentController implements Initializable {
         File file = fileChooser.showOpenDialog(this.inVarBtn.getScene().getWindow());
         if (file != null) {
             loadCommand = new LoadFunctionsCommand(functionCommands, stack, variables, file);
-
             try {
                 loadCommand.execute();
+                refreshFunctionCommands();
             } catch (FileNotFoundException ex) {
                 showError("File not found");
             } catch (IOException ex) {

@@ -240,7 +240,7 @@ public class FunctionCommandTest {
         System.out.println("toString");
 
         FunctionCommand instance = new FunctionCommand("function", "+ - * /", null);
-        String expString = "function: + - * /";
+        String expString = "function";
 
         assertEquals(instance.toString(), expString);
     }

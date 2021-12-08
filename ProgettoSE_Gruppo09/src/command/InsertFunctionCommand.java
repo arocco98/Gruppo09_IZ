@@ -35,7 +35,7 @@ public class InsertFunctionCommand implements Command {
      */
     public InsertFunctionCommand(String name, String sequence, ArrayList<FunctionCommand> functionCommands, Stack stack, Variables variables) {
         this.name = name.toLowerCase();
-        this.sequence = sequence;
+        this.sequence = sequence.trim();
         this.functionCommands = functionCommands;
         this.stack = stack;
         this.variables = variables;
@@ -57,9 +57,27 @@ public class InsertFunctionCommand implements Command {
                 throw new FunctionNameAlreadyExistsException();
             }
         }
+        
+        // This array of strings contains all the default operation names, except the operation on the variables
+        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over"};
+        // checking if the function name is a default operation name
+        for(String commandName: defaultCommandNames) {
+            if(name.equals(commandName))
+                throw new FunctionNameAlreadyExistsException();
+        }
+        
+        // checking if the function name is a variable name operation
+        if(name.matches(">[a-z]$"))
+            throw new FunctionNameAlreadyExistsException();
+        if(name.matches("<[a-z]$"))
+            throw new FunctionNameAlreadyExistsException();
+        if(name.matches("\\+[a-z]$"))
+            throw new FunctionNameAlreadyExistsException();
+        if(name.matches("-[a-z]$"))
+            throw new FunctionNameAlreadyExistsException();
 
         // splitting the sequence string and creating an array of Commands
-        String[] splittedSequence = sequence.toLowerCase().split("\\s+");
+        String[] splittedSequence = sequence.split("\\s+");
         ArrayList<Command> commands = new ArrayList<>();
 
         // for each string in the splitted sequence check if is a valid command 

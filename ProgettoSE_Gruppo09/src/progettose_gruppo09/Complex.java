@@ -39,6 +39,15 @@ public class Complex {
     }
 
     /**
+     * This method is used to get the instance of the complex.
+     *
+     * @return The instance of the complex number.
+     */
+    public Complex getComplex() {
+        return this;
+    }
+
+    /**
      * This method is used to get the real part of a complex number
      *
      * @return the real part of the complex number

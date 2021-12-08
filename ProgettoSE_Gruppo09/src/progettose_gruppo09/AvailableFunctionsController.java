@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -75,6 +76,8 @@ public class AvailableFunctionsController implements Initializable {
      * Show the stage that was loaded in the constructor
      */
     public void showStage() {
+        thisStage.initModality(Modality.APPLICATION_MODAL);
+        thisStage.setResizable(false);
         thisStage.showAndWait();
     }
 
@@ -88,8 +91,8 @@ public class AvailableFunctionsController implements Initializable {
 
         this.functionCommands.addAll(controller.getFunctionCommands());
 
-        nameClm.setCellValueFactory(new PropertyValueFactory<FunctionCommand, String>("name"));
-        sequenceClm.setCellValueFactory(new PropertyValueFactory<FunctionCommand, String>("sequenceString"));
+        nameClm.setCellValueFactory(new PropertyValueFactory<>("name"));
+        sequenceClm.setCellValueFactory(new PropertyValueFactory<>("sequenceString"));
 
         functionsTable.setItems(functionCommands);
         functionsTable.setPlaceholder(new Label("No functions available"));

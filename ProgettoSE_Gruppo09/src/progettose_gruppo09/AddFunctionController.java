@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -69,6 +70,8 @@ public class AddFunctionController implements Initializable {
      * Show the stage that was loaded in the constructor
      */
     public void showStage() {
+        thisStage.initModality(Modality.APPLICATION_MODAL);
+        thisStage.setResizable(false);
         thisStage.showAndWait();
     }
 
@@ -99,14 +102,18 @@ public class AddFunctionController implements Initializable {
 
         String name = nameTxt.getText();
         String sequence = sequenceTxt.getText();
-        InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(name, sequence, functionCommands, stack, variables);
-        try {
-            insertFunctionCommand.execute();
-            this.thisStage.close();
-        } catch (NoMatchFoundException ex) {
-            showError("Not a valid input");
-        } catch (FunctionNameAlreadyExistsException ex) {
-            showError("Function name '" + name + "' already exists, use a different name");
+        if (name.split("\\s+").length == 1) {
+            InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(name, sequence, functionCommands, stack, variables);
+            try {
+                insertFunctionCommand.execute();
+                this.thisStage.close();
+            } catch (NoMatchFoundException ex) {
+                showError("Not a valid input");
+            } catch (FunctionNameAlreadyExistsException ex) {
+                showError("Function name '" + name + "' already exists, use a different name");
+            }
+        } else {
+            showError("The function name must be composed by only one word.");
         }
 
     }

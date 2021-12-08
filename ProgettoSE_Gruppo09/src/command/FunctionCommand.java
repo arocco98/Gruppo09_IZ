@@ -103,7 +103,7 @@ public class FunctionCommand implements Command {
      */
     @Override
     public String toString() {
-        return this.name + ": " + this.sequenceString;
+        return this.name;
     }
     
     @Override
