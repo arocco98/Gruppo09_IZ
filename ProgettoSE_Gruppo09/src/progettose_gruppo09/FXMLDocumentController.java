@@ -26,10 +26,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 
@@ -186,6 +188,29 @@ public class FXMLDocumentController implements Initializable {
         functionsComboBox.setItems(observableFunctionCommands);
         // binding the button to the combobox, if no value is selected then the button must be disabled
         executeFunctionButton.disableProperty().bind(functionsComboBox.valueProperty().isNull());
+        // this method is used in order to show to the user the operations of one function when the mouse is over the name of the operation
+        functionsComboBox.setCellFactory(param -> {
+            return new ListCell<FunctionCommand>() {
+
+                @Override
+                public void updateItem(FunctionCommand item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (item != null) {
+                        setText(item.getName());
+
+                        // Add the Tooltip with the image of the current item
+                        Tooltip tt = new Tooltip();
+                        tt.setText(item.getSequenceString());
+
+                        setTooltip(tt);
+                    } else {
+                        setText(null);
+                        setTooltip(null);
+                    }
+                }
+            };
+        });
 
     }
 
