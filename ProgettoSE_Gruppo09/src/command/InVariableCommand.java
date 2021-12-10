@@ -50,4 +50,22 @@ public class InVariableCommand implements Command {
         }
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        InVariableCommand other = (InVariableCommand) obj;
+
+        if (!variable.equals(other.variable)) {
+            return false;
+        }
+        return true;
+    }
 }

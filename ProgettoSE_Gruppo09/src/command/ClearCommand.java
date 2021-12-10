@@ -1,5 +1,6 @@
 package command;
 
+import java.util.Objects;
 import progettose_gruppo09.*;
 
 /**
@@ -30,6 +31,20 @@ public class ClearCommand implements Command {
     public void execute() throws Exception {
         //using the method removeAll of ArrayList in order to empty the stack
         stack.removeAll(stack);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        return true;
     }
 
 }

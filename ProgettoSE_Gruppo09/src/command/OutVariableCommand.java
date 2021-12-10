@@ -48,4 +48,22 @@ public class OutVariableCommand implements Command {
         stack.push(variables.getVariable(variable));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        OutVariableCommand other = (OutVariableCommand) obj;
+
+        if (!variable.equals(other.variable)) {
+            return false;
+        }
+        return true;
+    }
 }
