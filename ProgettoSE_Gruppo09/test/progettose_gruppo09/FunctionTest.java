@@ -1,8 +1,10 @@
 package progettose_gruppo09;
 
 import command.Command;
+import command.DivCommand;
 import command.DropCommand;
 import command.OutVariableCommand;
+import command.ProdCommand;
 import command.SubCommand;
 import command.SumCommand;
 import exceptions.FunctionNameAlreadyExistsException;
@@ -72,22 +74,21 @@ public class FunctionTest {
         instance.generateCommands(sequenceString);
         
         ArrayList<Command> generatedCommands = instance.getSequenceCommands();
+        // checking if the just created array has the size we expect
         assertTrue(generatedCommands.size() == expectedCommands.size());
-        int size = generatedCommands.size();
-        for(int i = 0; i < size-1; i++) {
-            assertTrue(generatedCommands.get(i).equals(expectedCommands.get(i)));
-        }
+        // checking if all the elements of the arrays are equals to each other
+        assertEquals(generatedCommands, expectedCommands);
         
     }
 
     /**
-     * Test of generateCommands method, of class Function.
+     * Test of generateCommands method, of class Function, when it throws a NoMatchFoundException.
      */
     @Test (expected = NoMatchFoundException.class)
     public void testGenerateCommandsWhenThrowsException() throws Exception {
         System.out.println("GenerateCommands when it throws a NoMatchFoundException");
         
-        String sequenceString = "+ - <A drop";
+        String sequenceString = "+ - notExistingFunction drop";
         
         Function instance = new Function("function");
         instance.generateCommands(sequenceString); 
@@ -99,40 +100,61 @@ public class FunctionTest {
     @Test
     public void testIsAValidName() {
         System.out.println("isAValidName");
+        // expected false because the name is empty
         String name = "";
         boolean expResult = false;
         boolean result = Function.isAValidName(name);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // expected false because the name contains more than one word
+        name = "two words";
+        expResult = false;
+        result = Function.isAValidName(name);
+        assertEquals(expResult, result);
+        
+        // expected false because the name is a basic operation name
+        name = "drop";
+        expResult = false;
+        result = Function.isAValidName(name);
+        assertEquals(expResult, result);
+        
+        // expected false because the name is a basic operation name
+        name = "<a";
+        expResult = false;
+        result = Function.isAValidName(name);
+        assertEquals(expResult, result);
+        
+        // expected true because the name is a valid function name
+        name = "function";
+        expResult = true;
+        result = Function.isAValidName(name);
+        assertEquals(expResult, result);
     }
 
     /**
      * Test of getName method, of class Function.
      */
     @Test
-    public void testGetName() {
+    public void testGetName() throws FunctionNameAlreadyExistsException {
         System.out.println("getName");
-        Function instance = null;
-        String expResult = "";
+        
+        Function instance = new Function("function");
+        String expResult = "function";
         String result = instance.getName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of getSequenceString method, of class Function.
      */
     @Test
-    public void testGetSequenceString() {
+    public void testGetSequenceString() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("getSequenceString");
-        Function instance = null;
-        String expResult = "";
+        
+        Function instance = new Function("function", "clear 3.14 + sqrt");
+        String expResult = "clear 3.14 + sqrt";
         String result = instance.getSequenceString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -141,10 +163,13 @@ public class FunctionTest {
     @Test
     public void testSetSequenceString() throws Exception {
         System.out.println("setSequenceString");
+        
         String sequenceString = "+ - / *";
         Function instance = new Function("function", "+ -");
+        // expected not equals because the instance has the operations "+ -"
         assertNotEquals(instance.getSequenceString(), sequenceString);
         instance.setSequenceString(sequenceString);
+        // expected equals because now the function has the same operations as the sequenceStirng attribute
         assertEquals(instance.getSequenceString(), sequenceString);
     }
 
@@ -156,41 +181,52 @@ public class FunctionTest {
     @Test
     public void testGetSequenceCommands() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("getSequenceCommands");
-        Function instance = new Function("function", "+ - / *");
-        ArrayList<Command> expResult = null;
+        
+        Function instance = new Function("function", "+ - * /");
+        ArrayList<Command> expResult = new ArrayList<>();
+        expResult.add(new SumCommand(stack));
+        expResult.add(new SubCommand(stack));
+        expResult.add(new ProdCommand(stack));
+        expResult.add(new DivCommand(stack));
+        
         ArrayList<Command> result = instance.getSequenceCommands();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
     /**
      * Test of toString method, of class Function.
      */
     @Test
-    public void testToString() {
+    public void testToString() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("toString");
-        Function instance = null;
-        String expResult = "";
+        
+        Function instance = new Function("function", "<i -b over dup");
+        String expResult = "function";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
      * Test of equals method, of class Function.
+     * @throws exceptions.FunctionNameAlreadyExistsException
+     * @throws exceptions.NoMatchFoundException
      */
     @Test
-    public void testEquals() {
+    public void testEquals() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("equals");
-        Object obj = null;
-        Function instance = null;
+        
+        Function instance = new Function("function1", "+ +z * drop");
+        Function other = new Function("differentFunction", "clear 1.23+4.56j dup *");
+        
+        // expecting false because the other function has a different name
         boolean expResult = false;
-        boolean result = instance.equals(obj);
+        boolean result = instance.equals(other);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // expected true because we are comparing the same object
+        expResult = true;
+        result = instance.equals(instance);
+        assertEquals(expResult, result);
     }
 
 }
