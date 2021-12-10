@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
+import progettose_gruppo09.Function;
 import progettose_gruppo09.Stack;
 import progettose_gruppo09.Variables;
 
@@ -19,10 +20,10 @@ public class InsertFunctionCommandTest {
 
     private Stack stack = null;
     private Variables variables = null;
-    private ArrayList<FunctionCommand> functionCommands = null;
+    private ArrayList<Function> functions = null;
 
     @Before
-    public void setUp() {
+    public void setUp() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         // instantiating stack and variables attributes
         stack = new Stack();
         variables = new Variables();
@@ -41,20 +42,17 @@ public class InsertFunctionCommandTest {
         } catch (VariablesNameException ex) {
         }
 
-        ArrayList<Command> sequenceCommands1 = new ArrayList<>();
-        sequenceCommands1.add(new SumCommand(stack));
-        sequenceCommands1.add(new SubCommand(stack));
-        sequenceCommands1.add(new DropCommand(stack));
-        FunctionCommand functionCommand1 = new FunctionCommand("function1", "+ - drop", sequenceCommands1);
+        Function function1 = new Function("function1", "+ - drop");
 
-        ArrayList<Command> sequenceCommands2 = new ArrayList<>();
-        sequenceCommands2.add(new DropCommand(stack));
-        sequenceCommands2.add(new DropCommand(stack));
-        FunctionCommand functionCommand2 = new FunctionCommand("function2", "drop drop", sequenceCommands2);
+        Function function2 = new Function("function2", "drop drop");
 
-        functionCommands = new ArrayList<>();
-        functionCommands.add(functionCommand1);
-        functionCommands.add(functionCommand2);
+        functions = new ArrayList<>();
+        functions.add(function1);
+        functions.add(function2);
+        
+        Function.setStack(this.stack);
+        Function.setVariables(this.variables);
+        Function.setFunctions(this.functions);
 
     }
 
@@ -66,18 +64,14 @@ public class InsertFunctionCommandTest {
         System.out.println("Execute");
 
         // adding a new FunctionCommand with valid name and sequence command string
-        InsertFunctionCommand instance = new InsertFunctionCommand("function3", "* * <a", functionCommands, stack, variables);
+        InsertFunctionCommand instance = new InsertFunctionCommand("function3", "* * <a", functions);
         instance.execute();
 
-        assertEquals(functionCommands.size(), 3);
+        assertEquals(functions.size(), 3);
+        
+        Function function3 = new Function("function3", "* * <a");
 
-        ArrayList<Command> sequenceCommands3 = new ArrayList<>();
-        sequenceCommands3.add(new ProdCommand(stack));
-        sequenceCommands3.add(new ProdCommand(stack));
-        sequenceCommands3.add(new OutVariableCommand(stack, variables, 'a'));
-        FunctionCommand functionCommand3 = new FunctionCommand("function3", "* * <a", sequenceCommands3);
-
-        assertEquals(functionCommands.get(2), functionCommand3);
+        assertEquals(functions.get(2), function3);
     }
 
     /**
@@ -88,7 +82,7 @@ public class InsertFunctionCommandTest {
         System.out.println("Execute when it throws FunctionNameAlreadyExistsException");
 
         // adding a new FunctionCommand with valid name and sequence command string
-        InsertFunctionCommand instance = new InsertFunctionCommand("function2", "* * <a", functionCommands, stack, variables);
+        InsertFunctionCommand instance = new InsertFunctionCommand("function2", "* * <a", functions);
         instance.execute();
     }
 
@@ -100,7 +94,7 @@ public class InsertFunctionCommandTest {
         System.out.println("Execute when it throws NoMatchFoundException");
 
         // adding a new FunctionCommand with valid name and sequence command string
-        InsertFunctionCommand instance = new InsertFunctionCommand("function3", "sqrrt * <a", functionCommands, stack, variables);
+        InsertFunctionCommand instance = new InsertFunctionCommand("function3", "sqrrt * <a", functions);
         instance.execute();
     }
 
