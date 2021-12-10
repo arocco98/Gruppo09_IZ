@@ -1,5 +1,7 @@
 package command;
 
+import exceptions.FunctionNameAlreadyExistsException;
+import exceptions.NoMatchFoundException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
+import progettose_gruppo09.Function;
 import progettose_gruppo09.Stack;
 
 /**
@@ -17,7 +20,7 @@ import progettose_gruppo09.Stack;
  */
 public class SaveFunctionCommandsTest {
 
-    private ArrayList<FunctionCommand> functions;
+    private ArrayList<Function> functions;
     private ArrayList<Command> sequenceCommands;
     private ArrayList<Command> sequenceCommands2;
     private Stack stack;
@@ -56,6 +59,9 @@ public class SaveFunctionCommandsTest {
         sequenceCommands2.add(sub);
         sequenceCommands2.add(sum);
         sequenceCommands2.add(prod);
+        
+        Function.setFunctions(functions);
+        Function.setStack(stack);
     }
 
     /**
@@ -66,9 +72,9 @@ public class SaveFunctionCommandsTest {
         System.out.println("Save Test");
 
         file1 = new File("file1");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op2", "- + *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op2", "- + *");
         functions.add(fun2);
 
         SaveFunctionCommands instance = new SaveFunctionCommands(functions, file1);
@@ -94,7 +100,7 @@ public class SaveFunctionCommandsTest {
             int size = result.size();
             int i = 0;
 
-            for (FunctionCommand f : functions) {
+            for (Function f : functions) {
                 assertEquals(f.getName(), result.get(i));
                 assertEquals(f.getSequenceString(), result.get(i + 1));
                 i += 2;
@@ -113,13 +119,13 @@ public class SaveFunctionCommandsTest {
      * @throws IOException
      */
     @Test(expected = IOException.class)
-    public void testExecute2() throws IOException {
+    public void testExecute2() throws IOException, FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("Save Test 2");
 
         file1 = new File("src");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op2", "- + *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op2", "- + *");
         functions.add(fun2);
 
         SaveFunctionCommands instance = new SaveFunctionCommands(functions, file1);

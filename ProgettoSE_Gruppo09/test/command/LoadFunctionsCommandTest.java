@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
+import progettose_gruppo09.Function;
 import progettose_gruppo09.Stack;
 import progettose_gruppo09.Variables;
 
@@ -18,10 +19,8 @@ import progettose_gruppo09.Variables;
  */
 public class LoadFunctionsCommandTest {
 
-    private ArrayList<FunctionCommand> functions;
-    private ArrayList<FunctionCommand> functions2;
-    private ArrayList<Command> sequenceCommands;
-    private ArrayList<Command> sequenceCommands2;
+    private ArrayList<Function> functions;
+    private ArrayList<Function> functions2;
     private Stack stack;
     private Complex n1;
     private Complex n2;
@@ -40,8 +39,6 @@ public class LoadFunctionsCommandTest {
     public void setUp() {
         functions = new ArrayList<>();
         functions2 = new ArrayList<>();
-        sequenceCommands = new ArrayList<>();
-        sequenceCommands2 = new ArrayList<>();
         stack = new Stack();
         n1 = new Complex(1.0, 1.0);
         n2 = new Complex(2.0, 2.0);
@@ -54,13 +51,10 @@ public class LoadFunctionsCommandTest {
         sum = new SumCommand(stack);
         sub = new SubCommand(stack);
         prod = new ProdCommand(stack);
-        sequenceCommands.add(sum);
-        sequenceCommands.add(sub);
-        sequenceCommands.add(prod);
-        sequenceCommands2.add(sub);
-        sequenceCommands2.add(sum);
-        sequenceCommands2.add(prod);
         variables = new Variables();
+        Function.setFunctions(functions);
+        Function.setStack(stack);
+        Function.setVariables(variables);
     }
 
     /**
@@ -71,14 +65,15 @@ public class LoadFunctionsCommandTest {
         System.out.println("Load Test");
 
         file1 = new File("file1");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op2", "- + *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op2", "- + *");
         functions.add(fun2);
 
         SaveFunctionCommands insta = new SaveFunctionCommands(functions, file1);
         insta.execute();
 
+        Function.setFunctions(functions2);
         LoadFunctionsCommand instance = new LoadFunctionsCommand(functions2, stack, variables, file1);
         instance.execute();
 
@@ -93,14 +88,15 @@ public class LoadFunctionsCommandTest {
         System.out.println("Load Test2");
 
         file1 = new File("file1");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op2", "- op1 *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op2", "- op1 *");
         functions.add(fun2);
 
         SaveFunctionCommands insta = new SaveFunctionCommands(functions, file1);
         insta.execute();
 
+        Function.setFunctions(functions2);
         LoadFunctionsCommand instance = new LoadFunctionsCommand(functions2, stack, variables, file1);
         instance.execute();
 
@@ -116,14 +112,15 @@ public class LoadFunctionsCommandTest {
         System.out.println("Load Test 3");
 
         file1 = new File("file1");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op2", "- + *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op2", "- + *");
         functions.add(fun2);
 
         SaveFunctionCommands insta = new SaveFunctionCommands(functions, file1);
         insta.execute();
 
+        Function.setFunctions(functions2);
         LoadFunctionsCommand instance = new LoadFunctionsCommand(functions2, stack, variables, new File("file2"));
         instance.execute();
 
@@ -138,14 +135,15 @@ public class LoadFunctionsCommandTest {
         System.out.println("Load Test 4");
 
         file1 = new File("file1");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op2", "- op2 *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op2", "- op2 *");
         functions.add(fun2);
 
         SaveFunctionCommands insta = new SaveFunctionCommands(functions, file1);
         insta.execute();
 
+        Function.setFunctions(functions2);
         LoadFunctionsCommand instance = new LoadFunctionsCommand(functions2, stack, variables, file1);
         instance.execute();
 
@@ -160,14 +158,15 @@ public class LoadFunctionsCommandTest {
         System.out.println("Load Test 5");
 
         file1 = new File("file1");
-        FunctionCommand fun1 = new FunctionCommand("op1", "+ - *", sequenceCommands);
-        FunctionCommand fun2 = new FunctionCommand("op1", "- sqrt *", sequenceCommands2);
+        Function fun1 = new Function("op1", "+ - *");
         functions.add(fun1);
+        Function fun2 = new Function("op1", "- sqrt *");
         functions.add(fun2);
 
         SaveFunctionCommands insta = new SaveFunctionCommands(functions, file1);
         insta.execute();
 
+        Function.setFunctions(functions2);
         LoadFunctionsCommand instance = new LoadFunctionsCommand(functions2, stack, variables, file1);
         instance.execute();
 
