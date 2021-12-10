@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import progettose_gruppo09.Function;
 
 /**
  * This class implements Command interface and execute the store in file of each
@@ -13,7 +14,7 @@ import java.util.ArrayList;
  */
 public class SaveFunctionCommands implements Command {
 
-    private ArrayList<FunctionCommand> functions;
+    private ArrayList<Function> functions;
     private File file;
 
     /**
@@ -23,7 +24,7 @@ public class SaveFunctionCommands implements Command {
      * @param functions the list of FunctionCommands that you want to save
      * @param file the file in which you want to save a user-defined Operation
      */
-    public SaveFunctionCommands(ArrayList<FunctionCommand> functions, File file) {
+    public SaveFunctionCommands(ArrayList<Function> functions, File file) {
         this.functions = functions;
         this.file = file;
     }
@@ -40,7 +41,7 @@ public class SaveFunctionCommands implements Command {
         //creo uno stream per scrivere su file
         FileWriter writer = new FileWriter(file);
 
-        for (FunctionCommand f : functions) {
+        for (Function f : functions) {
             //scrivo su file
             writer.write(f.getName() + '\n');
             writer.write(f.getSequenceString() + '\n');

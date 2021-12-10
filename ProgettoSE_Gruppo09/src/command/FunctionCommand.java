@@ -1,128 +1,61 @@
 package command;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import progettose_gruppo09.Function;
 
 /**
- * This class implements Command interface and execute the execution of a
- * user-defined function.
+ * This class implements Command interface and performs the execution of the
+ * commands present in the the Function object passed in the constructor.
  *
  * @author gruppo09
  */
 public class FunctionCommand implements Command {
 
-    private String name;
-    private String sequenceString;
-    private ArrayList<Command> sequenceCommands;
+    private Function function;
 
     /**
-     * Constructor of FunctionCommand class, it takes in input the name of the
-     * function, the sequence string and an array of Commands.
+     * Constructor of FunctionCommand class.
      *
-     * @param name The name of the function.
-     * @param sequenceString The string representing all the command.
-     * @param sequenceCommands The array of Commands created by analyzing the
-     * sequence string.
+     * @param function The function to execute commands.
      */
-    public FunctionCommand(String name, String sequenceString, ArrayList<Command> sequenceCommands) {
-        this.name = name;
-        this.sequenceString = sequenceString;
-        this.sequenceCommands = sequenceCommands;
+    public FunctionCommand(Function function) {
+        this.function = function;
     }
 
     /**
-     * Execute all the commands present in sequenceCommands array.
+     * Execute all the commands present in the function object.
      *
-     * @throws Exception When one of the command throws an Exception.
+     * @throws Exception When a command throws an exception.
      */
     @Override
     public void execute() throws Exception {
-        for (Command command : sequenceCommands) {
+        ArrayList<Command> commands = function.getSequenceCommands();
+        for (Command command : commands) {
             command.execute();
         }
     }
 
     /**
-     * This method is used to get the name of the function.
+     * Equals method of FunctionCommand class, it returns true if the object
+     * passed as parameter has the same name of the function attribute.
      *
-     * @return The name of the function.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * This method is used to set the name of the function.
-     *
-     * @param name The value you want to set as name.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * This method is used to get the sequence string of the function.
-     *
-     * @return The sequenceString attribute.
-     */
-    public String getSequenceString() {
-        return sequenceString;
-    }
-
-    /**
-     * This method is used to set the sequenceString attribute of the function.
-     *
-     * @param sequenceString The value you want to set as sequenceString.
-     */
-    public void setSequenceString(String sequenceString) {
-        this.sequenceString = sequenceString;
-    }
-
-    /**
-     * This method is used to get the sequenceCommands attribute.
-     *
-     * @return The sequenceCommands attribute.
-     */
-    public ArrayList<Command> getSequenceCommands() {
-        return sequenceCommands;
-    }
-
-    /**
-     * This method is used to set the sequenceCommand attribute of the function.
-     *
-     * @param sequenceCommands The value you want to set as sequenceCommands.
-     */
-    public void setSequenceCommands(ArrayList<Command> sequenceCommands) {
-        this.sequenceCommands = sequenceCommands;
-    }
-
-    /**
-     * This method is used to get a String representation of the FunctionCommand
-     * object.
-     *
-     * @return A String representing the FunctionCommand object.
+     * @param obj The object to check the name.
+     * @return True if the names are equal, otherwise false.
      */
     @Override
-    public String toString() {
-        return this.name;
-    }
-    
-    @Override
-    public boolean equals(Object object) {
-        if(!(object instanceof FunctionCommand))
-            return false;
-        
-        if(this == object)
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
-        
-        FunctionCommand other = (FunctionCommand) object;
-        
-        if(!this.getName().equals(other.getName()))
+        }
+        if (obj == null) {
             return false;
-        
-        if(!this.getSequenceString().equals(other.sequenceString))
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        
-        return true;
+        }
+        final FunctionCommand other = (FunctionCommand) obj;
+        return Objects.equals(this.function.getName(), other.function.getName());
     }
 
 }

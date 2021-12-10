@@ -23,7 +23,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -113,7 +116,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ComboBox<Entry<Character, Complex>> variablesComboBox;
     @FXML
-    private ComboBox<FunctionCommand> functionsComboBox;
+    private ComboBox<Function> functionsComboBox;
     @FXML
     private MenuItem saveFunctionButton; // BIND!!!
     @FXML
@@ -149,27 +152,53 @@ public class FXMLDocumentController implements Initializable {
     private Variables variables = new Variables();
 
     // user-defined functions
-    private ArrayList<FunctionCommand> functionCommands = null;
-    private ObservableList<FunctionCommand> observableFunctionCommands = null;
+    private ArrayList<Function> functions = null;
+    private ObservableList<Function> observableFunctions = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // initializing stack and elementList variables
+        initializeStack();
+
+        // initializing variables 
+        initializeVariables();
+
+        // initializing all commands
+        initializeCommands();
+
+        // initializing functions array
+        initializeFunctions();
+    }
+
+    /**
+     * Initialize the stack structure and the observable list that will contain
+     * all the elements.
+     */
+    private void initializeStack() {
         stack = new Stack();
         elementList.setPlaceholder(new Label("No value present"));
         stackColumn.setCellValueFactory(new PropertyValueFactory<>("complex"));
         stackColumn.setSortable(false);
         observableStack = FXCollections.observableList(stack);
         elementList.setItems(observableStack);
+    }
 
-        // initializing variables 
+    /**
+     * Initialize the variables structure and the observable list.
+     */
+    private void initializeVariables() {
+
         MyEntry<Character, Complex> myEntry = new MyEntry<>();
         observableCharacterList = FXCollections.observableList(new ArrayList<>(myEntry.fromEntrySet(variables.getVariables().entrySet())));
         observableCharacterList.sort(null);
         variablesComboBox.setItems(observableCharacterList);
         variablesComboBox.getSelectionModel().selectFirst();
+    }
 
-        // initializing all commands
+    /**
+     * Initialize all the commands.
+     */
+    private void initializeCommands() {
         sumCommand = new SumCommand(this.stack);
         subCommand = new SubCommand(this.stack);
         prodCommand = new ProdCommand(this.stack);
@@ -181,19 +210,28 @@ public class FXMLDocumentController implements Initializable {
         dupCommand = new DupCommand(this.stack);
         swapCommand = new SwapCommand(this.stack);
         overCommand = new OverCommand(this.stack);
+    }
 
-        // initializing functionCommands array
-        functionCommands = new ArrayList<>();
-        observableFunctionCommands = FXCollections.observableArrayList(functionCommands);
-        functionsComboBox.setItems(observableFunctionCommands);
+    /**
+     * Initialize functions array and other attributes for the GUI.
+     */
+    private void initializeFunctions() {
+        functions = new ArrayList<>();
+        // setting the static attributes of Function class
+        Function.setFunctions(functions);
+        Function.setStack(stack);
+        Function.setVariables(variables);
+
+        observableFunctions = FXCollections.observableArrayList(functions);
+        functionsComboBox.setItems(observableFunctions);
         // binding the button to the combobox, if no value is selected then the button must be disabled
         executeFunctionButton.disableProperty().bind(functionsComboBox.valueProperty().isNull());
         // this method is used in order to show to the user the operations of one function when the mouse is over the name of the operation
         functionsComboBox.setCellFactory(param -> {
-            return new ListCell<FunctionCommand>() {
+            return new ListCell<Function>() {
 
                 @Override
-                public void updateItem(FunctionCommand item, boolean empty) {
+                public void updateItem(Function item, boolean empty) {
                     super.updateItem(item, empty);
 
                     if (item != null) {
@@ -211,7 +249,6 @@ public class FXMLDocumentController implements Initializable {
                 }
             };
         });
-
     }
 
     public Stack getStack() {
@@ -222,12 +259,12 @@ public class FXMLDocumentController implements Initializable {
         return variables;
     }
 
-    public ArrayList<FunctionCommand> getFunctionCommands() {
-        return functionCommands;
+    public ArrayList<Function> getFunctions() {
+        return functions;
     }
 
-    public void setFunctionCommands(ArrayList<FunctionCommand> functionCommands) {
-        this.functionCommands = functionCommands;
+    public void setFunctions(ArrayList<Function> functions) {
+        this.functions = functions;
     }
 
     /**
@@ -624,10 +661,10 @@ public class FXMLDocumentController implements Initializable {
         // clear the selected item in the combo box
         functionsComboBox.getSelectionModel().clearSelection();
         // refresh the observable array list
-        observableFunctionCommands.clear();
-        observableFunctionCommands.addAll(functionCommands);
+        observableFunctions.clear();
+        observableFunctions.addAll(functions);
         // set the items in the combobox
-        functionsComboBox.setItems(observableFunctionCommands);
+        functionsComboBox.setItems(observableFunctions);
     }
 
     /**
@@ -676,7 +713,7 @@ public class FXMLDocumentController implements Initializable {
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showSaveDialog(this.inVarBtn.getScene().getWindow());
         if (file != null) {
-            saveCommand = new SaveFunctionCommands(functionCommands, file);
+            saveCommand = new SaveFunctionCommands(functions, file);
 
             try {
                 saveCommand.execute();
@@ -700,18 +737,28 @@ public class FXMLDocumentController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(this.inVarBtn.getScene().getWindow());
         if (file != null) {
-            loadCommand = new LoadFunctionsCommand(functionCommands, stack, variables, file);
+            ArrayList<Function> tmpFunctions = new ArrayList<>();
+            loadCommand = new LoadFunctionsCommand(tmpFunctions, stack, variables, file);
             try {
+                Function.setFunctions(tmpFunctions);
                 loadCommand.execute();
+                errorLabel.setText("");
+                Function.setFunctions(functions);
+                functions.clear();
+                functions.addAll(tmpFunctions);
                 refreshFunctionCommands();
             } catch (FileNotFoundException ex) {
-                showError("File not found");
+                Alert dialog = new Alert(AlertType.ERROR, "File not found", ButtonType.OK);
+                dialog.show();
             } catch (IOException ex) {
-                showError("Error during loading file");
+                Alert dialog = new Alert(AlertType.ERROR, "During loading file", ButtonType.OK);
+                dialog.show();
             } catch (NoMatchFoundException ex) {
-                showError("Not a valid input");
+                Alert dialog = new Alert(AlertType.ERROR, "File content not valid", ButtonType.OK);
+                dialog.show();
             } catch (FunctionNameAlreadyExistsException ex) {
-                showError("Function name already exists, use a different name");
+                Alert dialog = new Alert(AlertType.ERROR, "Function name already exists, use a different name", ButtonType.OK);
+                dialog.show();
             }
         }
 

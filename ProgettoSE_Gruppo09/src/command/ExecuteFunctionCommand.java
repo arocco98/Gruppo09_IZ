@@ -3,6 +3,7 @@ package command;
 import java.util.ArrayList;
 import java.util.HashMap;
 import progettose_gruppo09.Complex;
+import progettose_gruppo09.Function;
 import progettose_gruppo09.Stack;
 import progettose_gruppo09.Variables;
 
@@ -14,7 +15,7 @@ import progettose_gruppo09.Variables;
  */
 public class ExecuteFunctionCommand implements Command {
 
-    private FunctionCommand functionCommand;
+    private Function function;
     private Stack stack;
     private Variables variables;
 
@@ -25,8 +26,8 @@ public class ExecuteFunctionCommand implements Command {
      * @param stack The stack to restore if errors occur.
      * @param variables The variables to restore if errors occur.
      */
-    public ExecuteFunctionCommand(FunctionCommand functionCommand, Stack stack, Variables variables) {
-        this.functionCommand = functionCommand;
+    public ExecuteFunctionCommand(Function function, Stack stack, Variables variables) {
+        this.function = function;
         this.stack = stack;
         this.variables = variables;
     }
@@ -45,6 +46,7 @@ public class ExecuteFunctionCommand implements Command {
         HashMap<Character, Complex> tmpVariables = new HashMap<>(variables.getVariables());
 
         try { // executing the user-defined function
+            FunctionCommand functionCommand = new FunctionCommand(function);
             functionCommand.execute();
         } catch (Exception exception) {
             // restoring stack

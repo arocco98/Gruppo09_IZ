@@ -1,10 +1,9 @@
 package progettose_gruppo09;
 
-import command.InsertFunctionCommand;
-import exceptions.*;
+import command.FunctionCommand;
+import exceptions.NoMatchFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,35 +20,35 @@ import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
- * @author gruppo09
+ * @author memol
  */
-public class AddFunctionController implements Initializable {
+public class ModifyFunctionController implements Initializable {
 
     // Holds this controller's Stage
     private Stage thisStage;
 
     // Will hold a reference to the first controller, allowing us to access the methods found there.
-    private FXMLDocumentController controller;
-    private ArrayList<Function> functions;
-    private Stack stack;
-    private Variables variables;
-
+    private AvailableFunctionsController controller;
+    private Function f;
+    
+    @FXML
+    private Label errorLbl;
     @FXML
     private TextField nameTxt;
     @FXML
     private TextField sequenceTxt;
-    @FXML
-    private Label errorLbl;
-
-    public AddFunctionController(FXMLDocumentController controller) {
+    
+        
+    public ModifyFunctionController(AvailableFunctionsController controller, Function f) {
         this.controller = controller;
+        this.f = f;
 
         // Create the new stage
         thisStage = new Stage();
 
         // Load the FXML file
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddFunction.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ModifyFunction.fxml"));
 
             // Set this class as the controller
             loader.setController(this);
@@ -58,13 +57,13 @@ public class AddFunctionController implements Initializable {
             thisStage.setScene(new Scene(loader.load()));
 
             // Setup the window/stage
-            thisStage.setTitle("Add A New Function");
+            thisStage.setTitle("Modify The Selected Function");
 
         } catch (IOException ex) {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     /**
      * Show the stage that was loaded in the constructor
      */
@@ -75,46 +74,43 @@ public class AddFunctionController implements Initializable {
     }
 
     /**
-     * Shows in the GUI the string passed as argument.
-     *
-     * @param errorString The string passed as argument.
-     */
-    private void showError(String errorString) {
-
-        errorLbl.textProperty().set(errorString);
-    }
-
-    /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        this.nameTxt.setText(this.f.getName());  
+        this.sequenceTxt.setText(this.f.getSequenceString()); 
+        
+    }    
 
-        this.functions = controller.getFunctions();
-        this.stack = controller.getStack();
-        this.variables = controller.getVariables();
-
+    /**
+     * Shows in the GUI the string passed as argument and cleans the text field.
+     *
+     * @param errorString The string passed as argument.
+     */
+    private void showError(String errorString) {
+        errorLbl.textProperty().set(errorString);
+    }
+    
+    @FXML
+    private void cancelFunction(ActionEvent event) {
+        
+        this.thisStage.close();
+        
     }
 
     @FXML
-    private void addFunction(ActionEvent event) {
-
-        String name = nameTxt.getText();
-        String sequence = sequenceTxt.getText();
-        if (name.split("\\s+").length == 1) {
-            InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(name, sequence, functions);
-            try {
-                insertFunctionCommand.execute();
-                this.thisStage.close();
-            } catch (NoMatchFoundException ex) {
-                showError("Not a valid input");
-            } catch (FunctionNameAlreadyExistsException ex) {
-                showError("Function name '" + name + "' already exists, use a different name");
-            }
-        } else {
-            showError("The function name must be composed by only one word.");
+    private void modifyFunction(ActionEvent event) {
+        
+        try {
+            errorLbl.setText("");
+            f.setSequenceString(this.sequenceTxt.getText());
+            this.thisStage.close();
+        } catch (NoMatchFoundException ex) {
+            showError("Not a valid input");
         }
 
     }
-
+    
 }

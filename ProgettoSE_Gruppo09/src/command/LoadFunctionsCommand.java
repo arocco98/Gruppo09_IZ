@@ -12,13 +12,13 @@ import progettose_gruppo09.*;
 
 /**
  * This class implements Command interface and execute the loading from file of
- * each FunctionCommand that it contains
+ * each Function that it contains
  *
  * @author gruppo09
  */
 public class LoadFunctionsCommand implements Command {
 
-    private ArrayList<FunctionCommand> functionCommands;
+    private ArrayList<Function> functions;
     private Stack stack;
     private Variables variables;
     private File file;
@@ -34,8 +34,8 @@ public class LoadFunctionsCommand implements Command {
      * @param file the file from which you want to read the user-defined
      * Operation.
      */
-    public LoadFunctionsCommand(ArrayList<FunctionCommand> functionCommands, Stack stack, Variables variables, File file) {
-        this.functionCommands = functionCommands;
+    public LoadFunctionsCommand(ArrayList<Function> functionCommands, Stack stack, Variables variables, File file) {
+        this.functions = functionCommands;
         this.stack = stack;
         this.variables = variables;
         this.file = file;
@@ -52,29 +52,38 @@ public class LoadFunctionsCommand implements Command {
     @Override
     public void execute() throws FileNotFoundException, IOException, NoMatchFoundException, FunctionNameAlreadyExistsException {
 
-        //creo uno stream per leggere da file
+        // creating a stream in order to read the file
         FileReader reader = new FileReader(file);
 
-        //questo mi permette di leggere linee intere
+        // creating a bufferReader in order to read all the lines
         BufferedReader lineReader = new BufferedReader(reader);
 
-        //Leggo una linea alla volta
-        String linea = lineReader.readLine();
+        // reading one line at a time
+        String line = lineReader.readLine();
 
-        ArrayList<String> str = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> stringSequences = new ArrayList<>();
+        
 
-        while (linea != null) {
+        while (line != null) {
 
-            str.add(linea);
-            linea = lineReader.readLine();
+            names.add(line);
+            line = lineReader.readLine();
+            stringSequences.add(line);
+            line = lineReader.readLine();
+        }
+        
+        for(String name: names) {
+            functions.add(new Function(name));
+        }
+        
+        int i = 0;
+        for(String stringSequence: stringSequences) {
+            functions.get(i).setSequenceString(stringSequence);
+            i++;
         }
 
-        for (int i = 0; i < str.size(); i += 2) {
-            InsertFunctionCommand insert = new InsertFunctionCommand(str.get(i), str.get(i + 1), functionCommands, stack, variables);
-            insert.execute();;
-        }
-
-        //chiudo lo stream
+        // closing the stream
         lineReader.close();
         reader.close();
     }

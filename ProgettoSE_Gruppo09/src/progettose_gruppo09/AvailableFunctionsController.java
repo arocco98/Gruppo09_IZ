@@ -1,6 +1,9 @@
 package progettose_gruppo09;
 
+import command.Command;
 import command.FunctionCommand;
+import exceptions.FunctionNameAlreadyExistsException;
+import exceptions.NoMatchFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,14 +38,14 @@ public class AvailableFunctionsController implements Initializable {
     // Will hold a reference to the first controller, allowing us to access the methods found there.
     private FXMLDocumentController controller;
 
-    private ObservableList<FunctionCommand> functionCommands;
+    private ObservableList<Function> functions;
 
     @FXML
-    private TableView<FunctionCommand> functionsTable;
+    private TableView<Function> functionsTable;
     @FXML
-    private TableColumn<FunctionCommand, String> nameClm;
+    private TableColumn<Function, String> nameClm;
     @FXML
-    private TableColumn<FunctionCommand, String> sequenceClm;
+    private TableColumn<Function, String> sequenceClm;
     @FXML
     private Button modifyButton;
     @FXML
@@ -87,26 +90,58 @@ public class AvailableFunctionsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        this.functionCommands = FXCollections.observableArrayList();
+        this.functions = FXCollections.observableArrayList();
 
-        this.functionCommands.addAll(controller.getFunctionCommands());
+        this.functions.addAll(controller.getFunctions());
 
         nameClm.setCellValueFactory(new PropertyValueFactory<>("name"));
         sequenceClm.setCellValueFactory(new PropertyValueFactory<>("sequenceString"));
 
-        functionsTable.setItems(functionCommands);
+        functionsTable.setItems(functions);
         functionsTable.setPlaceholder(new Label("No functions available"));
 
         modifyButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
         deleteButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
     }
 
+    private void refreshFunctions() {
+        functions.clear();
+        functions.addAll(controller.getFunctions());
+
+    }
+    
     @FXML
     private void modifyFunction(ActionEvent event) {
+        Function fc = functionsTable.getSelectionModel().getSelectedItem();
+        ModifyFunctionController modifyFunctionController = new ModifyFunctionController(this, fc);
+
+        modifyFunctionController.showStage();
+        refreshFunctions();
     }
 
     @FXML
     private void deleteFunction(ActionEvent event) {
-    }
+        Function selectedFunction = functionsTable.getSelectionModel().getSelectedItem();
+        ArrayList<Command> arr = selectedFunction.getSequenceCommands();
+        String[] splitter;
 
+        for (Function function : controller.getFunctions()) {
+            if (function.getSequenceCommands().contains(new FunctionCommand(selectedFunction))) {
+                splitter = function.getSequenceString().split("\\s");
+                for (int i = 0; i < splitter.length; i++) {
+                    if (selectedFunction.getName().compareTo(splitter[i]) == 0) {
+                        splitter[i] = selectedFunction.getSequenceString();
+                    }
+                }
+                try {
+                    function.setSequenceString(String.join(" ", splitter));
+                } catch (NoMatchFoundException ex) {
+                }
+            }
+        }
+        controller.getFunctions().remove(selectedFunction);
+        functions.clear();
+        functions.addAll(controller.getFunctions());
+
+    }
 }
