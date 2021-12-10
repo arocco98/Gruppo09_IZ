@@ -16,9 +16,6 @@ public class StackTest {
         instance = new Stack();
     }
 
-    public StackTest() {
-    }
-
     /**
      * Test of Push method, of class Stack.
      */

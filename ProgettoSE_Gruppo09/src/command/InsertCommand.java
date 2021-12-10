@@ -20,7 +20,7 @@ public class InsertCommand implements Command {
 
     /**
      * Constructor of InsertCommand class, it takes two parameters: a Stack
-     * object and a String object.
+ object and a String object.
      *
      * @param stack The stack to push the element into.
      * @param patternString The string to check.

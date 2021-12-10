@@ -27,6 +27,7 @@ public class InsertFunctionCommandTest {
         // instantiating stack and variables attributes
         stack = new Stack();
         variables = new Variables();
+        functions = new ArrayList<>();
 
         // populating stack and variables attributes
         stack.add(new Complex(1, 2));
@@ -41,14 +42,6 @@ public class InsertFunctionCommandTest {
             variables.setVariable('z', new Complex(3, 0.0));
         } catch (VariablesNameException ex) {
         }
-
-        Function function1 = new Function("function1", "+ - drop");
-
-        Function function2 = new Function("function2", "drop drop");
-
-        functions = new ArrayList<>();
-        functions.add(function1);
-        functions.add(function2);
         
         Function.setStack(this.stack);
         Function.setVariables(this.variables);
@@ -62,14 +55,19 @@ public class InsertFunctionCommandTest {
     @Test
     public void testExecute() throws Exception {
         System.out.println("Execute");
+        
+        Function function1 = new Function("function1", "+ - drop");
+        functions.add(function1);
+        Function function2 = new Function("function2", "drop drop");
+        functions.add(function2);
+        
+        Function function3 = new Function("function3", "* * <a");
 
         // adding a new FunctionCommand with valid name and sequence command string
-        InsertFunctionCommand instance = new InsertFunctionCommand("function3", "* * <a", functions);
+        InsertFunctionCommand instance = new InsertFunctionCommand(function3.getName(), function3.getSequenceString(), functions);
         instance.execute();
 
         assertEquals(functions.size(), 3);
-        
-        Function function3 = new Function("function3", "* * <a");
 
         assertEquals(functions.get(2), function3);
     }
@@ -81,6 +79,10 @@ public class InsertFunctionCommandTest {
     public void testExecuteWhenThrowsFunctionNameAlreadyExistsException() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("Execute when it throws FunctionNameAlreadyExistsException");
 
+        Function function1 = new Function("function1", "+ - drop");
+        functions.add(function1);
+        Function function2 = new Function("function2", "drop drop");
+        functions.add(function2);
         // adding a new FunctionCommand with valid name and sequence command string
         InsertFunctionCommand instance = new InsertFunctionCommand("function2", "* * <a", functions);
         instance.execute();
@@ -93,6 +95,10 @@ public class InsertFunctionCommandTest {
     public void testExecuteWhenThrowsNoMatchFoundException() throws NoMatchFoundException, FunctionNameAlreadyExistsException {
         System.out.println("Execute when it throws NoMatchFoundException");
 
+        Function function1 = new Function("function1", "+ - drop");
+        functions.add(function1);
+        Function function2 = new Function("function2", "drop drop");
+        functions.add(function2);
         // adding a new FunctionCommand with valid name and sequence command string
         InsertFunctionCommand instance = new InsertFunctionCommand("function3", "sqrrt * <a", functions);
         instance.execute();
