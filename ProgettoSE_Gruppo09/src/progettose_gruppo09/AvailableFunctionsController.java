@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 import command.Command;
+import command.DeleteFunctionCommand;
 import command.FunctionCommand;
 import exceptions.FunctionNameAlreadyExistsException;
 import exceptions.NoMatchFoundException;
@@ -122,26 +123,16 @@ public class AvailableFunctionsController implements Initializable {
     @FXML
     private void deleteFunction(ActionEvent event) {
         Function selectedFunction = functionsTable.getSelectionModel().getSelectedItem();
-        ArrayList<Command> arr = selectedFunction.getSequenceCommands();
-        String[] splitter;
-
-        for (Function function : controller.getFunctions()) {
-            if (function.getSequenceCommands().contains(new FunctionCommand(selectedFunction))) {
-                splitter = function.getSequenceString().split("\\s");
-                for (int i = 0; i < splitter.length; i++) {
-                    if (selectedFunction.getName().compareTo(splitter[i]) == 0) {
-                        splitter[i] = selectedFunction.getSequenceString();
-                    }
-                }
-                try {
-                    function.setSequenceString(String.join(" ", splitter));
-                } catch (NoMatchFoundException ex) {
-                }
-            }
+        
+        ArrayList<Function> arrFunctions = controller.getFunctions();
+        DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
+        try {
+            deleteFunctionCommand.execute();
+        } catch (Exception ex) {
+            Logger.getLogger(AvailableFunctionsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        controller.getFunctions().remove(selectedFunction);
-        functions.clear();
-        functions.addAll(controller.getFunctions());
+        
+        refreshFunctions();
 
     }
 }
