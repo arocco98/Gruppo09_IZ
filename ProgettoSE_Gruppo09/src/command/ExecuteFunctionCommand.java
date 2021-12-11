@@ -22,7 +22,7 @@ public class ExecuteFunctionCommand implements Command {
     /**
      * Constructor of ExecuteFunctionCommand class.
      *
-     * @param functionCommand The function command to execute.
+     * @param function The function command to execute.
      * @param stack The stack to restore if errors occur.
      * @param variables The variables to restore if errors occur.
      */

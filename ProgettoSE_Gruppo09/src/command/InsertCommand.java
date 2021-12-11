@@ -20,7 +20,7 @@ public class InsertCommand implements Command {
 
     /**
      * Constructor of InsertCommand class, it takes two parameters: a Stack
- object and a String object.
+     * object and a String object.
      *
      * @param stack The stack to push the element into.
      * @param patternString The string to check.
@@ -132,10 +132,10 @@ public class InsertCommand implements Command {
             // pushing the just created element into the stack
             stack.push(c);
         } else if (matcherI2.matches()) { // if the user input matches the seventh pattern
-            imaginary = Double.parseDouble(matcherI2.group(1).replace("j", "")); 
-            
+            imaginary = Double.parseDouble(matcherI2.group(1).replace("j", ""));
+
             Complex c = new Complex(0.0, imaginary);
-            
+
             // pushing the just created element into the stack
             stack.push(c);
         } else if (matcherRJ.matches()) { // if the user input matches the eighth pattern
@@ -207,4 +207,22 @@ public class InsertCommand implements Command {
         return pattern.matcher(patternString.replaceAll("\\s+", ""));
     }
 
+    /**
+     * Equals method, it checks if the object passed as parameter is equal to the instance.
+     * @param obj The object to check if it is equal.
+     * @return True if the objects are equals, otherwise false.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        return true;
+    }
 }
