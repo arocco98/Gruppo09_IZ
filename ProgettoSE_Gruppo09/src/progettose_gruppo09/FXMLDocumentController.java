@@ -409,6 +409,38 @@ public class FXMLDocumentController implements Initializable {
         refreshStack();
     }
 
+    @FXML
+    private void modulus(ActionEvent event) {
+    }
+
+    @FXML
+    private void arg(ActionEvent event) {
+    }
+
+    @FXML
+    private void power(ActionEvent event) {
+    }
+
+    @FXML
+    private void exponential(ActionEvent event) {
+    }
+
+    @FXML
+    private void naturalLogarithm(ActionEvent event) {
+    }
+
+    @FXML
+    private void sin(ActionEvent event) {
+    }
+
+    @FXML
+    private void cosin(ActionEvent event) {
+    }
+
+    @FXML
+    private void tangent(ActionEvent event) {
+    }
+
     /**
      * Execute the inversion sign of the last complex number in the stack when
      * button "+-" is clicked
