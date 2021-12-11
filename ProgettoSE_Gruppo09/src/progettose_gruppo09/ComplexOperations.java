@@ -308,4 +308,67 @@ public class ComplexOperations {
         return output;
     }
 
+    /**
+     * This method calculates the arc sine of a Complex number
+     * @param complex The input Complex number to calculate arc sine
+     * @return The arc sine of c
+     */
+    public static Complex arcsin(Complex complex) {
+
+        double realPart = complex.getReal();
+        double imaginaryPart = complex.getImaginary();
+        double real;
+        double imaginary;
+
+        double a = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) - Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
+        double b = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) + Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
+
+        real = Math.asin(a);
+        imaginary = Math.log(b + Math.sqrt(Math.pow(b, 2) - 1));
+
+        real = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP).doubleValue();
+        imaginary = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP).doubleValue();
+
+        return new Complex(real, imaginary);
+    }
+
+    /**
+     * This method calculates the arc cosine of a Complex number
+     * @param complex The input Complex number to calculate arc cosine
+     * @return The arc cosine of c
+     */
+    public static Complex arccos(Complex complex) {
+
+        double realPart = complex.getReal();
+        double imaginaryPart = complex.getImaginary();
+        double real;
+        double imaginary;
+
+        double a = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) - Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
+        double b = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) + Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
+
+        real = Math.acos(a);
+        imaginary = Math.log(b + Math.sqrt(Math.pow(b, 2) - 1));
+
+        real = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP).doubleValue();
+        imaginary = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP).doubleValue();
+
+        return new Complex(real, -imaginary);
+    }
+
+    /**
+     * This method calculates the arc tangent of a Complex number
+     *
+     * @param c the input Complex number to calculate arc tangent
+     * @return the arc tangent of c
+     */
+    public static Complex arctan(Complex c) {
+        double realPart = Math.atan((2 * c.getReal()) / ((1 - Math.pow(c.getReal(), 2) - Math.pow(c.getImaginary(), 2)))) / 2;
+        double imaginaryPart = Math.log((Math.pow(c.getReal(), 2) + Math.pow(1 + c.getImaginary(), 2)) / (Math.pow(c.getReal(), 2) + Math.pow(1 - c.getImaginary(), 2))) / 4;
+
+        realPart = new BigDecimal(realPart).setScale(7, RoundingMode.HALF_UP).doubleValue();
+        imaginaryPart = new BigDecimal(imaginaryPart).setScale(7, RoundingMode.HALF_UP).doubleValue();
+        return new Complex(realPart, imaginaryPart);
+    }
+
 }

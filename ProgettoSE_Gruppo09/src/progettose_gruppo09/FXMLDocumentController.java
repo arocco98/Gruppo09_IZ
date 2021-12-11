@@ -18,8 +18,6 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -149,6 +147,14 @@ public class FXMLDocumentController implements Initializable {
     private DupCommand dupCommand = null;
     private SwapCommand swapCommand = null;
     private OverCommand overCommand = null;
+    private ModCommand modCommand = null;
+    private ArgCommand argCommand = null;
+    private PowCommand powCommand = null;
+    private ExpCommand expCommand = null;
+    private LogCommand logCommand = null;
+    private SinCommand sinCommand = null;
+    private CosCommand cosCommand = null;
+    private TanCommand tanCommand = null;
 
     // variables 
     private Variables variables = new Variables();
@@ -214,6 +220,14 @@ public class FXMLDocumentController implements Initializable {
         dupCommand = new DupCommand(this.stack);
         swapCommand = new SwapCommand(this.stack);
         overCommand = new OverCommand(this.stack);
+        modCommand = new ModCommand(stack);
+        argCommand = new ArgCommand(stack);
+        powCommand = new PowCommand(stack);
+        expCommand = new ExpCommand(stack);
+        logCommand = new LogCommand(stack);
+        sinCommand = new SinCommand(stack);
+        cosCommand = new CosCommand(stack);
+        tanCommand = new TanCommand(stack);
     }
 
     /**
@@ -411,34 +425,105 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void modulus(ActionEvent event) {
+        try {
+            modCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform modulus with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void arg(ActionEvent event) {
+        try {
+            argCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform argument with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void power(ActionEvent event) {
+        try {
+            powCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform power, insufficient number of elements");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void exponential(ActionEvent event) {
+        try {
+            expCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform exponential with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void naturalLogarithm(ActionEvent event) {
+        try {
+            logCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform natural logarithm with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
-    private void sin(ActionEvent event) {
+    private void sine(ActionEvent event) {
+        try {
+            sinCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform sine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
-    private void cosin(ActionEvent event) {
+    private void cosine(ActionEvent event) {
+        try {
+            cosCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform cosine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void tangent(ActionEvent event) {
+        try {
+            tanCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform tangent with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    @FXML
+    private void arcsin(ActionEvent event) {
+        System.out.println(ComplexOperations.arcsin(stack.pop()));
+    }
+
+    @FXML
+    private void arccos(ActionEvent event) {
+        System.out.println(ComplexOperations.arccos(stack.pop()));
+    }
+
+    @FXML
+    private void arctan(ActionEvent event) {
+        
     }
 
     /**
