@@ -19,8 +19,8 @@ public class InsertCommand implements Command {
     String patternString;
 
     /**
-     * Constructor of InsertCommand class, it takes two parameters: a ComplexStack
- object and a String object.
+     * Constructor of InsertCommand class, it takes two parameters: a
+     * ComplexStack object and a String object.
      *
      * @param stack The stack to push the element into.
      * @param patternString The string to check.

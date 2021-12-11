@@ -35,11 +35,11 @@ public class SaveVariablesCommand implements Command {
     @Override
     public void execute() throws Exception {
         Variables newVariables = new Variables();
-        
-        for(Map.Entry<Character, Complex> entry : variables.getVariables().entrySet()) {
+
+        for (Map.Entry<Character, Complex> entry : variables.getVariables().entrySet()) {
             newVariables.setVariable(entry.getKey(), entry.getValue());
         }
-        
+
         savedVariables.push(newVariables);
     }
 

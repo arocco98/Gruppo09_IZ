@@ -16,7 +16,7 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class InVariableCommandTest {
-    
+
     private ComplexStack stack;
     private Variables variables;
     private Character variable;

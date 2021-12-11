@@ -15,12 +15,12 @@ import progettose_gruppo09.VariablesStack;
  * @author gruppo09
  */
 public class ExecuteFunctionCommandTest {
-    
+
     private ComplexStack stack = null;
     private Variables variables = null;
     private ArrayList<Function> functions;
     private VariablesStack savedVariables;
-    
+
     @Before
     public void setUp() {
         // instantiating stack and variables attributes
@@ -43,7 +43,7 @@ public class ExecuteFunctionCommandTest {
         }
 
         savedVariables = new VariablesStack();
-        
+
         Function.setStack(this.stack);
         Function.setVariables(this.variables);
         Function.setFunctions(this.functions);
@@ -56,7 +56,7 @@ public class ExecuteFunctionCommandTest {
     @Test
     public void testExecute() throws Exception {
         System.out.println("execute");
-        
+
         ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ drop dup dup"), stack, variables, savedVariables);
         instance.execute();
     }
@@ -68,7 +68,7 @@ public class ExecuteFunctionCommandTest {
     @Test(expected = Exception.class)
     public void testExecuteWhenItThrowsException() throws Exception {
         System.out.println("execute when it throws a Exception");
-        
+
         ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ - * / drop sqrt"), stack, variables, savedVariables);
         instance.execute();
     }

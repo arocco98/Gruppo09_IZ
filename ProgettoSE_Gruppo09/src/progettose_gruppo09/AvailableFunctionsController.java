@@ -127,7 +127,7 @@ public class AvailableFunctionsController implements Initializable {
         Function selectedFunction = functionsTable.getSelectionModel().getSelectedItem();
         ArrayList<Function> arrFunctions = controller.getFunctions();
         DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
-        
+
         try {
             Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this function?", ButtonType.YES, ButtonType.CANCEL);
             dialog.showAndWait();
@@ -135,8 +135,9 @@ public class AvailableFunctionsController implements Initializable {
             if (dialog.getResult() == ButtonType.YES) {
                 deleteFunctionCommand.execute();
             }
-        } catch (Exception ex) {}
-        
+        } catch (Exception ex) {
+        }
+
         refreshFunctions();
 
     }

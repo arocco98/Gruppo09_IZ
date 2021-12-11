@@ -15,7 +15,7 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class SwapCommandTest {
-    
+
     private ComplexStack stack;
     private Complex c1;
     private Complex c2;

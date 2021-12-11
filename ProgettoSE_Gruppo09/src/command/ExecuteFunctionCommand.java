@@ -48,10 +48,10 @@ public class ExecuteFunctionCommand implements Command {
         ArrayList<Complex> tmpStack = new ArrayList<>(stack);
         // creating a temporary variables for restoring the principal variables attribute if error occurs
         HashMap<Character, Complex> tmpVariables = new HashMap<>(variables.getVariables());
-        
+
         // creating the size of the variablesStack before the execution
         int tmpSize = savedVariables.size();
-        
+
         try { // executing the user-defined function
             FunctionCommand functionCommand = new FunctionCommand(function);
             functionCommand.execute();
@@ -62,8 +62,8 @@ public class ExecuteFunctionCommand implements Command {
             // restoring variables
             variables.getVariables().clear();
             variables.getVariables().putAll(tmpVariables);
-            
-            while(tmpSize < savedVariables.size()) {
+
+            while (tmpSize < savedVariables.size()) {
                 savedVariables.pop();
             }
             throw exception;

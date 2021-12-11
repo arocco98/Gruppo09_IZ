@@ -1,0 +1,42 @@
+package command;
+
+import exceptions.StackSizeException;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+import progettose_gruppo09.Complex;
+import progettose_gruppo09.ComplexStack;
+import progettose_gruppo09.Stack;
+
+/**
+ *
+ * @author gruppo_09
+ */
+public class ModCommandTest {
+
+    private ComplexStack stack;
+    private Complex c1;
+
+    @Before
+    public void setUp() {
+        stack = new ComplexStack();
+        c1 = new Complex(12, 4.9);
+    }
+
+    @Test(expected = StackSizeException.class)
+    public void testExecute1() throws StackSizeException, Exception {
+        System.out.println("Execute1");
+        ModCommand instance = new ModCommand(stack);
+        instance.execute();
+    }
+
+    @Test
+    public void testExecute2() throws StackSizeException, Exception {
+        System.out.println("Execute2");
+        stack.push(c1);
+        ModCommand instance = new ModCommand(stack);
+        instance.execute();
+        assertEquals(new Complex(12.9618671, 0.0), stack.peek());
+    }
+
+}
