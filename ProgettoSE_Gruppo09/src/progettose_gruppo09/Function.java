@@ -203,7 +203,7 @@ public class Function {
         }
 
         // This array of strings contains all the default operation names, except the operation on the variables
-        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over", "save", "restore"};
+        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over", "save", "restore", "mod", "arg", "pow", "exp", "log", "sin", "cos", "tan"};
         // checking if the function name is a default operation name
         for (String commandName : defaultCommandNames) {
             if (name.equals(commandName)) {

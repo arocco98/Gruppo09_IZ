@@ -1,11 +1,13 @@
 package command;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import exceptions.VariablesNameException;
+import java.util.Map.Entry;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import progettose_gruppo09.Complex;
+import progettose_gruppo09.Variables;
+import progettose_gruppo09.VariablesStack;
 
 /**
  *
@@ -13,23 +15,20 @@ import static org.junit.Assert.*;
  */
 public class SaveVariablesCommandTest {
 
-    public SaveVariablesCommandTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+    private Variables variables;
+    private VariablesStack savedVariables;
 
     @Before
-    public void setUp() {
-    }
+    public void setUp() throws VariablesNameException {
 
-    @After
-    public void tearDown() {
+        variables = new Variables();
+        variables.setVariable('a', new Complex(1.23, 4.56));
+        variables.setVariable('b', new Complex(0.0, 4.56));
+        variables.setVariable('c', new Complex(1.23, 0.0));
+        variables.setVariable('d', new Complex(42.0, 77.7));
+        variables.setVariable('e', new Complex(7.89, 10.11));
+
+        savedVariables = new VariablesStack();
     }
 
     /**
@@ -38,10 +37,18 @@ public class SaveVariablesCommandTest {
     @Test
     public void testExecute() throws Exception {
         System.out.println("execute");
-        SaveVariablesCommand instance = null;
+
+        SaveVariablesCommand instance = new SaveVariablesCommand(variables, savedVariables);
+
+        assertEquals(savedVariables.size(), 0);
         instance.execute();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(savedVariables.size(), 1);
+
+        // checking if all the values are equals
+        for (Entry<Character, Complex> entry : variables.getVariables().entrySet()) {
+            assertEquals(variables.getVariable(entry.getKey()), savedVariables.get(0).getVariable(entry.getKey()));
+        }
+
     }
 
 }
