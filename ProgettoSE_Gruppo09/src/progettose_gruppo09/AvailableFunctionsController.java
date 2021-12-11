@@ -110,7 +110,7 @@ public class AvailableFunctionsController implements Initializable {
         functions.addAll(controller.getFunctions());
 
     }
-    
+
     @FXML
     private void modifyFunction(ActionEvent event) {
         Function fc = functionsTable.getSelectionModel().getSelectedItem();
@@ -123,7 +123,7 @@ public class AvailableFunctionsController implements Initializable {
     @FXML
     private void deleteFunction(ActionEvent event) {
         Function selectedFunction = functionsTable.getSelectionModel().getSelectedItem();
-        
+
         ArrayList<Function> arrFunctions = controller.getFunctions();
         DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
         try {
@@ -131,7 +131,7 @@ public class AvailableFunctionsController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(AvailableFunctionsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         refreshFunctions();
 
     }

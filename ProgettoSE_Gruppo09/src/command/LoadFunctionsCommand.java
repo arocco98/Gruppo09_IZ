@@ -63,7 +63,6 @@ public class LoadFunctionsCommand implements Command {
 
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> stringSequences = new ArrayList<>();
-        
 
         while (line != null) {
 
@@ -72,13 +71,13 @@ public class LoadFunctionsCommand implements Command {
             stringSequences.add(line);
             line = lineReader.readLine();
         }
-        
-        for(String name: names) {
+
+        for (String name : names) {
             functions.add(new Function(name));
         }
-        
+
         int i = 0;
-        for(String stringSequence: stringSequences) {
+        for (String stringSequence : stringSequences) {
             functions.get(i).setSequenceString(stringSequence);
             i++;
         }

@@ -16,14 +16,13 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class InVariableCommandTest {
-    
+
     private Stack stack;
     private Variables variables;
     private Character variable;
     private Character variable2;
     private Complex complex;
-    
-    
+
     @Before
     public void setUp() {
         stack = new Stack();
@@ -46,7 +45,7 @@ public class InVariableCommandTest {
         Complex expectedResult = complex;
         // expected equals
         assertEquals(expectedResult, result);
-        
+
         stack.push(complex);
         InVariableCommand instance2 = new InVariableCommand(variable2, stack, variables);
         instance2.execute();
@@ -55,7 +54,7 @@ public class InVariableCommandTest {
         // expected equals
         assertEquals(expectedResult, result);
     }
-    
+
     /**
      * Test of testExecute method, of class InVariableCommand, when it throws an
      * VariablesException.
@@ -64,22 +63,22 @@ public class InVariableCommandTest {
     public void testExecuteThrowsException1() throws VariablesNameException, StackSizeException {
         System.out.println("testExecute throws exception VariablesException");
         stack.push(complex);
-        InVariableCommand instance = new InVariableCommand('A',stack, variables);
+        InVariableCommand instance = new InVariableCommand('A', stack, variables);
         instance.execute();
     }
-    
+
     /**
      * Test of testExecute method, of class InVariableCommand, when it throws an
      * StackSizeException.
-     * 
+     *
      * @throws VariablesNameException
-     * @throws StackSizeException 
+     * @throws StackSizeException
      */
     @Test(expected = StackSizeException.class)
     public void testExecuteThrowsException2() throws VariablesNameException, StackSizeException {
         System.out.println("testExecute throws exception StackSizeException");
-        InVariableCommand instance = new InVariableCommand('a',stack, variables);
+        InVariableCommand instance = new InVariableCommand('a', stack, variables);
         instance.execute();
     }
-    
+
 }

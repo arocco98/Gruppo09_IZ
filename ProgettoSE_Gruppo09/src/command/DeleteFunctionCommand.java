@@ -10,17 +10,16 @@ import progettose_gruppo09.Function;
  * @author gruppo09
  */
 public class DeleteFunctionCommand implements Command {
-    
+
     private Function selectedFunction;
     private ArrayList<Function> functions;
 
     public DeleteFunctionCommand(Function selectedFunction, ArrayList<Function> functions) {
-        
+
         this.selectedFunction = selectedFunction;
         this.functions = functions;
-        
-    }
 
+    }
 
     @Override
     public void execute() throws Exception {
@@ -43,9 +42,8 @@ public class DeleteFunctionCommand implements Command {
                 }
             }
         }
-        
+
         functions.remove(selectedFunction);
-        
 
     }
 

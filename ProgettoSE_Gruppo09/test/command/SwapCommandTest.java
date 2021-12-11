@@ -15,7 +15,7 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class SwapCommandTest {
-    
+
     private Stack stack;
     private Complex c1;
     private Complex c2;
@@ -37,6 +37,7 @@ public class SwapCommandTest {
         SwapCommand instance = new SwapCommand(stack);
         instance.execute();
     }
+
     /**
      * Test of execute method, of class SwapCommand.
      */
@@ -50,5 +51,5 @@ public class SwapCommandTest {
         assertEquals(c1, stack.pop());
         assertEquals(c2, stack.pop());
     }
-    
+
 }

@@ -37,16 +37,16 @@ public class DropCommandTest {
     @Test
     public void testExecute() throws StackSizeException {
         System.out.println("Execute with non-empty stack");
-        
+
         DropCommand instance = new DropCommand(this.stack);
-        
+
         // only one element in the stack
         Complex insertedComplex1 = new Complex(4.0, -2.0);
         stack.push(insertedComplex1);
         int tmpSize = stack.size();
         instance.execute();
         assertEquals(stack.size(), tmpSize - 1);
-        
+
         // two elements in the stack
         Complex insertedComplex2 = new Complex(2.0, 4.0);
         stack.push(insertedComplex1);

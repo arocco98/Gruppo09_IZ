@@ -38,7 +38,8 @@ public class Variables {
      * @param character The key of the value to get.
      * @return The variable associated to the key or null, if the variable was
      * not instantiated.
-     * @throws VariablesNameException If the character is not between 'a' and 'z'.
+     * @throws VariablesNameException If the character is not between 'a' and
+     * 'z'.
      */
     public Complex getVariable(Character character) throws VariablesNameException {
         if (character >= 'a' && character <= 'z') {
@@ -54,7 +55,8 @@ public class Variables {
      *
      * @param character The character to whom associate the variable.
      * @param complex The variable to associate.
-     * @throws VariablesNameException If the character is not between 'a' and 'z'.
+     * @throws VariablesNameException If the character is not between 'a' and
+     * 'z'.
      */
     public void setVariable(Character character, Complex complex) throws VariablesNameException {
         if (character >= 'a' && character <= 'z') {

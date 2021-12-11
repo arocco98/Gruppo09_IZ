@@ -30,15 +30,14 @@ public class ModifyFunctionController implements Initializable {
     // Will hold a reference to the first controller, allowing us to access the methods found there.
     private AvailableFunctionsController controller;
     private Function f;
-    
+
     @FXML
     private Label errorLbl;
     @FXML
     private TextField nameTxt;
     @FXML
     private TextField sequenceTxt;
-    
-        
+
     public ModifyFunctionController(AvailableFunctionsController controller, Function f) {
         this.controller = controller;
         this.f = f;
@@ -63,7 +62,7 @@ public class ModifyFunctionController implements Initializable {
             Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Show the stage that was loaded in the constructor
      */
@@ -78,11 +77,11 @@ public class ModifyFunctionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        this.nameTxt.setText(this.f.getName());  
-        this.sequenceTxt.setText(this.f.getSequenceString()); 
-        
-    }    
+
+        this.nameTxt.setText(this.f.getName());
+        this.sequenceTxt.setText(this.f.getSequenceString());
+
+    }
 
     /**
      * Shows in the GUI the string passed as argument and cleans the text field.
@@ -92,17 +91,17 @@ public class ModifyFunctionController implements Initializable {
     private void showError(String errorString) {
         errorLbl.textProperty().set(errorString);
     }
-    
+
     @FXML
     private void cancelFunction(ActionEvent event) {
-        
+
         this.thisStage.close();
-        
+
     }
 
     @FXML
     private void modifyFunction(ActionEvent event) {
-        
+
         try {
             errorLbl.setText("");
             f.setSequenceString(this.sequenceTxt.getText());
@@ -112,5 +111,5 @@ public class ModifyFunctionController implements Initializable {
         }
 
     }
-    
+
 }

@@ -49,7 +49,7 @@ public class SqrtCommandTest {
         stack.push(c1);
         SqrtCommand instance = new SqrtCommand(stack);
         instance.execute();
-        assertEquals(new Complex(3.5328365, 0.6934937), stack.peek());
+        assertEquals(new Complex(3.5328365, 0.6934938), stack.peek());
     }
 
 }

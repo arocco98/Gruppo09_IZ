@@ -25,7 +25,7 @@ public class DeleteFunctionCommandTest {
 
         functions = new ArrayList<>();
         Function.setFunctions(this.functions);
-        
+
         fc1 = new Function("op1", "+ - ");
         functions.add(fc1);
 
