@@ -365,6 +365,7 @@ public class Function {
 
     /**
      * Getter method of sequenceCommands attribute.
+     *
      * @return The sequenceCommands attribute.
      */
     public ArrayList<Command> getSequenceCommands() {
@@ -373,6 +374,7 @@ public class Function {
 
     /**
      * This method generate a string representation of the object.
+     *
      * @return The string representation of the object.
      */
     public String toString() {
@@ -380,7 +382,9 @@ public class Function {
     }
 
     /**
-     * Equals method of the Function class, it checks if the name of the object passed as argument is equals to the name of the instance.
+     * Equals method of the Function class, it checks if the name of the object
+     * passed as argument is equals to the name of the instance.
+     *
      * @param obj The object to check if it is equal.
      * @return True if the name are equals, otherwise false.
      */

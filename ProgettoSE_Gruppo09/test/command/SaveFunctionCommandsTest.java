@@ -59,7 +59,7 @@ public class SaveFunctionCommandsTest {
         sequenceCommands2.add(sub);
         sequenceCommands2.add(sum);
         sequenceCommands2.add(prod);
-        
+
         Function.setFunctions(functions);
         Function.setStack(stack);
     }

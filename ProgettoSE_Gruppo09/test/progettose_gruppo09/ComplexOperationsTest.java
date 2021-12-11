@@ -196,7 +196,7 @@ public class ComplexOperationsTest {
         assertEquals(new Complex(-1.16, -0.88), ComplexOperations.complexDiv(new Complex(7.0, -2.0), new Complex(-3.0, 4.0)));
 
     }
-    
+
     /**
      * Test of sqrt method, of class Complex.
      */
@@ -300,7 +300,5 @@ public class ComplexOperationsTest {
         assertEquals(0.0, ComplexOperations.arg(new Complex(0.0, 0.0)), 0);
 
     }
-    
-    
 
 }

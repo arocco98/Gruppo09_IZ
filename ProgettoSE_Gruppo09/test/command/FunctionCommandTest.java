@@ -78,13 +78,13 @@ public class FunctionCommandTest {
 
         Function function1 = new Function("function1", "+ - dup dup >a");
         functions.add(function1);
-        
+
         // testing using a user-defined function in the string
         String name = "function2";
         String sequenceString = "drop <i function1 +";
         Function function2 = new Function(name, sequenceString);
         Function.setFunctions(functions);
-       
+
         FunctionCommand instance = new FunctionCommand(function2);
         instance.execute();
 

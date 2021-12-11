@@ -21,15 +21,15 @@ public class ComplexOperations {
      * @return Complex number which is the sum between operand a and operand b
      */
     public static Complex complexSum(Complex a, Complex b) {
-        
+
         double real = a.getReal() + b.getReal();
         BigDecimal bdr = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP);
         double re = bdr.doubleValue();
-        
+
         double imaginary = a.getImaginary() + b.getImaginary();
         BigDecimal bdi = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP);
         double imm = bdi.doubleValue();
-        
+
         return new Complex(re, imm);
     }
 
@@ -44,11 +44,11 @@ public class ComplexOperations {
      * operand b
      */
     public static Complex complexSub(Complex a, Complex b) {
-        
+
         double real = a.getReal() - b.getReal();
         BigDecimal bdr = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP);
         double re = bdr.doubleValue();
-        
+
         double imaginary = a.getImaginary() - b.getImaginary();
         BigDecimal bdi = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP);
         double imm = bdi.doubleValue();
@@ -72,11 +72,11 @@ public class ComplexOperations {
         double real = ((a.getReal() * b.getReal()) - (a.getImaginary() * b.getImaginary()));
         BigDecimal bdr = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP);
         double re = bdr.doubleValue();
-        
+
         double imaginary = ((a.getReal() * b.getImaginary()) + (a.getImaginary() * b.getReal()));
         BigDecimal bdi = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP);
         double imm = bdi.doubleValue();
-        
+
         return new Complex(re, imm);
 
     }

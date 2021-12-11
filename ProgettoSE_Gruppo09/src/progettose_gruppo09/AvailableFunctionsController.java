@@ -1,10 +1,6 @@
 package progettose_gruppo09;
 
-import command.Command;
 import command.DeleteFunctionCommand;
-import command.FunctionCommand;
-import exceptions.FunctionNameAlreadyExistsException;
-import exceptions.NoMatchFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -105,12 +101,21 @@ public class AvailableFunctionsController implements Initializable {
         deleteButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
     }
 
+    /**
+     * Refreshes the user-defined functions into the current list
+     */
     private void refreshFunctions() {
         functions.clear();
         functions.addAll(controller.getFunctions());
 
     }
-    
+
+    /**
+     * Opens a new window in which modify the sequenceString of the selected
+     * function
+     *
+     * @param event Button "Modify" clicked
+     */
     @FXML
     private void modifyFunction(ActionEvent event) {
         Function fc = functionsTable.getSelectionModel().getSelectedItem();
@@ -120,10 +125,17 @@ public class AvailableFunctionsController implements Initializable {
         refreshFunctions();
     }
 
+    /**
+     * Deletes the selected function
+     *
+     * @param event Button "Delete" clicked
+     */
     @FXML
     private void deleteFunction(ActionEvent event) {
+
+        //takes the selected function to be deleted
         Function selectedFunction = functionsTable.getSelectionModel().getSelectedItem();
-        
+
         ArrayList<Function> arrFunctions = controller.getFunctions();
         DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
         try {
@@ -131,8 +143,7 @@ public class AvailableFunctionsController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(AvailableFunctionsController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        refreshFunctions();
 
+        refreshFunctions();
     }
 }

@@ -54,7 +54,9 @@ public class SumVariableCommand implements Command {
     }
 
     /**
-     * Equals method, it checks if the object passed as parameter is equal to the instance.
+     * Equals method, it checks if the object passed as parameter is equal to
+     * the instance.
+     *
      * @param obj The object to check if it is equal.
      * @return True if the objects are equals, otherwise false.
      */

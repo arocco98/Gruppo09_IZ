@@ -42,7 +42,7 @@ public class InsertFunctionCommandTest {
             variables.setVariable('z', new Complex(3, 0.0));
         } catch (VariablesNameException ex) {
         }
-        
+
         Function.setStack(this.stack);
         Function.setVariables(this.variables);
         Function.setFunctions(this.functions);
@@ -55,12 +55,12 @@ public class InsertFunctionCommandTest {
     @Test
     public void testExecute() throws Exception {
         System.out.println("Execute");
-        
+
         Function function1 = new Function("function1", "+ - drop");
         functions.add(function1);
         Function function2 = new Function("function2", "drop drop");
         functions.add(function2);
-        
+
         Function function3 = new Function("function3", "* * <a");
 
         // adding a new FunctionCommand with valid name and sequence command string

@@ -14,11 +14,11 @@ import progettose_gruppo09.Variables;
  * @author gruppo09
  */
 public class ExecuteFunctionCommandTest {
-    
+
     private Stack stack = null;
     private Variables variables = null;
     private ArrayList<Function> functions;
-    
+
     @Before
     public void setUp() {
         // instantiating stack and variables attributes
@@ -51,18 +51,19 @@ public class ExecuteFunctionCommandTest {
     @Test
     public void testExecute() throws Exception {
         System.out.println("execute");
-        
+
         ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ drop dup dup"), stack, variables);
         instance.execute();
     }
-    
+
     /**
-     * Test of execute method, of class ExecuteFunctionCommand, when it throws an exception.
+     * Test of execute method, of class ExecuteFunctionCommand, when it throws
+     * an exception.
      */
-    @Test (expected = Exception.class)
+    @Test(expected = Exception.class)
     public void testExecuteWhenItThrowsException() throws Exception {
         System.out.println("execute when it throws a Exception");
-        
+
         ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ - * / drop sqrt"), stack, variables);
         instance.execute();
     }

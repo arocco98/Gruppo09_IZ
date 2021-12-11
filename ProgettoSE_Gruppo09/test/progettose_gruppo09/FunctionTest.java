@@ -36,7 +36,7 @@ public class FunctionTest {
         Function.setFunctions(functions);
         Function.setStack(stack);
         Function.setVariables(variables);
-        
+
         // populating stack and variables attributes
         stack.add(new Complex(1.23, 4.56));
         stack.add(new Complex(1.23, 0.0));
@@ -58,7 +58,7 @@ public class FunctionTest {
     @Test
     public void testGenerateCommands() throws Exception {
         System.out.println("GenerateCommands");
-        
+
         String sequenceString = "+ - <a drop";
         ArrayList<Command> expectedCommands = new ArrayList<>();
         Command command1 = new SumCommand(stack);
@@ -69,31 +69,32 @@ public class FunctionTest {
         expectedCommands.add(command2);
         expectedCommands.add(command3);
         expectedCommands.add(command4);
-        
+
         Function instance = new Function("function");
         instance.generateCommands(sequenceString);
-        
+
         ArrayList<Command> generatedCommands = instance.getSequenceCommands();
         // checking if the just created array has the size we expect
         assertTrue(generatedCommands.size() == expectedCommands.size());
         // checking if all the elements of the arrays are equals to each other
         assertEquals(generatedCommands, expectedCommands);
-        
+
     }
 
     /**
-     * Test of generateCommands method, of class Function, when it throws a NoMatchFoundException.
+     * Test of generateCommands method, of class Function, when it throws a
+     * NoMatchFoundException.
      */
-    @Test (expected = NoMatchFoundException.class)
+    @Test(expected = NoMatchFoundException.class)
     public void testGenerateCommandsWhenThrowsException() throws Exception {
         System.out.println("GenerateCommands when it throws a NoMatchFoundException");
-        
+
         String sequenceString = "+ - notExistingFunction drop";
-        
+
         Function instance = new Function("function");
-        instance.generateCommands(sequenceString); 
+        instance.generateCommands(sequenceString);
     }
-    
+
     /**
      * Test of isAValidName method, of class Function.
      */
@@ -105,25 +106,25 @@ public class FunctionTest {
         boolean expResult = false;
         boolean result = Function.isAValidName(name);
         assertEquals(expResult, result);
-        
+
         // expected false because the name contains more than one word
         name = "two words";
         expResult = false;
         result = Function.isAValidName(name);
         assertEquals(expResult, result);
-        
+
         // expected false because the name is a basic operation name
         name = "drop";
         expResult = false;
         result = Function.isAValidName(name);
         assertEquals(expResult, result);
-        
+
         // expected false because the name is a basic operation name
         name = "<a";
         expResult = false;
         result = Function.isAValidName(name);
         assertEquals(expResult, result);
-        
+
         // expected true because the name is a valid function name
         name = "function";
         expResult = true;
@@ -137,7 +138,7 @@ public class FunctionTest {
     @Test
     public void testGetName() throws FunctionNameAlreadyExistsException {
         System.out.println("getName");
-        
+
         Function instance = new Function("function");
         String expResult = "function";
         String result = instance.getName();
@@ -150,7 +151,7 @@ public class FunctionTest {
     @Test
     public void testGetSequenceString() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("getSequenceString");
-        
+
         Function instance = new Function("function", "clear 3.14 + sqrt");
         String expResult = "clear 3.14 + sqrt";
         String result = instance.getSequenceString();
@@ -163,7 +164,7 @@ public class FunctionTest {
     @Test
     public void testSetSequenceString() throws Exception {
         System.out.println("setSequenceString");
-        
+
         String sequenceString = "+ - / *";
         Function instance = new Function("function", "+ -");
         // expected not equals because the instance has the operations "+ -"
@@ -175,31 +176,32 @@ public class FunctionTest {
 
     /**
      * Test of getSequenceCommands method, of class Function.
+     *
      * @throws exceptions.FunctionNameAlreadyExistsException
      * @throws exceptions.NoMatchFoundException
      */
     @Test
     public void testGetSequenceCommands() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("getSequenceCommands");
-        
+
         Function instance = new Function("function", "+ - * /");
         ArrayList<Command> expResult = new ArrayList<>();
         expResult.add(new SumCommand(stack));
         expResult.add(new SubCommand(stack));
         expResult.add(new ProdCommand(stack));
         expResult.add(new DivCommand(stack));
-        
+
         ArrayList<Command> result = instance.getSequenceCommands();
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of toString method, of class Function.
      */
     @Test
     public void testToString() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("toString");
-        
+
         Function instance = new Function("function", "<i -b over dup");
         String expResult = "function";
         String result = instance.toString();
@@ -208,21 +210,22 @@ public class FunctionTest {
 
     /**
      * Test of equals method, of class Function.
+     *
      * @throws exceptions.FunctionNameAlreadyExistsException
      * @throws exceptions.NoMatchFoundException
      */
     @Test
     public void testEquals() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         System.out.println("equals");
-        
+
         Function instance = new Function("function1", "+ +z * drop");
         Function other = new Function("differentFunction", "clear 1.23+4.56j dup *");
-        
+
         // expecting false because the other function has a different name
         boolean expResult = false;
         boolean result = instance.equals(other);
         assertEquals(expResult, result);
-        
+
         // expected true because we are comparing the same object
         expResult = true;
         result = instance.equals(instance);
