@@ -4,7 +4,7 @@ import exceptions.NoMatchFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import progettose_gruppo09.Complex;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  * This class implements Command interface and execute the insertion of a
@@ -15,17 +15,17 @@ import progettose_gruppo09.Stack;
  */
 public class InsertCommand implements Command {
 
-    Stack stack;
+    ComplexStack stack;
     String patternString;
 
     /**
-     * Constructor of InsertCommand class, it takes two parameters: a Stack
-     * object and a String object.
+     * Constructor of InsertCommand class, it takes two parameters: a ComplexStack
+ object and a String object.
      *
      * @param stack The stack to push the element into.
      * @param patternString The string to check.
      */
-    public InsertCommand(Stack stack, String patternString) {
+    public InsertCommand(ComplexStack stack, String patternString) {
         this.stack = stack;
         this.patternString = patternString;
     }

@@ -4,7 +4,7 @@ import exceptions.OperationDenied;
 import exceptions.StackSizeException;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.ComplexOperations;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -12,9 +12,9 @@ import progettose_gruppo09.Stack;
  */
 public class LogCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
-    public LogCommand(Stack stack) {
+    public LogCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class SqrtCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new SqrtCommand object that operates on a stack
      *
      * @param stack The stack on which SqrtCommand operates
      */
-    public SqrtCommand(Stack stack) {
+    public SqrtCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

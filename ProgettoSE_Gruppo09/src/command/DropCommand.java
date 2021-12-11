@@ -1,7 +1,7 @@
 package command;
 
 import exceptions.StackSizeException;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  * This class implements Command interface and removes the last element (i.e.
@@ -11,7 +11,7 @@ import progettose_gruppo09.Stack;
  */
 public class DropCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new DropCommand object that removes the last element in the
@@ -19,7 +19,7 @@ public class DropCommand implements Command {
      *
      * @param stack The stack on which DropCommand operates
      */
-    public DropCommand(Stack stack) {
+    public DropCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

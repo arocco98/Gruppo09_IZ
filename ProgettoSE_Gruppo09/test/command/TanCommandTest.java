@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -14,12 +14,12 @@ import progettose_gruppo09.Stack;
  */
 public class TanCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Complex c1;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         c1 = new Complex(12, 4.9);
     }
 

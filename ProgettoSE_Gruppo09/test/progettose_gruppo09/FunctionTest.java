@@ -22,14 +22,14 @@ import static org.junit.Assert.*;
 public class FunctionTest {
 
     private ArrayList<Function> functions = null;
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private Variables variables = null;
 
     @Before
     public void setUp() {
         // instantiating functions, stack and variables attributes
         functions = new ArrayList<>();
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
 
         // setting static variables

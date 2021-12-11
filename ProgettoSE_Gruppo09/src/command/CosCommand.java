@@ -3,7 +3,7 @@ package command;
 import exceptions.StackSizeException;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.ComplexOperations;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -11,9 +11,9 @@ import progettose_gruppo09.Stack;
  */
 public class CosCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
-    public CosCommand(Stack stack) {
+    public CosCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

@@ -2,7 +2,7 @@ package command;
 
 import exceptions.StackSizeException;
 import progettose_gruppo09.Complex;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  * This class implements Command interface and execute the inversion sign
@@ -12,14 +12,14 @@ import progettose_gruppo09.Stack;
  */
 public class InversionSignCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new InversionSignCommand object that operates on a stack.
      *
      * @param stack The stack on which InversionSignCommand operates.
      */
-    public InversionSignCommand(Stack stack) {
+    public InversionSignCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

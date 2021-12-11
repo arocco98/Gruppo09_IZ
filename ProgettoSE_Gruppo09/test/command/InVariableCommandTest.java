@@ -16,8 +16,8 @@ import progettose_gruppo09.*;
  * @author gruppo09
  */
 public class InVariableCommandTest {
-
-    private Stack stack;
+    
+    private ComplexStack stack;
     private Variables variables;
     private Character variable;
     private Character variable2;
@@ -25,7 +25,7 @@ public class InVariableCommandTest {
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         variable = 'a';
         variable2 = 'i';

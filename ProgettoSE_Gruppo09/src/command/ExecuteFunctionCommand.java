@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
+import progettose_gruppo09.VariablesStack;
 
 /**
  * This class implements Command interface and performs the execution of the
@@ -16,8 +17,9 @@ import progettose_gruppo09.Variables;
 public class ExecuteFunctionCommand implements Command {
 
     private Function function;
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
+    private VariablesStack savedVariables;
 
     /**
      * Constructor of ExecuteFunctionCommand class.
@@ -25,11 +27,13 @@ public class ExecuteFunctionCommand implements Command {
      * @param function The function command to execute.
      * @param stack The stack to restore if errors occur.
      * @param variables The variables to restore if errors occur.
+     * @param savedVariables The stack variables to restore if errors occur.
      */
-    public ExecuteFunctionCommand(Function function, Stack stack, Variables variables) {
+    public ExecuteFunctionCommand(Function function, ComplexStack stack, Variables variables, VariablesStack savedVariables) {
         this.function = function;
         this.stack = stack;
         this.variables = variables;
+        this.savedVariables = savedVariables;
     }
 
     /**
@@ -44,7 +48,10 @@ public class ExecuteFunctionCommand implements Command {
         ArrayList<Complex> tmpStack = new ArrayList<>(stack);
         // creating a temporary variables for restoring the principal variables attribute if error occurs
         HashMap<Character, Complex> tmpVariables = new HashMap<>(variables.getVariables());
-
+        
+        // creating the size of the variablesStack before the execution
+        int tmpSize = savedVariables.size();
+        
         try { // executing the user-defined function
             FunctionCommand functionCommand = new FunctionCommand(function);
             functionCommand.execute();
@@ -55,6 +62,10 @@ public class ExecuteFunctionCommand implements Command {
             // restoring variables
             variables.getVariables().clear();
             variables.getVariables().putAll(tmpVariables);
+            
+            while(tmpSize < savedVariables.size()) {
+                savedVariables.pop();
+            }
             throw exception;
         }
     }

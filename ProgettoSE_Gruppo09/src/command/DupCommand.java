@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class DupCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new DupCommand object that operates on a stack
      *
      * @param stack The stack on which ClearCommand operates
      */
-    public DupCommand(Stack stack) {
+    public DupCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
  */
 public class SumVariableCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character char1;
     private Complex c1;
@@ -20,7 +20,7 @@ public class SumVariableCommandTest {
 
     @Before
     public void setUp() throws VariablesNameException {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         char1 = 'f';
         c1 = new Complex(5.2, 2.6);

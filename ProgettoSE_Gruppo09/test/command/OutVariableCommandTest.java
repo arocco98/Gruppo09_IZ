@@ -16,14 +16,14 @@ import progettose_gruppo09.*;
  */
 public class OutVariableCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character variable;
     private Complex complex;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         variable = 'a';
         complex = new Complex(1.0, 0.1);

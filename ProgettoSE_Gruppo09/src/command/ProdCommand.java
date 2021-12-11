@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class ProdCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new ProdCommand object that operates on a stack
      *
      * @param stack The stack on which DivCommand operates
      */
-    public ProdCommand(Stack stack) {
+    public ProdCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

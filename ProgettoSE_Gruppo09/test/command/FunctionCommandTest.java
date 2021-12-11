@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
 
 /**
@@ -18,14 +18,14 @@ import progettose_gruppo09.Variables;
  */
 public class FunctionCommandTest {
 
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private Variables variables = null;
     private ArrayList<Function> functions;
 
     @Before
     public void setUp() {
         // instantiating stack and variables attributes
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         functions = new ArrayList<>();
 

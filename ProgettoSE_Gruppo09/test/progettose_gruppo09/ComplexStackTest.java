@@ -7,17 +7,17 @@ import static org.junit.Assert.*;
  *
  * @author gruppo09
  */
-public class StackTest {
+public class ComplexStackTest {
 
-    private Stack instance;
+    private ComplexStack instance;
 
     @Before
     public void setUp() {
-        instance = new Stack();
+        instance = new ComplexStack();
     }
 
     /**
-     * Test of Push method, of class Stack.
+     * Test of Push method, of class ComplexStack.
      */
     @Test
     public void testPush() {
@@ -28,7 +28,7 @@ public class StackTest {
     }
 
     /**
-     * Test of Pop method, of class Stack.
+     * Test of Pop method, of class ComplexStack.
      */
     @Test
     public void testPop() {
@@ -45,7 +45,7 @@ public class StackTest {
     }
 
     /**
-     * Test of Peek method, of class Stack.
+     * Test of Peek method, of class ComplexStack.
      */
     @Test
     public void testPeek() {
@@ -62,7 +62,7 @@ public class StackTest {
     }
 
     /**
-     * Test of toString method, of class Stack.
+     * Test of toString method, of class ComplexStack.
      */
     @Test
     public void testToString() {

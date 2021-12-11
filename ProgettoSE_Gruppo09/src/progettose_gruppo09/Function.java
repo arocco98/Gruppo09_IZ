@@ -12,6 +12,8 @@ import command.InversionSignCommand;
 import command.OutVariableCommand;
 import command.OverCommand;
 import command.ProdCommand;
+import command.RestoreVariablesCommand;
+import command.SaveVariablesCommand;
 import command.SqrtCommand;
 import command.SubCommand;
 import command.SubVariableCommand;
@@ -36,8 +38,9 @@ public class Function {
     private String sequenceString;
     private ArrayList<Command> sequenceCommands;
     static private ArrayList<Function> functions = new ArrayList<>();
-    static private Stack stack = new Stack();
+    static private ComplexStack stack = new ComplexStack();
     static private Variables variables = new Variables();
+    static private VariablesStack variablesStack = new VariablesStack();
 
     /**
      * Constructor of class Function, it throws a
@@ -91,7 +94,7 @@ public class Function {
      *
      * @param stack The new value of stack attribute.
      */
-    public static void setStack(Stack stack) {
+    public static void setStack(ComplexStack stack) {
         Function.stack = stack;
     }
 
@@ -102,6 +105,10 @@ public class Function {
      */
     public static void setVariables(Variables variables) {
         Function.variables = variables;
+    }
+
+    public static void setVariablesStack(VariablesStack variablesStack) {
+        Function.variablesStack = variablesStack;
     }
 
     /**
@@ -150,6 +157,10 @@ public class Function {
                 commands.add(new SumVariableCommand(stack, variables, string.charAt(1)));
             } else if (string.matches("-[a-z]$")) { // the string is a subVariable operation
                 commands.add(new SubVariableCommand(stack, variables, string.charAt(1)));
+            } else if (string.matches("save$")) { // the string is a saveVariables operation
+                commands.add(new SaveVariablesCommand(variables, variablesStack));
+            } else if (string.matches("restore$")) { // the string is a restoreVariables operation
+                commands.add(new RestoreVariablesCommand(variables, variablesStack));
             } else if (isAValidComplex(string)) { // the string is a insertion operation
                 commands.add(new InsertCommand(stack, string));
             } else if (isAFunction(string)) { // the string is a user-defined function
@@ -192,7 +203,7 @@ public class Function {
         }
 
         // This array of strings contains all the default operation names, except the operation on the variables
-        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over"};
+        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over", "save", "restore"};
         // checking if the function name is a default operation name
         for (String commandName : defaultCommandNames) {
             if (name.equals(commandName)) {

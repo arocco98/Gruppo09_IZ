@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
 
 /**
@@ -21,7 +21,7 @@ public class LoadFunctionsCommandTest {
 
     private ArrayList<Function> functions;
     private ArrayList<Function> functions2;
-    private Stack stack;
+    private ComplexStack stack;
     private Complex n1;
     private Complex n2;
     private Complex n3;
@@ -39,7 +39,7 @@ public class LoadFunctionsCommandTest {
     public void setUp() {
         functions = new ArrayList<>();
         functions2 = new ArrayList<>();
-        stack = new Stack();
+        stack = new ComplexStack();
         n1 = new Complex(1.0, 1.0);
         n2 = new Complex(2.0, 2.0);
         n3 = new Complex(1.0, 1.0);
