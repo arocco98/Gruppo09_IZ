@@ -370,8 +370,8 @@ public class Function {
      * sequence.
      */
     public void setSequenceString(String sequenceString) throws NoMatchFoundException {
-        generateCommands(sequenceString);
-        this.sequenceString = sequenceString;
+        generateCommands(sequenceString.trim());
+        this.sequenceString = sequenceString.trim().replaceAll("\\s+", " ");
     }
 
     /**
