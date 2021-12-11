@@ -11,13 +11,13 @@ import progettose_gruppo09.*;
  */
 public class ClearCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Complex c1;
     private Complex c2;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         c1 = new Complex(12, 4.9);
         c2 = new Complex(1.5, 3.1);
         stack.push(c1);

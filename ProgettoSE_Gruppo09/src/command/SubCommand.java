@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class SubCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new SubCommand object that operates on a stack
      *
      * @param stack The stack on which SubCommand operates
      */
-    public SubCommand(Stack stack) {
+    public SubCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

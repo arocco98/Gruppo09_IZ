@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 import command.Command;
+import command.DeleteFunctionCommand;
 import command.FunctionCommand;
 import exceptions.FunctionNameAlreadyExistsException;
 import exceptions.NoMatchFoundException;
@@ -17,7 +18,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -109,7 +112,7 @@ public class AvailableFunctionsController implements Initializable {
         functions.addAll(controller.getFunctions());
 
     }
-    
+
     @FXML
     private void modifyFunction(ActionEvent event) {
         Function fc = functionsTable.getSelectionModel().getSelectedItem();
@@ -122,26 +125,19 @@ public class AvailableFunctionsController implements Initializable {
     @FXML
     private void deleteFunction(ActionEvent event) {
         Function selectedFunction = functionsTable.getSelectionModel().getSelectedItem();
-        ArrayList<Command> arr = selectedFunction.getSequenceCommands();
-        String[] splitter;
+        ArrayList<Function> arrFunctions = controller.getFunctions();
+        DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
+        
+        try {
+            Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this function?", ButtonType.YES, ButtonType.CANCEL);
+            dialog.showAndWait();
 
-        for (Function function : controller.getFunctions()) {
-            if (function.getSequenceCommands().contains(new FunctionCommand(selectedFunction))) {
-                splitter = function.getSequenceString().split("\\s");
-                for (int i = 0; i < splitter.length; i++) {
-                    if (selectedFunction.getName().compareTo(splitter[i]) == 0) {
-                        splitter[i] = selectedFunction.getSequenceString();
-                    }
-                }
-                try {
-                    function.setSequenceString(String.join(" ", splitter));
-                } catch (NoMatchFoundException ex) {
-                }
+            if (dialog.getResult() == ButtonType.YES) {
+                deleteFunctionCommand.execute();
             }
-        }
-        controller.getFunctions().remove(selectedFunction);
-        functions.clear();
-        functions.addAll(controller.getFunctions());
+        } catch (Exception ex) {}
+        
+        refreshFunctions();
 
     }
 }

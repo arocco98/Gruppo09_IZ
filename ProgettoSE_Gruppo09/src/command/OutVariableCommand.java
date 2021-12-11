@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
  */
 public class OutVariableCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character variable;
 
@@ -24,7 +24,7 @@ public class OutVariableCommand implements Command {
      * @param stack stack on which InVariableCommand operates
      * @param variables variables on which InVariableCommand operates
      */
-    public OutVariableCommand(Stack stack, Variables variables, Character variable) {
+    public OutVariableCommand(ComplexStack stack, Variables variables, Character variable) {
         this.stack = stack;
         this.variables = variables;
         this.variable = variable;

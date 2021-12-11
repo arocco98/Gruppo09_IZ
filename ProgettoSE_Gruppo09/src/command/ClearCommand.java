@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class ClearCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new ClearCommand object that operates on a stack
      *
      * @param stack The stack on which ClearCommand operates
      */
-    public ClearCommand(Stack stack) {
+    public ClearCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

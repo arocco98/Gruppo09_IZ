@@ -17,12 +17,12 @@ import progettose_gruppo09.*;
  */
 public class SqrtCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Complex c1;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         c1 = new Complex(12, 4.9);
     }
 

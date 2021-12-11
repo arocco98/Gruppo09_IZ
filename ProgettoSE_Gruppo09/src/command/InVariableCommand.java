@@ -14,7 +14,7 @@ import progettose_gruppo09.*;
 public class InVariableCommand implements Command {
 
     private Character variable;
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
 
     /**
@@ -25,7 +25,7 @@ public class InVariableCommand implements Command {
      * @param stack stack on which InVariableCommand operates
      * @param variables variables on which InVariableCommand operates
      */
-    public InVariableCommand(Character variable, Stack stack, Variables variables) {
+    public InVariableCommand(Character variable, ComplexStack stack, Variables variables) {
         this.variable = variable;
         this.stack = stack;
         this.variables = variables;

@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class SwapCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new SwapCommand object that operates on a stack
      *
      * @param stack The stack on which SwapCommand operates
      */
-    public SwapCommand(Stack stack) {
+    public SwapCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

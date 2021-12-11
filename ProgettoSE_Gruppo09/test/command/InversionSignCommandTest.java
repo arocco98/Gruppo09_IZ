@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -13,11 +13,11 @@ import progettose_gruppo09.Stack;
  */
 public class InversionSignCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
     }
 
     /**

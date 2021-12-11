@@ -18,6 +18,8 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -131,7 +133,7 @@ public class FXMLDocumentController implements Initializable {
     private Button executeFunctionButton;
 
     // elements stack
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private ObservableList<Complex> observableStack = null;
     private ObservableList<Entry<Character, Complex>> observableCharacterList = null;
 
@@ -150,6 +152,7 @@ public class FXMLDocumentController implements Initializable {
 
     // variables 
     private Variables variables = new Variables();
+    private VariablesStack savedVariables = new VariablesStack();
 
     // user-defined functions
     private ArrayList<Function> functions = null;
@@ -175,7 +178,7 @@ public class FXMLDocumentController implements Initializable {
      * all the elements.
      */
     private void initializeStack() {
-        stack = new Stack();
+        stack = new ComplexStack();
         elementList.setPlaceholder(new Label("No value present"));
         stackColumn.setCellValueFactory(new PropertyValueFactory<>("complex"));
         stackColumn.setSortable(false);
@@ -193,6 +196,7 @@ public class FXMLDocumentController implements Initializable {
         observableCharacterList.sort(null);
         variablesComboBox.setItems(observableCharacterList);
         variablesComboBox.getSelectionModel().selectFirst();
+        Function.setVariablesStack(savedVariables);
     }
 
     /**
@@ -251,7 +255,7 @@ public class FXMLDocumentController implements Initializable {
         });
     }
 
-    public Stack getStack() {
+    public ComplexStack getStack() {
         return stack;
     }
 
@@ -430,9 +434,15 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void clear(ActionEvent event) {
         try {
-            clearCommand.execute();
+            Alert dialog = new Alert(AlertType.CONFIRMATION, "Are you sure you want to clear the stack?", ButtonType.YES, ButtonType.CANCEL);
+            dialog.showAndWait();
+
+            if (dialog.getResult() == ButtonType.YES) {
+                clearCommand.execute();
+            }
         } catch (Exception ex) {
         }
+
         // refreshing the listView
         refreshStack();
     }
@@ -542,6 +552,46 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
+     * Save the instance of variables in savedStack
+     *
+     * @param event When button "Save" is clicked
+     */
+    @FXML
+    private void saveVariables(ActionEvent event) {
+        SaveVariablesCommand saveVariablesCommand = new SaveVariablesCommand(variables, savedVariables);
+        try {
+            errorLabel.setText("");
+            saveVariablesCommand.execute();
+            Alert dialog = new Alert(AlertType.INFORMATION, "Variables saved correctly", ButtonType.OK);
+            dialog.showAndWait();
+        } catch (Exception ex) {
+            showError("Error during save the variables");
+        }
+    }
+
+    /**
+     * Restore the variables attribute by getting the last element in savedStack
+     *
+     * @param event When button "Restore" is clicked
+     */
+    @FXML
+    private void restoreVariables(ActionEvent event) {
+        RestoreVariablesCommand restoreVariablesCommand = new RestoreVariablesCommand(variables, savedVariables);
+        try {
+            errorLabel.setText("");
+            restoreVariablesCommand.execute();
+            Alert dialog = new Alert(AlertType.INFORMATION, "Variables restored correctly", ButtonType.OK);
+            dialog.showAndWait();
+        } catch (StackSizeException ex) {
+            Alert dialog = new Alert(AlertType.ERROR, "No variables to restore", ButtonType.OK);
+            dialog.show();
+        } catch (VariablesNameException ex) {
+        }
+
+        refreshVariables();
+    }
+
+    /**
      * Takes the top of the stack and saves it into a selected variable
      *
      * @param event Button ">x" clicked
@@ -638,7 +688,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void executeFunction(ActionEvent event) {
         // creating the new executeFunctionCommand object
-        ExecuteFunctionCommand executeFunctionCommand = new ExecuteFunctionCommand(functionsComboBox.getValue(), stack, variables);
+        ExecuteFunctionCommand executeFunctionCommand = new ExecuteFunctionCommand(functionsComboBox.getValue(), stack, variables, savedVariables);
 
         clearTextField();
         try { // try executing all the commands

@@ -12,13 +12,13 @@ import progettose_gruppo09.*;
  */
 public class SumCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Complex c1;
     private Complex c2;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         c1 = new Complex(5.2, 4.9);
         c2 = new Complex(18.9, 3.1);
     }
