@@ -31,11 +31,14 @@ public class ArccosCommand implements Command {
      */
     @Override
     public void execute() throws Exception {
+        //check that the stack has at least one element so that
+        //arc cosine should be executed
         if (stack.isEmpty()) {
             throw new StackSizeException();
         }
         Complex complex = stack.pop();
-        stack.add(ComplexOperations.arccos(complex));
+        //pushing into the stack the value of the arc cosine of complex
+        stack.push(ComplexOperations.arccos(complex));
     }
 
 }

@@ -88,6 +88,11 @@ public class Function {
         Function.variables = variables;
     }
 
+    /**
+     * Static setter of variablesStack attribute.
+     *
+     * @param variablesStack The new value of variablesStack attribute.
+     */
     public static void setVariablesStack(VariablesStack variablesStack) {
         Function.variablesStack = variablesStack;
     }

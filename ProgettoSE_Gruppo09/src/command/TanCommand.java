@@ -8,7 +8,7 @@ import progettose_gruppo09.ComplexStack;
 
 /**
  *
- * @author gruppo_09
+ * @author gruppo09
  */
 public class TanCommand implements Command {
 
@@ -22,7 +22,7 @@ public class TanCommand implements Command {
     public void execute() throws StackSizeException, OperationDenied {
         //check that the stack has at least one element so that
         //tangent should be executed
-        if (stack.size() >= 1) {
+        if (!stack.isEmpty()) {
             Complex c1 = stack.pop();
 
             //pushing into the stack the tangent of c1 calling tan function

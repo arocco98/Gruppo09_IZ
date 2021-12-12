@@ -3,14 +3,14 @@ package progettose_gruppo09;
 import java.util.ArrayList;
 
 /**
- * This class implements a data structure having a stack behavior
+ * This class implements a data structure having a stack behavior.
  *
  * @author gruppo09
  */
 public class ComplexStack extends ArrayList<Complex> implements Stack<Complex> {
 
     /**
-     * Construct a new Stack object
+     * Construct a new ComplexStack object
      */
     public ComplexStack() {
         super();
@@ -19,7 +19,7 @@ public class ComplexStack extends ArrayList<Complex> implements Stack<Complex> {
     /**
      * Function to push a Complex onto the stack
      *
-     * @param a complex value you want to put on the stack
+     * @param a Complex value you want to put onto the stack
      */
     @Override
     public void push(Complex a) {
@@ -30,7 +30,7 @@ public class ComplexStack extends ArrayList<Complex> implements Stack<Complex> {
     /**
      * Function for picking an item from the stack
      *
-     * @return item taken from the stack
+     * @return Item taken from the stack
      */
     @Override
     public Complex pop() {

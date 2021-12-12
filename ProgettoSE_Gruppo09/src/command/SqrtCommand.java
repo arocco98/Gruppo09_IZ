@@ -31,7 +31,7 @@ public class SqrtCommand implements Command {
     public void execute() throws StackSizeException {
         //check that the stack has at least one element so that
         //square root should be executed
-        if (stack.size() >= 1) {
+        if (!stack.isEmpty()) {
             Complex c1 = stack.pop();
 
             //pushing into the stack the square root of c1 calling sqrt function

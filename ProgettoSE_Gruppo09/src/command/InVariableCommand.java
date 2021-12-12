@@ -32,7 +32,7 @@ public class InVariableCommand implements Command {
     }
 
     /**
-     * Saves the thetop of the stack in the variable
+     * Saves the top of the stack in the variable
      *
      * @throws VariablesNameException
      * @throws StackSizeException
@@ -41,7 +41,7 @@ public class InVariableCommand implements Command {
     public void execute() throws VariablesNameException, StackSizeException {
 
         //check that the stack has at least one element so that division should be executed
-        if (stack.size() >= 1) {
+        if (!stack.isEmpty()) {
             //saving in the selected variable the value in the top of the stack
             //and removing it
             variables.setVariable(variable, stack.pop());
@@ -50,6 +50,14 @@ public class InVariableCommand implements Command {
         }
     }
 
+    /**
+     * This method is used to verify that a InVariableCommand object is equal to
+     * another one
+     *
+     * @param obj the reference object with which to compare
+     * @return true if this object is the same as the obj argument; false
+     * otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

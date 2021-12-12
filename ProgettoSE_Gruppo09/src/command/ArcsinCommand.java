@@ -31,11 +31,14 @@ public class ArcsinCommand implements Command {
      */
     @Override
     public void execute() throws Exception {
+        //check that the stack has at least one element so that
+        //arc sine should be executed
         if (stack.isEmpty()) {
             throw new StackSizeException();
         }
         Complex complex = stack.pop();
-        stack.add(ComplexOperations.arcsin(complex));
+        //pushing into the stack the value of the arc sine of complex
+        stack.push(ComplexOperations.arcsin(complex));
     }
 
 }

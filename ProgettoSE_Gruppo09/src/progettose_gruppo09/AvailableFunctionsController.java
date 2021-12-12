@@ -25,7 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * AvailableFunctions Controller class
  *
  * @author gruppo09
  */
@@ -50,6 +50,11 @@ public class AvailableFunctionsController implements Initializable {
     @FXML
     private Button deleteButton;
 
+    /**
+     * Construct a new AvailableFunctionsController object
+     *
+     * @param controller The calling controller
+     */
     public AvailableFunctionsController(FXMLDocumentController controller) {
         this.controller = controller;
 
@@ -96,9 +101,11 @@ public class AvailableFunctionsController implements Initializable {
         nameClm.setCellValueFactory(new PropertyValueFactory<>("name"));
         sequenceClm.setCellValueFactory(new PropertyValueFactory<>("sequenceString"));
 
+        //setting the items of the table with the current list of functions
         functionsTable.setItems(functions);
         functionsTable.setPlaceholder(new Label("No functions available"));
 
+        //disabling modifyButton and deleteButton when no function is selected
         modifyButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
         deleteButton.disableProperty().bind(functionsTable.getSelectionModel().selectedItemProperty().isNull());
     }
@@ -142,10 +149,13 @@ public class AvailableFunctionsController implements Initializable {
         DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
 
         try {
+            //instantiating an Alert popup to confirm the deletion
             Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this function?", ButtonType.YES, ButtonType.CANCEL);
+            //showing the Alert popup
             dialog.showAndWait();
 
             if (dialog.getResult() == ButtonType.YES) {
+                //deleting the function after the user's confirmation
                 deleteFunctionCommand.execute();
             }
         } catch (Exception ex) {

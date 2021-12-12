@@ -9,14 +9,14 @@ import java.util.ArrayList;
 public class VariablesStack extends ArrayList<Variables> implements Stack<Variables> {
 
     /**
-     * Construct a new Stack object
+     * Construct a new VariablesStack object
      */
     public VariablesStack() {
         super();
     }
 
     /**
-     * Function to push a Variables onto the stack
+     * Function to push a Variables object onto the stack
      *
      * @param a Variables object you want to put on the stack
      */

@@ -1,6 +1,7 @@
 package progettose_gruppo09;
 
 /**
+ * The interface used to represent a stack object
  *
  * @author gruppo09
  */

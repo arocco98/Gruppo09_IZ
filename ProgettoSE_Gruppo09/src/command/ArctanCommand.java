@@ -19,17 +19,23 @@ public class ArctanCommand implements Command {
     /**
      * Construct a new ArctanCommand object that operates on a stack.
      *
-     * @param stack The stack on which InversionSignCommand operates.
+     * @param stack The stack on which ArctanCommand operates.
      */
     public ArctanCommand(ComplexStack stack) {
         this.stack = stack;
     }
 
+    /**
+     * Execute the arcsin operation on the first element of the stack.
+     *
+     * @throws exceptions.StackSizeException
+     * @throws exceptions.OperationDenied
+     */
     @Override
     public void execute() throws StackSizeException, OperationDenied {
         //check that the stack has at least one element so that
         //arc tangent should be executed
-        if (stack.size() >= 1) {
+        if (!stack.isEmpty()) {
             Complex complex = stack.pop();
 
             //pushing into the stack the value of the arc tangent of complex

@@ -40,12 +40,14 @@ public class RestoreVariablesCommand implements Command {
      */
     @Override
     public void execute() throws StackSizeException, VariablesNameException {
+        //controlling that there is almost one element to restore
         if (savedVariables.isEmpty()) {
             throw new StackSizeException();
         }
 
         Variables poppedVariables = savedVariables.pop();
 
+        //setting the current variables to the last value saved into the stack
         for (Entry<Character, Complex> entry : poppedVariables.getVariables().entrySet()) {
             variables.setVariable(entry.getKey(), entry.getValue());
         }

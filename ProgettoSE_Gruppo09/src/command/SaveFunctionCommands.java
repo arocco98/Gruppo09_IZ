@@ -38,16 +38,16 @@ public class SaveFunctionCommands implements Command {
     @Override
     public void execute() throws IOException {
 
-        //creo uno stream per scrivere su file
+        //creating a stream in order to write the file
         FileWriter writer = new FileWriter(file);
 
         for (Function f : functions) {
-            //scrivo su file
+            //writing on the file
             writer.write(f.getName() + '\n');
             writer.write(f.getSequenceString() + '\n');
         }
 
-        //chiudo lo stream
+        //closing the stream
         writer.close();
     }
 

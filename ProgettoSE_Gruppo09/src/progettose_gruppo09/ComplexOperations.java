@@ -107,10 +107,10 @@ public class ComplexOperations {
     }
 
     /**
-     * Modulus of this Complex number (the distance from the origin in polar
+     * Modulus of a Complex number (the distance from the origin in polar
      * coordinates).
      *
-     * @return |z| where z is this Complex number.
+     * @return |a| where 'a' is a Complex number.
      */
     public static double mod(Complex a) {
         double x = a.getReal();
@@ -131,10 +131,10 @@ public class ComplexOperations {
     }
 
     /**
-     * Argument of this Complex number (the angle in radians with the x-axis in
+     * Argument of a Complex number (the angle in radians with the x-axis in
      * polar coordinates).
      *
-     * @return arg(z) where z is this Complex number.
+     * @return arg(a) where 'a' is a Complex number.
      */
     public static double arg(Complex a) {
         double x = a.getReal();
@@ -153,11 +153,10 @@ public class ComplexOperations {
     }
 
     /**
-     * Complex square root (doesn't change this complex number). Computes the
-     * principal branch of the square root, which is the value with 0 <= arg <
-     * pi.
+     * Complex square root. Computes the principal branch of the square root,
+     * which is the value with 0 <= arg < pi.
      *
-     * @return sqrt(z) where z is this Complex number.
+     * @return sqrt(a) where 'a' is a Complex number.
      */
     public static Complex sqrt(Complex a) {
 
@@ -176,9 +175,9 @@ public class ComplexOperations {
     }
 
     /**
-     * Complex exponential (doesn't change this Complex number).
+     * Complex exponential.
      *
-     * @return exp(a) where a is this Complex number.
+     * @return exp(a) where 'a' is a Complex number.
      */
     public static Complex exp(Complex a) {
 
@@ -194,11 +193,10 @@ public class ComplexOperations {
     }
 
     /**
-     * Principal branch of the Complex logarithm of this Complex number.
-     * (doesn't change this Complex number). The principal branch is the branch
-     * with -pi < arg <= pi.
+     * Principal branch of the Complex logarithm of a Complex number. The
+     * principal branch is the branch with -pi < arg <= pi.
      *
-     * @return log(a) where a is this Complex number.
+     * @return log(a) where 'a' is a Complex number.
      */
     public static Complex log(Complex a) throws OperationDenied {
         if (mod(a) != 0.0) {
@@ -217,10 +215,9 @@ public class ComplexOperations {
     }
 
     /**
-     * Sine of this Complex number (doesn't change this Complex number).
-     * <br>sin(a) = (exp(i*a)-exp(-i*a))/(2*i).
+     * Sine of this Complex number.
      *
-     * @return sin(a) where a is this Complex number.
+     * @return sin(a) where 'a' is a Complex number.
      */
     public static Complex sin(Complex a) {
         double real = Math.cosh(a.getImaginary()) * Math.sin(a.getReal());
@@ -236,9 +233,8 @@ public class ComplexOperations {
 
     /**
      * Cosine of this Complex number (doesn't change this Complex number).
-     * <br>cos(a) = (exp(i*a)+exp(-i*a))/ 2.
      *
-     * @return cos(a) where a is this Complex number.
+     * @return cos(a) where 'a' is a Complex number.
      */
     public static Complex cos(Complex a) {
         double real = Math.cosh(a.getImaginary()) * Math.cos(a.getReal());
@@ -253,10 +249,9 @@ public class ComplexOperations {
     }
 
     /**
-     * Tangent of this Complex number (doesn't change this Complex number).
-     * <br>tan(a) = sin(a)/cos(a).
+     * Tangent of this Complex number.
      *
-     * @return tan(a) where z is this Complex number.
+     * @return tan(a) where 'a' is a Complex number.
      */
     public static Complex tan(Complex a) throws OperationDenied {
         Complex cos = cos(a);
@@ -270,11 +265,11 @@ public class ComplexOperations {
     }
 
     /**
-     * Calculates the <code>ComplexNumber</code> to the passed integer power.
+     * Calculates the Complex to the passed power.
      *
-     * @param z The input complex number
+     * @param z The input complex number.
      * @param power The power.
-     * @return a <code>ComplexNumber</code> which is (z)^power
+     * @return a Complex which is (z)^power.
      */
     public static Complex pow(Complex z, double power) throws OperationDenied {
 

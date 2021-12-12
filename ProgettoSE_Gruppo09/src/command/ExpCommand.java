@@ -7,16 +7,27 @@ import progettose_gruppo09.ComplexStack;
 
 /**
  *
- * @author gruppo_09
+ * @author gruppo09
  */
 public class ExpCommand implements Command {
 
     private ComplexStack stack;
 
+    /**
+     * Construct a new ExpCommand object that operates on a stack.
+     *
+     * @param stack The stack on which ExpCommand operates.
+     */
     public ExpCommand(ComplexStack stack) {
         this.stack = stack;
     }
 
+    /**
+     * Execute the exp operation with the first element of the stack as
+     * exponent.
+     *
+     * @throws StackSizeException
+     */
     @Override
     public void execute() throws StackSizeException {
         //check that the stack has at least one element so that

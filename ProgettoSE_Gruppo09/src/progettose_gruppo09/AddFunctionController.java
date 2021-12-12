@@ -19,7 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * AddFunction Controller class
  *
  * @author gruppo09
  */
@@ -41,6 +41,12 @@ public class AddFunctionController implements Initializable {
     @FXML
     private Label errorLbl;
 
+    /**
+     * Construct a new AddFunctionController object that operates on a function
+     * to be added
+     *
+     * @param controller The calling controller
+     */
     public AddFunctionController(FXMLDocumentController controller) {
         this.controller = controller;
 
@@ -96,12 +102,21 @@ public class AddFunctionController implements Initializable {
 
     }
 
+    /**
+     * This method is invoked when the user wants to add a neew function
+     *
+     * @param event Button "Add" clicked
+     */
     @FXML
     private void addFunction(ActionEvent event) {
 
+        //taking the name of the new function 
         String name = nameTxt.getText();
+        //taking the name of the sequence of operations that the function will perform
         String sequence = sequenceTxt.getText();
+        //the name function must have almost one word
         if (name.split("\\s+").length == 1) {
+            //inserting the new function into the current list of functions
             InsertFunctionCommand insertFunctionCommand = new InsertFunctionCommand(name, sequence, functions);
             try {
                 insertFunctionCommand.execute();

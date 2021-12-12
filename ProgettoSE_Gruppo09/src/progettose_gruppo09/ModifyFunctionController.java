@@ -120,6 +120,8 @@ public class ModifyFunctionController implements Initializable {
     @FXML
     private void modifyFunction(ActionEvent event) {
 
+        //modifying the sequence of operations of the selected function with the
+        //new sequence taken from the text field
         ModifyFunctionCommand modifyFunctionCommand = new ModifyFunctionCommand(f, sequenceTxt.getText());
 
         try {
