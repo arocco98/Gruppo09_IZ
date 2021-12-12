@@ -22,14 +22,14 @@ import static org.junit.Assert.*;
 public class FunctionTest {
 
     private ArrayList<Function> functions = null;
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private Variables variables = null;
 
     @Before
     public void setUp() {
         // instantiating functions, stack and variables attributes
         functions = new ArrayList<>();
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
 
         // setting static variables
@@ -57,7 +57,7 @@ public class FunctionTest {
      */
     @Test
     public void testGenerateCommands() throws Exception {
-        System.out.println("GenerateCommands");
+        System.out.println("Test of generateCommands method, of class Function.");
 
         String sequenceString = "+ - <a drop";
         ArrayList<Command> expectedCommands = new ArrayList<>();
@@ -87,7 +87,7 @@ public class FunctionTest {
      */
     @Test(expected = NoMatchFoundException.class)
     public void testGenerateCommandsWhenThrowsException() throws Exception {
-        System.out.println("GenerateCommands when it throws a NoMatchFoundException");
+        System.out.println("Test of generateCommands method, of class Function, when it throws a NoMatchFoundException.");
 
         String sequenceString = "+ - notExistingFunction drop";
 
@@ -100,7 +100,8 @@ public class FunctionTest {
      */
     @Test
     public void testIsAValidName() {
-        System.out.println("isAValidName");
+        System.out.println("Test of isAValidName method, of class Function.");
+
         // expected false because the name is empty
         String name = "";
         boolean expResult = false;
@@ -137,7 +138,7 @@ public class FunctionTest {
      */
     @Test
     public void testGetName() throws FunctionNameAlreadyExistsException {
-        System.out.println("getName");
+        System.out.println("Test of getName method, of class Function.");
 
         Function instance = new Function("function");
         String expResult = "function";
@@ -150,7 +151,7 @@ public class FunctionTest {
      */
     @Test
     public void testGetSequenceString() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("getSequenceString");
+        System.out.println("Test of getSequenceString method, of class Function.");
 
         Function instance = new Function("function", "clear 3.14 + sqrt");
         String expResult = "clear 3.14 + sqrt";
@@ -163,7 +164,7 @@ public class FunctionTest {
      */
     @Test
     public void testSetSequenceString() throws Exception {
-        System.out.println("setSequenceString");
+        System.out.println("Test of setSequenceString method, of class Function.");
 
         String sequenceString = "+ - / *";
         Function instance = new Function("function", "+ -");
@@ -182,7 +183,7 @@ public class FunctionTest {
      */
     @Test
     public void testGetSequenceCommands() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("getSequenceCommands");
+        System.out.println("Test of getSequenceCommands method, of class Function.");
 
         Function instance = new Function("function", "+ - * /");
         ArrayList<Command> expResult = new ArrayList<>();
@@ -200,7 +201,7 @@ public class FunctionTest {
      */
     @Test
     public void testToString() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("toString");
+        System.out.println("Test of toString method, of class Function.");
 
         Function instance = new Function("function", "<i -b over dup");
         String expResult = "function";
@@ -216,7 +217,7 @@ public class FunctionTest {
      */
     @Test
     public void testEquals() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("equals");
+        System.out.println("Test of equals method, of class Function.");
 
         Function instance = new Function("function1", "+ +z * drop");
         Function other = new Function("differentFunction", "clear 1.23+4.56j dup *");

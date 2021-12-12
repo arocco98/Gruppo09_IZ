@@ -21,6 +21,8 @@ public class ComplexTest {
      */
     @Test
     public void testComplex() {
+        System.out.println("Test of Constructor method, of class Complex.");
+
         Complex c2 = new Complex(7.4, 6.2);
 
         assertTrue(c2.getReal() == 7.4);
@@ -37,6 +39,8 @@ public class ComplexTest {
      */
     @Test
     public void testGetReal() {
+        System.out.println("Test of getReal method, of class Complex.");
+
         double expResult = 1.2;
         assertEquals(expResult, c1.getReal(), 0.0);
     }
@@ -46,6 +50,8 @@ public class ComplexTest {
      */
     @Test
     public void testSetReal() {
+        System.out.println("Test of setReal method, of class Complex.");
+
         double real = 4.7;
         c1.setReal(real);
         assertEquals(real, c1.getReal(), 0.0);
@@ -56,6 +62,8 @@ public class ComplexTest {
      */
     @Test
     public void testGetImaginary() {
+        System.out.println("Test of getImaginary method, of class Complex.");
+
         double imaginary = 5.6;
         assertEquals(imaginary, c1.getImaginary(), 0.0);
     }
@@ -65,6 +73,8 @@ public class ComplexTest {
      */
     @Test
     public void testSetImaginary() {
+        System.out.println("Test of setImaginary method, of class Complex.");
+
         double imaginary = -5.40;
         c1.setImaginary(imaginary);
         assertEquals(imaginary, c1.getImaginary(), 0.0);
@@ -75,6 +85,8 @@ public class ComplexTest {
      */
     @Test
     public void testEquals() {
+        System.out.println("Test of equals method, of class Complex.");
+
         Object obj = null;
         boolean expResult1 = false;
         boolean result1 = c1.equals(obj);
@@ -91,6 +103,8 @@ public class ComplexTest {
      */
     @Test
     public void testToString() {
+        System.out.println("Test of toString method, of class Complex.");
+
         String result = c1.toString();
         String expResult = "1.2+5.6j";
         assertEquals(expResult, result);

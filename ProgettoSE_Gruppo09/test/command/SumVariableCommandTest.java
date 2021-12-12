@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
  */
 public class SumVariableCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character char1;
     private Complex c1;
@@ -20,7 +20,7 @@ public class SumVariableCommandTest {
 
     @Before
     public void setUp() throws VariablesNameException {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         char1 = 'f';
         c1 = new Complex(5.2, 2.6);
@@ -33,7 +33,7 @@ public class SumVariableCommandTest {
      */
     @Test(expected = StackSizeException.class)
     public void testExecute1() throws Exception {
-        System.out.println("execute SumVariableCommand (StackSizeException)");
+        System.out.println("Test of execute method, of class SumVariableCommand, whet it throws a StackSizeException.");
         SumVariableCommand instance = new SumVariableCommand(stack, variables, char1);
         instance.execute();
     }
@@ -44,7 +44,7 @@ public class SumVariableCommandTest {
      */
     @Test(expected = VariablesValueException.class)
     public void testExecute2() throws Exception {
-        System.out.println("execute SumVariableCommand (VariablesValueException)");
+        System.out.println("Test of execute method, of class SumVariableCommand, whet it throws a VariablesValueException.");
         SumVariableCommand instance = new SumVariableCommand(stack, variables, char1);
         stack.push(c2);
         instance.execute();
@@ -55,7 +55,7 @@ public class SumVariableCommandTest {
      */
     @Test
     public void testExecute3() throws Exception {
-        System.out.println("execute SumVariableCommand");
+        System.out.println("Test of execute method, of class SumVariableCommand.");
         SumVariableCommand instance = new SumVariableCommand(stack, variables, char1);
         variables.setVariable(char1, c1);
         stack.push(c2);

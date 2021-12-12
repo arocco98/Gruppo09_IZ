@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
 
 /**
@@ -18,14 +18,14 @@ import progettose_gruppo09.Variables;
  */
 public class InsertFunctionCommandTest {
 
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private Variables variables = null;
     private ArrayList<Function> functions = null;
 
     @Before
     public void setUp() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
         // instantiating stack and variables attributes
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         functions = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class InsertFunctionCommandTest {
      */
     @Test
     public void testExecute() throws Exception {
-        System.out.println("Execute");
+        System.out.println("Test of execute method, of class InsertFunctionCommand.");
 
         Function function1 = new Function("function1", "+ - drop");
         functions.add(function1);
@@ -73,11 +73,12 @@ public class InsertFunctionCommandTest {
     }
 
     /**
-     * Test of execute method, of class InsertFunctionCommand.
+     * Test of execute method, of class InsertFunctionCommand, when it throws
+     * FunctionNameAlreadyExistsException.
      */
     @Test(expected = FunctionNameAlreadyExistsException.class)
     public void testExecuteWhenThrowsFunctionNameAlreadyExistsException() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("Execute when it throws FunctionNameAlreadyExistsException");
+        System.out.println("Test of execute method, of class InsertFunctionCommand, when it throws FunctionNameAlreadyExistsException.");
 
         Function function1 = new Function("function1", "+ - drop");
         functions.add(function1);
@@ -89,11 +90,12 @@ public class InsertFunctionCommandTest {
     }
 
     /**
-     * Test of execute method, of class InsertFunctionCommand.
+     * Test of execute method, of class InsertFunctionCommand, when it throws
+     * NoMatchFoundException.
      */
     @Test(expected = NoMatchFoundException.class)
     public void testExecuteWhenThrowsNoMatchFoundException() throws NoMatchFoundException, FunctionNameAlreadyExistsException {
-        System.out.println("Execute when it throws NoMatchFoundException");
+        System.out.println("Test of execute method, of class InsertFunctionCommand, when it throws NoMatchFoundException.");
 
         Function function1 = new Function("function1", "+ - drop");
         functions.add(function1);

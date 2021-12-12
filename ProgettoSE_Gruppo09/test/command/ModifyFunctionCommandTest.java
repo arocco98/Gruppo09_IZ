@@ -42,12 +42,12 @@ public class ModifyFunctionCommandTest {
     }
 
     /**
-     * Test of execute method, of class ModifyFunctionCommand, launching
+     * Test of execute method, of class ModifyFunctionCommand, when it throws a
      * NoMatchFoundException.
      */
     @Test(expected = NoMatchFoundException.class)
     public void testExecute2() throws Exception {
-        System.out.println("Test of execute method, of class ModifyFunctionCommand, launching NoMatchFoundException.");
+        System.out.println("Test of execute method, of class ModifyFunctionCommand, when it throws a NoMatchFoundException.");
 
         String sequence = "+ - * / sqrtt";
         ModifyFunctionCommand modifyFunctionCommand = new ModifyFunctionCommand(fc1, sequence);

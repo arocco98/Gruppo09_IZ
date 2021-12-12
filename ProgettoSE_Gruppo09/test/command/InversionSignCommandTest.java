@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -13,11 +13,11 @@ import progettose_gruppo09.Stack;
  */
 public class InversionSignCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
     }
 
     /**
@@ -26,7 +26,8 @@ public class InversionSignCommandTest {
      */
     @Test(expected = StackSizeException.class)
     public void testExecuteThrowsException() throws Exception {
-        System.out.println("Execute with empty stack");
+        System.out.println("Test of execute method with an empty stack, it should throw a StackSizeException.");
+
         InversionSignCommand instance = new InversionSignCommand(this.stack);
         instance.execute();
     }
@@ -36,7 +37,7 @@ public class InversionSignCommandTest {
      */
     @Test
     public void testExecute() throws StackSizeException {
-        System.out.println("Execute with non-empty stack");
+        System.out.println("Test of execute method, of class InversionSignCommand.");
 
         InversionSignCommand instance = new InversionSignCommand(this.stack);
 

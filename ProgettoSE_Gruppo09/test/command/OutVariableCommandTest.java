@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package command;
 
 import exceptions.*;
@@ -16,14 +12,14 @@ import progettose_gruppo09.*;
  */
 public class OutVariableCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character variable;
     private Complex complex;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         variable = 'a';
         complex = new Complex(1.0, 0.1);
@@ -34,7 +30,8 @@ public class OutVariableCommandTest {
      */
     @Test
     public void testExecute() throws VariablesNameException, VariablesValueException, StackSizeException {
-        System.out.println("execute OutVariableCommandTest");
+        System.out.println("Test of execute method, of class OutVariableCommand.");
+
         variables.setVariable(variable, complex);
         OutVariableCommand instance = new OutVariableCommand(stack, variables, variable);
         instance.execute();
@@ -45,23 +42,25 @@ public class OutVariableCommandTest {
     }
 
     /**
-     * Test of testExecute method, of class OutVariableCommand, when it throws
-     * an VariablesNameException.
+     * Test of testExecute method, of class OutVariableCommand, when it throws a
+     * VariablesNameException.
      */
     @Test(expected = VariablesNameException.class)
     public void testExecuteThrowsException1() throws VariablesNameException, StackSizeException, VariablesValueException {
-        System.out.println("testExecute throws exception VariablesNameException");
+        System.out.println("Test of testExecute method, of class OutVariableCommand, when it throws a VariablesNameException.");
+
         OutVariableCommand instance = new OutVariableCommand(stack, variables, 'A');
         instance.execute();
     }
 
     /**
-     * Test of testExecute method, of class OutVariableCommand, when it throws
-     * an VariablesValueException.
+     * Test of testExecute method, of class OutVariableCommand, when it throws a
+     * VariablesValueException.
      */
     @Test(expected = VariablesValueException.class)
     public void testExecuteThrowsException2() throws VariablesNameException, StackSizeException, VariablesValueException {
-        System.out.println("testExecute throws exception VariablesValueException");
+        System.out.println("Test of testExecute method, of class OutVariableCommand, when it throws a VariablesValueException.");
+
         variables.setVariable(variable, null);
         OutVariableCommand instance = new OutVariableCommand(stack, variables, variable);
         instance.execute();

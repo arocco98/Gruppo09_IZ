@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package command;
 
 import static org.junit.Assert.*;
@@ -17,12 +13,12 @@ import progettose_gruppo09.*;
  */
 public class SqrtCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Complex c1;
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         c1 = new Complex(12, 4.9);
     }
 
@@ -32,7 +28,8 @@ public class SqrtCommandTest {
      */
     @Test(expected = StackSizeException.class)
     public void testExecute1() throws StackSizeException {
-        System.out.println("Execute1");
+        System.out.println("Test of execute method with a stack size smaller than 1, of class SqrtCommand.");
+
         SqrtCommand instance = new SqrtCommand(stack);
         instance.execute();
     }
@@ -45,11 +42,12 @@ public class SqrtCommandTest {
      */
     @Test
     public void testExecute2() throws StackSizeException {
-        System.out.println("Execute2");
+        System.out.println("Test of execute method with a stack size greater than 1 or equal, of class SqrtCommand.");
+
         stack.push(c1);
         SqrtCommand instance = new SqrtCommand(stack);
         instance.execute();
-        assertEquals(new Complex(3.5328365, 0.6934937), stack.peek());
+        assertEquals(new Complex(3.5328365, 0.6934938), stack.peek());
     }
 
 }

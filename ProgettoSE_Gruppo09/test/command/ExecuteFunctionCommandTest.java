@@ -6,8 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
+import progettose_gruppo09.VariablesStack;
 
 /**
  *
@@ -15,14 +16,15 @@ import progettose_gruppo09.Variables;
  */
 public class ExecuteFunctionCommandTest {
 
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private Variables variables = null;
     private ArrayList<Function> functions;
+    private VariablesStack savedVariables;
 
     @Before
     public void setUp() {
         // instantiating stack and variables attributes
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         functions = new ArrayList<>();
 
@@ -40,9 +42,12 @@ public class ExecuteFunctionCommandTest {
         } catch (VariablesNameException ex) {
         }
 
+        savedVariables = new VariablesStack();
+
         Function.setStack(this.stack);
         Function.setVariables(this.variables);
         Function.setFunctions(this.functions);
+        Function.setVariablesStack(savedVariables);
     }
 
     /**
@@ -50,9 +55,9 @@ public class ExecuteFunctionCommandTest {
      */
     @Test
     public void testExecute() throws Exception {
-        System.out.println("execute");
+        System.out.println("Test of execute method, of class ExecuteFunctionCommand.");
 
-        ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ drop dup dup"), stack, variables);
+        ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ drop dup dup"), stack, variables, savedVariables);
         instance.execute();
     }
 
@@ -62,9 +67,9 @@ public class ExecuteFunctionCommandTest {
      */
     @Test(expected = Exception.class)
     public void testExecuteWhenItThrowsException() throws Exception {
-        System.out.println("execute when it throws a Exception");
+        System.out.println("Test of execute method, of class ExecuteFunctionCommand, when it throws an exception.");
 
-        ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ - * / drop sqrt"), stack, variables);
+        ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ - * / drop sqrt"), stack, variables, savedVariables);
         instance.execute();
     }
 }

@@ -56,7 +56,8 @@ public class VariablesTest {
      */
     @Test
     public void testGetVariable() {
-        System.out.println("getVariable");
+        System.out.println("Test of getVariable method, of class Variables.");
+
         Variables instance = new Variables();
         Complex expResult = null;
         Complex result = null;
@@ -85,7 +86,8 @@ public class VariablesTest {
      */
     @Test(expected = VariablesNameException.class)
     public void testGetVariableThrowsException() throws VariablesNameException {
-        System.out.println("getVariable throws exception");
+        System.out.println("Test of getVariable method, of class Variables, when it throws an exception.");
+
         Variables instance = new Variables();
         instance.getVariable('A');
     }
@@ -95,7 +97,8 @@ public class VariablesTest {
      */
     @Test
     public void testSetVariable() {
-        System.out.println("setVariable");
+        System.out.println("Test of setVariable method, of class Variables.");
+
         Complex complex = null;
         Variables instance = new Variables();
         try {
@@ -129,7 +132,8 @@ public class VariablesTest {
      */
     @Test(expected = VariablesNameException.class)
     public void testSetVariableThrowsException() throws VariablesNameException {
-        System.out.println("setVariable throws exception");
+        System.out.println("Test of setVariable method, of class Variables, when it throws an exception.");
+
         Variables instance = new Variables();
         instance.setVariable('A', new Complex(1.2, 3.4));
     }
@@ -139,7 +143,8 @@ public class VariablesTest {
      */
     @Test
     public void testToString() {
-        System.out.println("toString");
+        System.out.println("Test of toString method, of class Variables.");
+
         Variables instance = new Variables();
         String expResult = "";
         for (char character = 'a'; character <= 'z'; character++) {

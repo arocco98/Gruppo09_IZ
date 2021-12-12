@@ -31,7 +31,7 @@ public class AddFunctionController implements Initializable {
     // Will hold a reference to the first controller, allowing us to access the methods found there.
     private FXMLDocumentController controller;
     private ArrayList<Function> functions;
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
 
     @FXML

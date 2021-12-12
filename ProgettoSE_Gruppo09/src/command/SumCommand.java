@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class SumCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new SumCommand object that operates on a stack
      *
      * @param stack The stack on which SumCommand operates
      */
-    public SumCommand(Stack stack) {
+    public SumCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

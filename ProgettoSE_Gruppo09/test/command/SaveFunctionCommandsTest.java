@@ -12,7 +12,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SaveFunctionCommandsTest {
     private ArrayList<Function> functions;
     private ArrayList<Command> sequenceCommands;
     private ArrayList<Command> sequenceCommands2;
-    private Stack stack;
+    private ComplexStack stack;
     private Complex n1;
     private Complex n2;
     private Complex n3;
@@ -33,15 +33,12 @@ public class SaveFunctionCommandsTest {
     private ProdCommand prod;
     private File file1;
 
-    public SaveFunctionCommandsTest() {
-    }
-
     @Before
     public void setUp() {
         functions = new ArrayList<>();
         sequenceCommands = new ArrayList<>();
         sequenceCommands2 = new ArrayList<>();
-        stack = new Stack();
+        stack = new ComplexStack();
         n1 = new Complex(1.0, 1.0);
         n2 = new Complex(2.0, 2.0);
         n3 = new Complex(1.0, 1.0);
@@ -69,7 +66,7 @@ public class SaveFunctionCommandsTest {
      */
     @Test
     public void testExecute() throws Exception {
-        System.out.println("Save Test");
+        System.out.println("Test of execute method, of class SaveFunctionCommands.");
 
         file1 = new File("file1");
         Function fun1 = new Function("op1", "+ - *");
@@ -120,7 +117,7 @@ public class SaveFunctionCommandsTest {
      */
     @Test(expected = IOException.class)
     public void testExecute2() throws IOException, FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("Save Test 2");
+        System.out.println("Test of execute method, of class SaveFunctionCommands, that generate an IOException");
 
         file1 = new File("src");
         Function fun1 = new Function("op1", "+ - *");

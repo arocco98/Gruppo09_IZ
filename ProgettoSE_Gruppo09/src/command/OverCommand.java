@@ -11,14 +11,14 @@ import progettose_gruppo09.*;
  */
 public class OverCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
 
     /**
      * Construct a new OverCommand object that operates on a stack
      *
      * @param stack The stack on which OverCommand operates
      */
-    public OverCommand(Stack stack) {
+    public OverCommand(ComplexStack stack) {
         this.stack = stack;
     }
 

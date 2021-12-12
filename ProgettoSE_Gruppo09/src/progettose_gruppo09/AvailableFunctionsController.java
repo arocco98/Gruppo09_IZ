@@ -14,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -138,10 +140,15 @@ public class AvailableFunctionsController implements Initializable {
 
         ArrayList<Function> arrFunctions = controller.getFunctions();
         DeleteFunctionCommand deleteFunctionCommand = new DeleteFunctionCommand(selectedFunction, arrFunctions);
+
         try {
-            deleteFunctionCommand.execute();
+            Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this function?", ButtonType.YES, ButtonType.CANCEL);
+            dialog.showAndWait();
+
+            if (dialog.getResult() == ButtonType.YES) {
+                deleteFunctionCommand.execute();
+            }
         } catch (Exception ex) {
-            Logger.getLogger(AvailableFunctionsController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         refreshFunctions();

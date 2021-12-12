@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
 
 /**
@@ -21,7 +21,7 @@ public class LoadFunctionsCommandTest {
 
     private ArrayList<Function> functions;
     private ArrayList<Function> functions2;
-    private Stack stack;
+    private ComplexStack stack;
     private Complex n1;
     private Complex n2;
     private Complex n3;
@@ -39,7 +39,7 @@ public class LoadFunctionsCommandTest {
     public void setUp() {
         functions = new ArrayList<>();
         functions2 = new ArrayList<>();
-        stack = new Stack();
+        stack = new ComplexStack();
         n1 = new Complex(1.0, 1.0);
         n2 = new Complex(2.0, 2.0);
         n3 = new Complex(1.0, 1.0);
@@ -62,7 +62,7 @@ public class LoadFunctionsCommandTest {
      */
     @Test
     public void testExecute() throws Exception {
-        System.out.println("Load Test");
+        System.out.println("Test of execute method, of class LoadFunctionsCommand.");
 
         file1 = new File("file1");
         Function fun1 = new Function("op1", "+ - *");
@@ -85,7 +85,7 @@ public class LoadFunctionsCommandTest {
      */
     @Test
     public void testExecute2() throws Exception {
-        System.out.println("Load Test2");
+        System.out.println("Test of execute method, of class LoadFunctionsCommand.");
 
         file1 = new File("file1");
         Function fun1 = new Function("op1", "+ - *");
@@ -109,7 +109,7 @@ public class LoadFunctionsCommandTest {
      */
     @Test(expected = FileNotFoundException.class)
     public void testExecute3() throws Exception {
-        System.out.println("Load Test 3");
+        System.out.println("Test of execute method, of class LoadFunctionsCommand, that generate an FileNotFoundException");
 
         file1 = new File("file1");
         Function fun1 = new Function("op1", "+ - *");
@@ -132,7 +132,7 @@ public class LoadFunctionsCommandTest {
      */
     @Test(expected = NoMatchFoundException.class)
     public void testExecute4() throws Exception {
-        System.out.println("Load Test 4");
+        System.out.println("Test of execute method, of class LoadFunctionsCommand, that generate an NoMatchFoundException");
 
         file1 = new File("file1");
         Function fun1 = new Function("op1", "+ - *");
@@ -155,7 +155,7 @@ public class LoadFunctionsCommandTest {
      */
     @Test(expected = FunctionNameAlreadyExistsException.class)
     public void testExecute5() throws Exception {
-        System.out.println("Load Test 5");
+        System.out.println("Test of execute method, of class LoadFunctionsCommand, that generate an FunctionNameAlreadyExistsException");
 
         file1 = new File("file1");
         Function fun1 = new Function("op1", "+ - *");

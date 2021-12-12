@@ -1,6 +1,8 @@
 package exceptions;
 
 /**
+ * This exception is called when the the user wants to add a new user-defined
+ * function with a name that already exists or is uqual to a base operation
  *
  * @author gruppo09
  */

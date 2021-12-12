@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 
 /**
  *
@@ -13,14 +13,14 @@ import progettose_gruppo09.Stack;
  */
 public class InsertCommandTest {
 
-    Stack stack;
+    ComplexStack stack;
 
     /**
      * Method for setting up all the used variables.
      */
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
     }
 
     /**
@@ -30,7 +30,7 @@ public class InsertCommandTest {
      */
     @Test
     public void testExecute() throws Exception {
-        System.out.println("execute");
+        System.out.println("Test of execute method, of class InsertCommand.");
 
         // defining variables for testing
         InsertCommand instance = null;
@@ -138,9 +138,15 @@ public class InsertCommandTest {
         assertEquals(size, stack.size());
     }
 
+    /**
+     * Test of execute method, of class InsertCommand,when it throws
+     * NoMatchFoundException
+     *
+     * @throws NoMatchFoundException
+     */
     @Test(expected = NoMatchFoundException.class)
     public void testExecuteThrowsException() throws NoMatchFoundException {
-        System.out.println("Execute when throws NoMatchFoundException");
+        System.out.println("Test of execute method, of class InsertCommand,when it throws NoMatchFoundException");
 
         InsertCommand instance = new InsertCommand(stack, "1.23+4.56a");
         instance.execute();

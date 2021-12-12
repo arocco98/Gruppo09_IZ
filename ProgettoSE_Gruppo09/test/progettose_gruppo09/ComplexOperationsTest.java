@@ -1,5 +1,6 @@
 package progettose_gruppo09;
 
+import exceptions.OperationDenied;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -10,10 +11,11 @@ import static org.junit.Assert.*;
 public class ComplexOperationsTest {
 
     /**
-     * Test of complexSum method, of class Complex.
+     * Test of complexSum method, of class ComplexOperations.
      */
     @Test
     public void testComplexSum() {
+        System.out.println("Test of complexSum method, of class ComplexOperations.");
 
         //This case is used to test that the sum between two numbers with
         //real part and imaginary part equal and opposite sign gives zero 
@@ -61,10 +63,11 @@ public class ComplexOperationsTest {
     }
 
     /**
-     * Test of complexSub method, of class Complex.
+     * Test of complexSub method, of class ComplexOperations.
      */
     @Test
     public void testComplexSub() {
+        System.out.println("Test of complexSub method, of class ComplexOperations.");
 
         //sub with positive real part ≠0 and immag part =0 
         Complex a = new Complex(4.0, 0.0);
@@ -140,10 +143,11 @@ public class ComplexOperationsTest {
     }
 
     /**
-     * Test of complexProd method, of class Complex.
+     * Test of complexProd method, of class ComplexOperations.
      */
     @Test
     public void testComplexProd() {
+        System.out.println("Test of complexProd method, of class ComplexOperations.");
 
         Complex a = new Complex(4.0, 2.0);
         Complex b = new Complex(3.0, 1.0);
@@ -178,10 +182,11 @@ public class ComplexOperationsTest {
     }
 
     /**
-     * Test of complexDiv method, of class Complex.
+     * Test of complexDiv method, of class ComplexOperations.
      */
     @Test
     public void testComplexDiv() {
+        System.out.println("Test of complexDiv method, of class ComplexOperations.");
 
         assertEquals(new Complex(1.4, 0.2), ComplexOperations.complexDiv(new Complex(4.0, 2.0), new Complex(3.0, 1.0)));
 
@@ -198,10 +203,11 @@ public class ComplexOperationsTest {
     }
 
     /**
-     * Test of sqrt method, of class Complex.
+     * Test of sqrt method, of class ComplexOperations.
      */
     @Test
     public void testSqrt() {
+        System.out.println("Test of sqrt method, of class ComplexOperations.");
 
         //sqrt of number with positive real part and positive immag. part
         assertEquals(new Complex(1.0986841, 0.4550899), ComplexOperations.sqrt(new Complex(1.0, 1.0)));
@@ -216,89 +222,358 @@ public class ComplexOperationsTest {
         assertEquals(new Complex(1.0986841, -0.4550899), ComplexOperations.sqrt(new Complex(1.0, -1.0)));
 
         //sqrt of number,with decimal part, with positive real part and positive immag. part
-        assertEquals(new Complex(1.6853045, 0.8603786), ComplexOperations.sqrt(new Complex(2.1, 2.9)));
+        assertEquals(new Complex(1.6853046, 0.8603786), ComplexOperations.sqrt(new Complex(2.1, 2.9)));
 
         //sqrt of number,with decimal part, with negative real part and negative immag. part
-        assertEquals(new Complex(0.8603786, -1.6853045), ComplexOperations.sqrt(new Complex(-2.1, -2.9)));
+        assertEquals(new Complex(0.8603787, -1.6853045), ComplexOperations.sqrt(new Complex(-2.1, -2.9)));
 
         //sqrt of number,with decimal part, with negative real part and positive immag. part
-        assertEquals(new Complex(0.8603786, 1.6853045), ComplexOperations.sqrt(new Complex(-2.1, 2.9)));
+        assertEquals(new Complex(0.8603787, 1.6853045), ComplexOperations.sqrt(new Complex(-2.1, 2.9)));
 
         //sqrt of number,with decimal part, with positive real part and negative immag. part
-        assertEquals(new Complex(1.6853045, -0.8603786), ComplexOperations.sqrt(new Complex(2.1, -2.9)));
+        assertEquals(new Complex(1.6853046, -0.8603786), ComplexOperations.sqrt(new Complex(2.1, -2.9)));
 
         //sqrt of number 0
         assertEquals(new Complex(0.0, 0.0), ComplexOperations.sqrt(new Complex(0.0, 0.0)));
     }
 
     /**
-     * Test of mod method, of class Complex.
+     * Test of mod method, of class ComplexOperations.
      */
     @Test
     public void testMod() {
+        System.out.println("Test of mod method, of class ComplexOperations.");
 
         //mod of number with positive real part and positive immag. part
-        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(1.0, 1.0)), 0);
+        assertEquals(1.4142136, ComplexOperations.mod(new Complex(1.0, 1.0)), 0);
 
         //mod of number with negative real part and negative immag. part
-        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(-1.0, -1.0)), 0);
+        assertEquals(1.4142136, ComplexOperations.mod(new Complex(-1.0, -1.0)), 0);
 
         //mod of number with negative real part and positive immag. part
-        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(-1.0, 1.0)), 0);
+        assertEquals(1.4142136, ComplexOperations.mod(new Complex(-1.0, 1.0)), 0);
 
         //mod of number with positive real part and negative immag. part
-        assertEquals(1.4142135623730951, ComplexOperations.mod(new Complex(1.0, -1.0)), 0);
+        assertEquals(1.4142136, ComplexOperations.mod(new Complex(1.0, -1.0)), 0);
 
         //mod of number,with decimal part, with positive real part and positive immag. part
-        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(2.1, 2.9)), 0);
+        assertEquals(3.5805028, ComplexOperations.mod(new Complex(2.1, 2.9)), 0);
 
         //mod of number,with decimal part, with negative real part and negative immag. part
-        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(-2.1, -2.9)), 0);
+        assertEquals(3.5805028, ComplexOperations.mod(new Complex(-2.1, -2.9)), 0);
 
         //mod of number,with decimal part, with negative real part and positive immag. part
-        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(-2.1, 2.9)), 0);
+        assertEquals(3.5805028, ComplexOperations.mod(new Complex(-2.1, 2.9)), 0);
 
         //mod of number,with decimal part, with positive real part and negative immag. part
-        assertEquals(3.5805027579936315, ComplexOperations.mod(new Complex(2.1, -2.9)), 0);
+        assertEquals(3.5805028, ComplexOperations.mod(new Complex(2.1, -2.9)), 0);
 
         //mod of number 0
         assertEquals(0.0, ComplexOperations.mod(new Complex(0.0, 0.0)), 0);
-
     }
 
     /**
-     * Test of arg method, of class Complex.
+     * Test of arg method, of class ComplexOperations.
      */
     @Test
     public void testArg() {
+        System.out.println("Test of arg method, of class ComplexOperations.");
 
         //arg of number with positive real part and positive immag. part
-        assertEquals(0.7853981633974483, ComplexOperations.arg(new Complex(1.0, 1.0)), 0);
+        assertEquals(0.7853982, ComplexOperations.arg(new Complex(1.0, 1.0)), 0);
 
         //arg of number with negative real part and negative immag. part
-        assertEquals(-2.356194490192345, ComplexOperations.arg(new Complex(-1.0, -1.0)), 0);
+        assertEquals(-2.3561945, ComplexOperations.arg(new Complex(-1.0, -1.0)), 0);
 
         //arg of number with negative real part and positive immag. part
-        assertEquals(2.356194490192345, ComplexOperations.arg(new Complex(-1.0, 1.0)), 0);
+        assertEquals(2.3561945, ComplexOperations.arg(new Complex(-1.0, 1.0)), 0);
 
         //arg of number with positive real part and negative immag. part
-        assertEquals(-0.7853981633974483, ComplexOperations.arg(new Complex(1.0, -1.0)), 0);
+        assertEquals(-0.7853982, ComplexOperations.arg(new Complex(1.0, -1.0)), 0);
 
         //arg of number,with decimal part, with positive real part and positive immag. part
-        assertEquals(0.9440534255838497, ComplexOperations.arg(new Complex(2.1, 2.9)), 0);
+        assertEquals(0.9440534, ComplexOperations.arg(new Complex(2.1, 2.9)), 0);
 
         //arg of number,with decimal part, with negative real part and negative immag. part
-        assertEquals(-2.1975392280059434, ComplexOperations.arg(new Complex(-2.1, -2.9)), 0);
+        assertEquals(-2.1975392, ComplexOperations.arg(new Complex(-2.1, -2.9)), 0);
 
         //arg of number,with decimal part, with negative real part and positive immag. part
-        assertEquals(2.1975392280059434, ComplexOperations.arg(new Complex(-2.1, 2.9)), 0);
+        assertEquals(2.1975392, ComplexOperations.arg(new Complex(-2.1, 2.9)), 0);
 
         //arg of number,with decimal part, with positive real part and negative immag. part
-        assertEquals(-0.9440534255838497, ComplexOperations.arg(new Complex(2.1, -2.9)), 0);
+        assertEquals(-0.9440534, ComplexOperations.arg(new Complex(2.1, -2.9)), 0);
 
         //arg of number 0
         assertEquals(0.0, ComplexOperations.arg(new Complex(0.0, 0.0)), 0);
 
     }
 
+    /**
+     * Test of exp method, of class ComplexOperations.
+     */
+    @Test
+    public void testExp() {
+        System.out.println("Test of exp method, of class ComplexOperations.");
+
+        //exp of number with positive real part and positive immag. part
+        assertEquals(new Complex(1.4686939, 2.2873553), ComplexOperations.exp(new Complex(1.0, 1.0)));
+
+        //exp of number with negative real part and negative immag. part
+        assertEquals(new Complex(0.1987661, -0.3095599), ComplexOperations.exp(new Complex(-1.0, -1.0)));
+
+        //exp of number with negative real part and positive immag. part
+        assertEquals(new Complex(0.1987661, 0.3095599), ComplexOperations.exp(new Complex(-1.0, 1.0)));
+
+        //exp of number with positive real part and negative immag. part
+        assertEquals(new Complex(1.4686939, -2.2873553), ComplexOperations.exp(new Complex(1.0, -1.0)));
+
+        //exp of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(-7.9290094, 1.9537507), ComplexOperations.exp(new Complex(2.1, 2.9)));
+
+        //exp of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(-0.1189001, -0.0292976), ComplexOperations.exp(new Complex(-2.1, -2.9)));
+
+        //exp of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(-0.1189001, 0.0292976), ComplexOperations.exp(new Complex(-2.1, 2.9)));
+
+        //exp of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(-7.9290094, -1.9537507), ComplexOperations.exp(new Complex(2.1, -2.9)));
+
+        //exp of number 0
+        assertEquals(new Complex(1.0, 0.0), ComplexOperations.exp(new Complex(0.0, 0.0)));
+    }
+
+    /**
+     * Test of log method, of class ComplexOperations.
+     */
+    @Test
+    public void testLog() throws OperationDenied {
+        System.out.println("Test of log method, of class ComplexOperations.");
+
+        //log of number with positive real part and positive immag. part
+        assertEquals(new Complex(0.3465736, 0.7853982), ComplexOperations.log(new Complex(1.0, 1.0)));
+
+        //log of number with negative real part and negative immag. part
+        assertEquals(new Complex(0.3465736, -2.3561945), ComplexOperations.log(new Complex(-1.0, -1.0)));
+
+        //log of number with negative real part and positive immag. part
+        assertEquals(new Complex(0.3465736, 2.3561945), ComplexOperations.log(new Complex(-1.0, 1.0)));
+
+        //log of number with positive real part and negative immag. part
+        assertEquals(new Complex(0.3465736, -0.7853982), ComplexOperations.log(new Complex(1.0, -1.0)));
+
+        //log of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(1.2755032, 0.9440534), ComplexOperations.log(new Complex(2.1, 2.9)));
+
+        //log of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(1.2755032, -2.1975392), ComplexOperations.log(new Complex(-2.1, -2.9)));
+
+        //log of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(1.2755032, 2.1975392), ComplexOperations.log(new Complex(-2.1, 2.9)));
+
+        //log of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(1.2755032, -0.9440534), ComplexOperations.log(new Complex(2.1, -2.9)));
+
+    }
+
+    /**
+     * Test of log method, of class ComplexOperations, when it launches
+     * OperationDenied.
+     */
+    @Test(expected = OperationDenied.class)
+    public void testLog2() throws OperationDenied {
+        System.out.println("Test of log method, of class ComplexOperations, when it launches OperationDenied.");
+
+        ComplexOperations.log(new Complex(0.0, 0.0));
+    }
+
+    /**
+     * Test of sin method, of class ComplexOperations.
+     */
+    @Test
+    public void testSin() {
+        System.out.println("Test of sin method, of class ComplexOperations.");
+
+        //sin of number with positive real part and positive immag. part
+        assertEquals(new Complex(1.2984576, 0.6349639), ComplexOperations.sin(new Complex(1.0, 1.0)));
+
+        //sin of number with negative real part and negative immag. part
+        assertEquals(new Complex(-1.2984576, -0.6349639), ComplexOperations.sin(new Complex(-1.0, -1.0)));
+
+        //sin of number with negative real part and positive immag. part
+        assertEquals(new Complex(-1.2984576, 0.6349639), ComplexOperations.sin(new Complex(-1.0, 1.0)));
+
+        //sin of number with positive real part and negative immag. part
+        assertEquals(new Complex(1.2984576, -0.6349639), ComplexOperations.sin(new Complex(1.0, -1.0)));
+
+        //sin of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(7.8677945, -4.5736841), ComplexOperations.sin(new Complex(2.1, 2.9)));
+
+        //sin of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(-7.8677945, 4.5736841), ComplexOperations.sin(new Complex(-2.1, -2.9)));
+
+        //sin of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(-7.8677945, -4.5736841), ComplexOperations.sin(new Complex(-2.1, 2.9)));
+
+        //sin of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(7.8677945, 4.5736841), ComplexOperations.sin(new Complex(2.1, -2.9)));
+
+        //sin of number 0
+        assertEquals(new Complex(0.0, 0.0), ComplexOperations.sin(new Complex(0.0, 0.0)));
+
+    }
+
+    /**
+     * Test of cos method, of class ComplexOperations.
+     */
+    @Test
+    public void testCos() {
+        System.out.println("Test of cos method, of class ComplexOperations.");
+
+        //cos of number with positive real part and positive immag. part
+        assertEquals(new Complex(0.8337300, -0.9888977), ComplexOperations.cos(new Complex(1.0, 1.0)));
+
+        //cos of number with negative real part and negative immag. part
+        assertEquals(new Complex(0.8337300, -0.9888977), ComplexOperations.cos(new Complex(-1.0, -1.0)));
+
+        //cos of number with negative real part and positive immag. part
+        assertEquals(new Complex(0.8337300, 0.9888977), ComplexOperations.cos(new Complex(-1.0, 1.0)));
+
+        //cos of number with positive real part and negative immag. part
+        assertEquals(new Complex(0.8337300, 0.9888977), ComplexOperations.cos(new Complex(1.0, -1.0)));
+
+        //cos of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(-4.6014624, -7.8202980), ComplexOperations.cos(new Complex(2.1, 2.9)));
+
+        //cos of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(-4.6014624, -7.8202980), ComplexOperations.cos(new Complex(-2.1, -2.9)));
+
+        //cos of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(-4.6014624, 7.8202980), ComplexOperations.cos(new Complex(-2.1, 2.9)));
+
+        //cos of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(-4.6014624, 7.8202980), ComplexOperations.cos(new Complex(2.1, -2.9)));
+
+        //cos of number 0
+        assertEquals(new Complex(1.0, 0.0), ComplexOperations.cos(new Complex(0.0, 0.0)));
+
+    }
+
+    /**
+     * Test of tan method, of class ComplexOperations.
+     */
+    @Test
+    public void testTan() throws OperationDenied {
+        System.out.println("Test of tan method, of class ComplexOperations.");
+
+        //tan of number with positive real part and positive immag. part
+        assertEquals(new Complex(0.2717526, 1.0839234), ComplexOperations.tan(new Complex(1.0, 1.0)));
+
+        //tan of number with negative real part and negative immag. part
+        assertEquals(new Complex(-0.2717526, -1.0839234), ComplexOperations.tan(new Complex(-1.0, -1.0)));
+
+        //tan of number with negative real part and positive immag. part
+        assertEquals(new Complex(-0.2717526, 1.0839234), ComplexOperations.tan(new Complex(-1.0, 1.0)));
+
+        //tan of number with positive real part and negative immag. part
+        assertEquals(new Complex(0.2717526, -1.0839234), ComplexOperations.tan(new Complex(1.0, -1.0)));
+
+        //tan of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(-0.0052932, 1.0029590), ComplexOperations.tan(new Complex(2.1, 2.9)));
+
+        //tan of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(0.0052932, -1.0029590), ComplexOperations.tan(new Complex(-2.1, -2.9)));
+
+        //tan of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(0.0052932, 1.0029590), ComplexOperations.tan(new Complex(-2.1, 2.9)));
+
+        //tan of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(-0.0052932, -1.0029590), ComplexOperations.tan(new Complex(2.1, -2.9)));
+
+    }
+
+    /**
+     * Test of pow method, of class ComplexOperations.
+     */
+    @Test
+    public void testPow() throws OperationDenied {
+        System.out.println("Test of pow method, of class ComplexOperations.");
+
+        //positive pow of number with positive real part and positive immag. part
+        assertEquals(new Complex(-2, 2), ComplexOperations.pow(new Complex(1.0, 1.0), 3.0));
+
+        //positive pow of number with negative real part and negative immag. part
+        assertEquals(new Complex(2, -2), ComplexOperations.pow(new Complex(-1.0, -1.0), 3.0));
+
+        //positive pow of number with negative real part and positive immag. part
+        assertEquals(new Complex(2, 2), ComplexOperations.pow(new Complex(-1.0, 1.0), 3.0));
+
+        //positive pow of number with positive real part and negative immag. part
+        assertEquals(new Complex(-2, -2), ComplexOperations.pow(new Complex(1.0, -1.0), 3.0));
+
+        //negative pow of number,with decimal part, with positive real part and positive immag. part
+        assertEquals(new Complex(-0.0207509, -0.0066341), ComplexOperations.pow(new Complex(2.1, 2.9), -3.0));
+
+        //negative pow of number,with decimal part, with negative real part and negative immag. part
+        assertEquals(new Complex(0.0207509, 0.0066341), ComplexOperations.pow(new Complex(-2.1, -2.9), -3.0));
+
+        //negative pow of number,with decimal part, with negative real part and positive immag. part
+        assertEquals(new Complex(0.0207509, -0.0066341), ComplexOperations.pow(new Complex(-2.1, 2.9), -3.0));
+
+        //negative pow of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(-0.0207509, 0.0066341), ComplexOperations.pow(new Complex(2.1, -2.9), -3.0));
+
+        //zero pow of number,with decimal part, with positive real part and negative immag. part
+        assertEquals(new Complex(1, 1), ComplexOperations.pow(new Complex(2.1, -2.9), 0.0));
+
+        //positive pow of number 0
+        assertEquals(new Complex(0, 0), ComplexOperations.pow(new Complex(0.0, 0.0), 3.0));
+
+    }
+
+    /**
+     * Test of pow method, of class Complex, when it throws an OperationDenied.
+     */
+    @Test(expected = OperationDenied.class)
+    public void testPow2() throws OperationDenied {
+        System.out.println("Test of pow method, of class Complex.");
+
+        //negative pow of number 0
+        ComplexOperations.pow(new Complex(0.0, 0.0), -3.0);
+    }
+
+    /**
+     * Test of arctan method, of class ComplexOperations.
+     */
+    @Test
+    public void testArctan() throws OperationDenied {
+        System.out.println("Test of arctan method, of class ComplexOperations.");
+
+        //This case is used to test that the arc tangent of a number with
+        //positive real part and imaginary part 
+        assertEquals(new Complex(1.4701378, 0.0993254), ComplexOperations.arctan(new Complex(5.0, 5.0)));
+
+        //This case is used to test that the arc tangent of a number with
+        //negative real part and imaginary part 
+        assertEquals(new Complex(-1.4701378, -0.0993254), ComplexOperations.arctan(new Complex(-5.0, -5.0)));
+
+        //This case is used to test that the arc tangent of a number with
+        //positive real part and imaginary part equal to zero
+        assertEquals(new Complex(1.3734008, 0.0), ComplexOperations.arctan(new Complex(5.0, 0.0)));
+
+        //This case is used to test that the arc tangent of a number with
+        //positive imaginarypart and real  part equal to zero
+        assertEquals(new Complex(1.5707963, 0.2027326), ComplexOperations.arctan(new Complex(0.0, 5.0)));
+
+        //This case is used to test that the arc tangent of a number with
+        //negative real part and imaginary part equal to zero
+        assertEquals(new Complex(-1.3734008, 0.0), ComplexOperations.arctan(new Complex(-5.0, 0.0)));
+
+        //This case is used to test that the arc tangent of a number with
+        //negative imaginarypart and real  part equal to zero
+        assertEquals(new Complex(1.5707963, -0.2027326), ComplexOperations.arctan(new Complex(0.0, -5.0)));
+
+        //This case is used to test that the arc tangent of zero
+        assertEquals(new Complex(0.0, 0.0), ComplexOperations.arctan(new Complex(0.0, 0.0)));
+    }
 }

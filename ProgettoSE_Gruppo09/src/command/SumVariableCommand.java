@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
  */
 public class SumVariableCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character x;
 
@@ -23,7 +23,7 @@ public class SumVariableCommand implements Command {
      * @param variables The list of variables SumVariableCommand operates on
      * @param x The variable in which sum is stored
      */
-    public SumVariableCommand(Stack stack, Variables variables, Character x) {
+    public SumVariableCommand(ComplexStack stack, Variables variables, Character x) {
         this.stack = stack;
         this.variables = variables;
         this.x = x;

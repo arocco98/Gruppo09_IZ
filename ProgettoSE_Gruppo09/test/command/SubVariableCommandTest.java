@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
  */
 public class SubVariableCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character char1;
     private Complex c1;
@@ -20,7 +20,7 @@ public class SubVariableCommandTest {
 
     @Before
     public void setUp() throws VariablesNameException {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         char1 = 'f';
         c1 = new Complex(14.2, 1.6);
@@ -33,7 +33,7 @@ public class SubVariableCommandTest {
      */
     @Test(expected = StackSizeException.class)
     public void testExecute1() throws Exception {
-        System.out.println("execute SubVariableCommand (StackSizeException)");
+        System.out.println("Test of execute method, of class SubVariableCommand, whet it throws a StackSizeException.");
         SubVariableCommand instance = new SubVariableCommand(stack, variables, char1);
         instance.execute();
     }
@@ -44,7 +44,7 @@ public class SubVariableCommandTest {
      */
     @Test(expected = VariablesValueException.class)
     public void testExecute2() throws Exception {
-        System.out.println("execute SubVariableCommand (VariablesValueException)");
+        System.out.println("Test of execute method, of class SubVariableCommand, whet it throws a VariablesValueException.");
         SubVariableCommand instance = new SubVariableCommand(stack, variables, char1);
         stack.push(c2);
         instance.execute();
@@ -55,7 +55,7 @@ public class SubVariableCommandTest {
      */
     @Test
     public void testExecute3() throws Exception {
-        System.out.println("execute SubVariableCommand");
+        System.out.println("Test of execute method, of class SubVariableCommand.");
         SubVariableCommand instance = new SubVariableCommand(stack, variables, char1);
         variables.setVariable(char1, c1);
         stack.push(c2);

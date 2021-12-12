@@ -12,7 +12,7 @@ import progettose_gruppo09.*;
  */
 public class SubVariableCommand implements Command {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character x;
 
@@ -23,7 +23,7 @@ public class SubVariableCommand implements Command {
      * @param variables The list of variables SubVariableCommand operates on
      * @param x The variable in which subtraction is stored
      */
-    public SubVariableCommand(Stack stack, Variables variables, Character x) {
+    public SubVariableCommand(ComplexStack stack, Variables variables, Character x) {
         this.stack = stack;
         this.variables = variables;
         this.x = x;

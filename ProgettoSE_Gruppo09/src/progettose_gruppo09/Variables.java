@@ -3,6 +3,10 @@ package progettose_gruppo09;
 import exceptions.VariablesNameException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class allows the use of 26 variables (from 'a' to 'z').
@@ -64,6 +68,42 @@ public class Variables {
         } else {
             throw new VariablesNameException();
         }
+    }
+
+    /**
+     * This method is used to verify that a Variables object is equal to another
+     * one
+     *
+     * @param obj the reference object with which to compare
+     * @return true if this object is the same as the obj argument; false
+     * otherwise
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Variables other = (Variables) obj;
+        for (Entry<Character, Complex> entry : variables.entrySet()) {
+            try {
+                if ((entry.getValue() != null) && (other.getVariable(entry.getKey()) != null)) {
+                    if (!entry.getValue().equals(other.getVariable(entry.getKey()))) {
+                        return false;
+                    }
+                } else if (!(entry.getValue() == null) || !(other.getVariable(entry.getKey()) == null)) {
+                    return false;
+                }
+            } catch (VariablesNameException ex) {
+                Logger.getLogger(Variables.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return true;
     }
 
     /**

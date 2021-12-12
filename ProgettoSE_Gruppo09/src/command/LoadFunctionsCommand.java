@@ -19,7 +19,7 @@ import progettose_gruppo09.*;
 public class LoadFunctionsCommand implements Command {
 
     private ArrayList<Function> functions;
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private File file;
 
@@ -34,7 +34,7 @@ public class LoadFunctionsCommand implements Command {
      * @param file the file from which you want to read the user-defined
      * Operation.
      */
-    public LoadFunctionsCommand(ArrayList<Function> functionCommands, Stack stack, Variables variables, File file) {
+    public LoadFunctionsCommand(ArrayList<Function> functionCommands, ComplexStack stack, Variables variables, File file) {
         this.functions = functionCommands;
         this.stack = stack;
         this.variables = variables;

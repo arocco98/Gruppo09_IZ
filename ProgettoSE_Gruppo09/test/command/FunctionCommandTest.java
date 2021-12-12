@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import progettose_gruppo09.Complex;
 import progettose_gruppo09.Function;
-import progettose_gruppo09.Stack;
+import progettose_gruppo09.ComplexStack;
 import progettose_gruppo09.Variables;
 
 /**
@@ -18,14 +18,14 @@ import progettose_gruppo09.Variables;
  */
 public class FunctionCommandTest {
 
-    private Stack stack = null;
+    private ComplexStack stack = null;
     private Variables variables = null;
     private ArrayList<Function> functions;
 
     @Before
     public void setUp() {
         // instantiating stack and variables attributes
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         functions = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class FunctionCommandTest {
      */
     @Test
     public void testExecute() throws Exception {
-        System.out.println("Execute with only default operations");
+        System.out.println("Test of execute method, of class FunctionCommand with only default operations");
 
         String name = "function";
         String sequenceString = "+ - dup dup >a";
@@ -74,7 +74,7 @@ public class FunctionCommandTest {
      */
     @Test
     public void testExecuteWithCreatedFunctionCommand() throws Exception {
-        System.out.println("Execute with a user-defined operation");
+        System.out.println("Test of execute method, of class FunctionCommand with a user-defined operation");
 
         Function function1 = new Function("function1", "+ - dup dup >a");
         functions.add(function1);
@@ -97,7 +97,7 @@ public class FunctionCommandTest {
      */
     @Test(expected = Exception.class)
     public void testExecuteWhenThrowsException() throws Exception {
-        System.out.println("Execute test when it throws an exception");
+        System.out.println("Test of execute method, of class FunctionCommand when it throws an exception");
 
         FunctionCommand instance = null;
         String name = "function";
@@ -112,7 +112,7 @@ public class FunctionCommandTest {
      */
     @Test
     public void testEquals() throws FunctionNameAlreadyExistsException, NoMatchFoundException {
-        System.out.println("equals");
+        System.out.println("Test of equals method, of class FunctionCommand.");
 
         FunctionCommand instance = new FunctionCommand(new Function("function", "+ - * /"));
 

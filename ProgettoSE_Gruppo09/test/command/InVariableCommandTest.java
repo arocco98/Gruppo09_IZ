@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit4TestClass.java to edit this template
- */
 package command;
 
 import exceptions.StackSizeException;
@@ -17,7 +13,7 @@ import progettose_gruppo09.*;
  */
 public class InVariableCommandTest {
 
-    private Stack stack;
+    private ComplexStack stack;
     private Variables variables;
     private Character variable;
     private Character variable2;
@@ -25,7 +21,7 @@ public class InVariableCommandTest {
 
     @Before
     public void setUp() {
-        stack = new Stack();
+        stack = new ComplexStack();
         variables = new Variables();
         variable = 'a';
         variable2 = 'i';
@@ -37,7 +33,8 @@ public class InVariableCommandTest {
      */
     @Test
     public void testExecute() throws VariablesNameException, StackSizeException {
-        System.out.println("execute InVariableCommandTest");
+        System.out.println("Test of execute method, of class InVariableCommand.");
+
         stack.push(complex);
         InVariableCommand instance = new InVariableCommand(variable, stack, variables);
         instance.execute();
@@ -61,7 +58,8 @@ public class InVariableCommandTest {
      */
     @Test(expected = VariablesNameException.class)
     public void testExecuteThrowsException1() throws VariablesNameException, StackSizeException {
-        System.out.println("testExecute throws exception VariablesException");
+        System.out.println("Test of testExecute method, of class InVariableCommand, when it throws an VariablesException.");
+
         stack.push(complex);
         InVariableCommand instance = new InVariableCommand('A', stack, variables);
         instance.execute();
@@ -76,7 +74,7 @@ public class InVariableCommandTest {
      */
     @Test(expected = StackSizeException.class)
     public void testExecuteThrowsException2() throws VariablesNameException, StackSizeException {
-        System.out.println("testExecute throws exception StackSizeException");
+        System.out.println("Test of testExecute method, of class InVariableCommand, when it throws an StackSizeException.");
         InVariableCommand instance = new InVariableCommand('a', stack, variables);
         instance.execute();
     }
