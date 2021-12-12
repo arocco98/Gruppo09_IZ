@@ -152,6 +152,8 @@ public class AvailableFunctionsController implements Initializable {
             //instantiating an Alert popup to confirm the deletion
             Alert dialog = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this function?", ButtonType.YES, ButtonType.CANCEL);
             //showing the Alert popup
+            dialog.setTitle("Confirm to delete");
+            dialog.setHeaderText("Confirm to delete");
             dialog.showAndWait();
 
             if (dialog.getResult() == ButtonType.YES) {
