@@ -1162,6 +1162,10 @@ public class FXMLDocumentController implements Initializable {
                 functions.clear();
                 functions.addAll(tmpFunctions);
                 refreshFunctionCommands();
+                Alert dialog = new Alert(AlertType.INFORMATION, "Functions loaded correctly", ButtonType.OK);
+                dialog.setTitle("Load functions");
+                dialog.setHeaderText("Functions loaded");
+                dialog.show();
             } catch (FileNotFoundException ex) {
                 Alert dialog = new Alert(AlertType.ERROR, "File not found", ButtonType.OK);
                 dialog.setTitle("Error");
