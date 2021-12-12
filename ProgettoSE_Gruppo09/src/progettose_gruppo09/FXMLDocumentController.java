@@ -18,6 +18,8 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -118,6 +120,54 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ComboBox<Function> functionsComboBox;
     @FXML
+    private Button sumButton;
+    @FXML
+    private Button subtractionButton;
+    @FXML
+    private Button productButton;
+    @FXML
+    private Button divisionButton;
+    @FXML
+    private Button squareRootButton;
+    @FXML
+    private Button inversionSignButton;
+    @FXML
+    private Button clearButton;
+    @FXML
+    private Button dropButton;
+    @FXML
+    private Button dupButton;
+    @FXML
+    private Button swapButton;
+    @FXML
+    private Button overButton;
+    @FXML
+    private Button saveButton;
+    @FXML
+    private Button restoreButton;
+    @FXML
+    private Button modulusButton;
+    @FXML
+    private Button argumentButton;
+    @FXML
+    private Button powerButton;
+    @FXML
+    private Button exponentialButton;
+    @FXML
+    private Button logButton;
+    @FXML
+    private Button sineButton;
+    @FXML
+    private Button cosineButton;
+    @FXML
+    private Button tangentButton;
+    @FXML
+    private Button arcsineButton;
+    @FXML
+    private Button arccosineButton;
+    @FXML
+    private Button arctangentButton;
+    @FXML
     private MenuItem saveFunctionButton; // BIND!!!
     @FXML
     private Button inVarBtn;
@@ -155,6 +205,9 @@ public class FXMLDocumentController implements Initializable {
     private SinCommand sinCommand = null;
     private CosCommand cosCommand = null;
     private TanCommand tanCommand = null;
+    private ArcsinCommand asinCommand = null;
+    private ArccosCommand acosCommand = null;
+    //private ArctanCommand atanCommand = null;
 
     // variables 
     private Variables variables = new Variables();
@@ -166,6 +219,9 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // setting up buttons tooltip
+        setupButtons();
+
         // initializing stack and elementList variables
         initializeStack();
 
@@ -190,6 +246,40 @@ public class FXMLDocumentController implements Initializable {
         stackColumn.setSortable(false);
         observableStack = FXCollections.observableList(stack);
         elementList.setItems(observableStack);
+    }
+
+    /**
+     * Sets up all the tooltip of all the buttons
+     */
+    private void setupButtons() {
+        sumButton.setTooltip(new Tooltip("Sum the first two elements of the stack"));
+        subtractionButton.setTooltip(new Tooltip("Subtract the first element in the stack from the second one"));
+        productButton.setTooltip(new Tooltip("Multiply the firts two elements of the stack"));
+        divisionButton.setTooltip(new Tooltip("Divide the second element in the stack by the first one"));
+        squareRootButton.setTooltip(new Tooltip("Perform the square root of the first element of the stack"));
+        inversionSignButton.setTooltip(new Tooltip("Perform the inversion of sign of the first element of the stack"));
+        modulusButton.setTooltip(new Tooltip("Execute the modulus of the first element of the stack"));
+        argumentButton.setTooltip(new Tooltip("Execute the argument of the first element of the stack"));
+        powerButton.setTooltip(new Tooltip("Execute the power of the second element of the stack elevated by the first one"));
+        exponentialButton.setTooltip(new Tooltip("Elevate the constant 'e' to the power of the first element of the stack"));
+        logButton.setTooltip(new Tooltip("Execute the natural logarithm of the first element of the stack"));
+        sineButton.setTooltip(new Tooltip("Execute the sine of the first element of the stack"));
+        cosineButton.setTooltip(new Tooltip("Execute the cosine of the first element of the stack"));
+        tangentButton.setTooltip(new Tooltip("Execute the tangent of the first element of the stack"));
+        arcsineButton.setTooltip(new Tooltip("Execute the arc sine of the first element of the stack"));
+        arccosineButton.setTooltip(new Tooltip("Execute the arc cosine of the first element of the stack"));
+        arctangentButton.setTooltip(new Tooltip("Execute the arc tangent of the first element of the stack"));
+        clearButton.setTooltip(new Tooltip("Clear the stack by removing all the elements"));
+        dropButton.setTooltip(new Tooltip("Remove the first element of the stack"));
+        dupButton.setTooltip(new Tooltip("Duplicate the first element of the stack"));
+        swapButton.setTooltip(new Tooltip("Swap the first two elements of the stack"));
+        overButton.setTooltip(new Tooltip("Insert in the stack the second elements of the stack"));
+        saveButton.setTooltip(new Tooltip("Save a copy of the actual variables"));
+        restoreButton.setTooltip(new Tooltip("Restore a copy of the last saved variables"));
+        inVarBtn.setTooltip(new Tooltip("Remove the first element of the stack and push it into the selected variable"));
+        outVarBtn.setTooltip(new Tooltip("Insert a copy of the element present in the selected variable into the stack"));
+        sumVarBtn.setTooltip(new Tooltip("Sum the first element of the stack to the value present in the selected variable"));
+        subVarBtn.setTooltip(new Tooltip("Subtract the first element of the stack from the value present in the selected variable"));
     }
 
     /**
@@ -228,6 +318,9 @@ public class FXMLDocumentController implements Initializable {
         sinCommand = new SinCommand(stack);
         cosCommand = new CosCommand(stack);
         tanCommand = new TanCommand(stack);
+        asinCommand = new ArcsinCommand(stack);
+        acosCommand = new ArccosCommand(stack);
+        //atancommand = new ArctanCommand(stack);
     }
 
     /**
@@ -513,17 +606,35 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void arcsin(ActionEvent event) {
-        System.out.println(ComplexOperations.arcsin(stack.pop()));
+        try {
+            asinCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform arc sine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void arccos(ActionEvent event) {
-        System.out.println(ComplexOperations.arccos(stack.pop()));
+        try {
+            acosCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform arc cosine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
     }
 
     @FXML
     private void arctan(ActionEvent event) {
-        
+        /*try {
+            atanCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform arc sine with empty stack");
+        }*/
+        // refreshing the listView
+        refreshStack();
     }
 
     /**

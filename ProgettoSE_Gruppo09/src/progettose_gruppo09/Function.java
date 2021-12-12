@@ -1,33 +1,6 @@
 package progettose_gruppo09;
 
-import command.ArgCommand;
-import command.ClearCommand;
-import command.Command;
-import command.CosCommand;
-import command.DivCommand;
-import command.DropCommand;
-import command.DupCommand;
-import command.ExpCommand;
-import command.FunctionCommand;
-import command.InVariableCommand;
-import command.InsertCommand;
-import command.InversionSignCommand;
-import command.LogCommand;
-import command.ModCommand;
-import command.OutVariableCommand;
-import command.OverCommand;
-import command.PowCommand;
-import command.ProdCommand;
-import command.RestoreVariablesCommand;
-import command.SaveVariablesCommand;
-import command.SinCommand;
-import command.SqrtCommand;
-import command.SubCommand;
-import command.SubVariableCommand;
-import command.SumCommand;
-import command.SumVariableCommand;
-import command.SwapCommand;
-import command.TanCommand;
+import command.*;
 import exceptions.FunctionNameAlreadyExistsException;
 import exceptions.NoMatchFoundException;
 import java.util.ArrayList;
@@ -163,6 +136,12 @@ public class Function {
                 commands.add(new CosCommand(stack));
             } else if (string.matches("tan$")) { // the string is an tangent operation
                 commands.add(new TanCommand(stack));
+            } else if (string.matches("arcsin$")) { // the string is an arc sine operation
+                commands.add(new ArcsinCommand(stack));
+            } else if (string.matches("arccos$")) { // the string is an arc cosine operation
+                commands.add(new ArccosCommand(stack));
+            } else if (string.matches("arctan$")) { // the string is an arc tangent operation
+                //commands.add(new ArctanCommand(stack));
             } else if (string.matches("clear$")) { // the string is a clear operation
                 commands.add(new ClearCommand(stack));
             } else if (string.matches("drop$")) { // the string is a drop operation
@@ -227,7 +206,7 @@ public class Function {
         }
 
         // This array of strings contains all the default operation names, except the operation on the variables
-        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over", "save", "restore", "mod", "arg", "pow", "exp", "log", "sin", "cos", "tan"};
+        String[] defaultCommandNames = {"+", "-", "*", "/", "sqrt", "+-", "clear", "drop", "dup", "swap", "over", "save", "restore", "mod", "arg", "pow", "exp", "log", "sin", "cos", "tan", "arcsin", "arccos", "arctan"};
         // checking if the function name is a default operation name
         for (String commandName : defaultCommandNames) {
             if (name.equals(commandName)) {

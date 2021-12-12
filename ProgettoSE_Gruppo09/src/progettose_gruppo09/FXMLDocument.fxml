@@ -81,17 +81,17 @@
                                 </Label>
                                 <TextField fx:id="elementTextField" prefWidth="145.0" promptText="Insert element here..." GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                 <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#insert" prefHeight="50.0" prefWidth="100.0" text="Insert" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                                <Button mnemonicParsing="false" onAction="#sum" prefHeight="50.0" prefWidth="100.0" text="+" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                <Button mnemonicParsing="false" onAction="#subtraction" prefHeight="50.0" prefWidth="100.0" text="-" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                <Button mnemonicParsing="false" onAction="#product" prefHeight="50.0" prefWidth="100.0" text="*" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                <Button mnemonicParsing="false" onAction="#division" prefHeight="50.0" prefWidth="100.0" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                <Button mnemonicParsing="false" onAction="#squareRoot" prefHeight="50.0" prefWidth="100.0" text="sqrt" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                                <Button mnemonicParsing="false" onAction="#inversionSign" prefHeight="50.0" prefWidth="100.0" text="+-" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                                <Button mnemonicParsing="false" onAction="#clear" prefHeight="50.0" prefWidth="100.0" text="Clear" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                                <Button mnemonicParsing="false" onAction="#drop" prefHeight="50.0" prefWidth="100.0" text="Drop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                                <Button mnemonicParsing="false" onAction="#dup" prefHeight="50.0" prefWidth="100.0" text="Dup" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-                                <Button mnemonicParsing="false" onAction="#swap" prefHeight="50.0" prefWidth="100.0" text="Swap" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-                                <Button mnemonicParsing="false" onAction="#over" prefHeight="50.0" prefWidth="100.0" text="Over" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+                                <Button fx:id="sumButton" mnemonicParsing="false" onAction="#sum" prefHeight="50.0" prefWidth="100.0" text="+" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                <Button fx:id="subtractionButton" mnemonicParsing="false" onAction="#subtraction" prefHeight="50.0" prefWidth="100.0" text="-" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                <Button fx:id="productButton" mnemonicParsing="false" onAction="#product" prefHeight="50.0" prefWidth="100.0" text="*" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                <Button fx:id="divisionButton" mnemonicParsing="false" onAction="#division" prefHeight="50.0" prefWidth="100.0" text="/" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                <Button fx:id="squareRootButton" mnemonicParsing="false" onAction="#squareRoot" prefHeight="50.0" prefWidth="100.0" text="sqrt" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                <Button fx:id="inversionSignButton" mnemonicParsing="false" onAction="#inversionSign" prefHeight="50.0" prefWidth="100.0" text="+-" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                                <Button fx:id="clearButton" mnemonicParsing="false" onAction="#clear" prefHeight="50.0" prefWidth="100.0" text="Clear" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                                <Button fx:id="dropButton" mnemonicParsing="false" onAction="#drop" prefHeight="50.0" prefWidth="100.0" text="Drop" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                                <Button fx:id="dupButton" mnemonicParsing="false" onAction="#dup" prefHeight="50.0" prefWidth="100.0" text="Dup" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+                                <Button fx:id="swapButton" mnemonicParsing="false" onAction="#swap" prefHeight="50.0" prefWidth="100.0" text="Swap" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+                                <Button fx:id="overButton" mnemonicParsing="false" onAction="#over" prefHeight="50.0" prefWidth="100.0" text="Over" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
                                 <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" />
                                 <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="10" />
                                 <ComboBox fx:id="variablesComboBox" onAction="#selectedItemChanged" prefWidth="210.0" promptText="a" GridPane.columnSpan="2147483647" GridPane.rowIndex="11" />
@@ -102,19 +102,19 @@
                                 <Separator prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="14" />
                                 <Button fx:id="executeFunctionButton" mnemonicParsing="false" onAction="#executeFunction" prefHeight="50.0" prefWidth="100.0" text="Execute" GridPane.columnIndex="2" GridPane.rowIndex="15" />
                                 <ComboBox fx:id="functionsComboBox" prefWidth="210.0" promptText="Select a function" GridPane.columnSpan="2" GridPane.rowIndex="15" />
-                                <Button mnemonicParsing="false" onAction="#saveVariables" prefHeight="50.0" prefWidth="100.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-                                <Button mnemonicParsing="false" onAction="#restoreVariables" prefHeight="50.0" prefWidth="100.0" text="Restore" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-                                <Button mnemonicParsing="false" onAction="#modulus" prefHeight="50.0" prefWidth="100.0" text="mod" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                                <Button mnemonicParsing="false" onAction="#arg" prefHeight="50.0" prefWidth="100.0" text="arg" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                                <Button mnemonicParsing="false" onAction="#power" prefHeight="50.0" prefWidth="100.0" text="pow" textAlignment="CENTER" GridPane.rowIndex="4" />
-                                <Button mnemonicParsing="false" onAction="#exponential" prefHeight="50.0" prefWidth="100.0" text="exp" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Button mnemonicParsing="false" onAction="#naturalLogarithm" prefHeight="50.0" prefWidth="100.0" text="log" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                                <Button mnemonicParsing="false" onAction="#sine" prefHeight="50.0" prefWidth="100.0" text="sin" textAlignment="CENTER" GridPane.rowIndex="5" />
-                                <Button mnemonicParsing="false" onAction="#cosine" prefHeight="50.0" prefWidth="100.0" text="cos" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                <Button mnemonicParsing="false" onAction="#tangent" prefHeight="50.0" prefWidth="100.0" text="tan" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Button mnemonicParsing="false" onAction="#arcsin" prefHeight="50.0" prefWidth="100.0" text="arcsin" textAlignment="CENTER" GridPane.rowIndex="6" />
-                        <Button mnemonicParsing="false" onAction="#arccos" prefHeight="50.0" prefWidth="100.0" text="arccos" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Button mnemonicParsing="false" onAction="#arctan" prefHeight="50.0" prefWidth="100.0" text="arctan" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveVariables" prefHeight="50.0" prefWidth="100.0" text="Save" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                <Button fx:id="restoreButton" mnemonicParsing="false" onAction="#restoreVariables" prefHeight="50.0" prefWidth="100.0" text="Restore" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                                <Button fx:id="modulusButton" mnemonicParsing="false" onAction="#modulus" prefHeight="50.0" prefWidth="100.0" text="mod" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                <Button fx:id="argumentButton" mnemonicParsing="false" onAction="#arg" prefHeight="50.0" prefWidth="100.0" text="arg" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                <Button fx:id="powerButton" mnemonicParsing="false" onAction="#power" prefHeight="50.0" prefWidth="100.0" text="pow" textAlignment="CENTER" GridPane.rowIndex="4" />
+                                <Button fx:id="exponentialButton" mnemonicParsing="false" onAction="#exponential" prefHeight="50.0" prefWidth="100.0" text="exp" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                <Button fx:id="logButton" mnemonicParsing="false" onAction="#naturalLogarithm" prefHeight="50.0" prefWidth="100.0" text="log" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                <Button fx:id="sineButton" mnemonicParsing="false" onAction="#sine" prefHeight="50.0" prefWidth="100.0" text="sin" textAlignment="CENTER" GridPane.rowIndex="5" />
+                                <Button fx:id="cosineButton" mnemonicParsing="false" onAction="#cosine" prefHeight="50.0" prefWidth="100.0" text="cos" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                <Button fx:id="tangentButton" mnemonicParsing="false" onAction="#tangent" prefHeight="50.0" prefWidth="100.0" text="tan" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Button fx:id="arcsineButton" mnemonicParsing="false" onAction="#arcsin" prefHeight="50.0" prefWidth="100.0" text="arcsin" textAlignment="CENTER" GridPane.rowIndex="6" />
+                        <Button fx:id="arccosineButton" mnemonicParsing="false" onAction="#arccos" prefHeight="50.0" prefWidth="100.0" text="arccos" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Button fx:id="arctangentButton" mnemonicParsing="false" onAction="#arctan" prefHeight="50.0" prefWidth="100.0" text="arctan" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                             </children>
                         </GridPane>
                     </children>

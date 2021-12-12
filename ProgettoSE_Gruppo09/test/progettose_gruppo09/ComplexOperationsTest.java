@@ -524,4 +524,54 @@ public class ComplexOperationsTest {
         ComplexOperations.pow(new Complex(0.0, 0.0), -3.0);
     }
 
+    /**
+     * Test of arcsin method, of class CompleOperations.
+     *
+     * @throws OperationDenied When an exception is thrown.
+     */
+    @Test
+    public void testArcsin() throws OperationDenied {
+        System.out.println("arcsin");
+
+        // real and imaginary part positive
+        assertEquals(new Complex(0.2579882, 2.2551835), ComplexOperations.arcsin(new Complex(1.23, 4.56)));
+        // real and imaginary part negative
+        assertEquals(new Complex(-0.2579897, -2.2551804), ComplexOperations.arcsin(new Complex(-1.23, -4.56)));
+        // real part positive and imaginary part negative
+        assertEquals(new Complex(0.2579897, -2.2551804), ComplexOperations.arcsin(new Complex(1.23, -4.56)));
+        // real part negative and imaginary part positive
+        assertEquals(new Complex(-0.2579882, 2.2551835), ComplexOperations.arcsin(new Complex(-1.23, 4.56)));
+        // real part equals to zero
+        assertEquals(new Complex(0.0, 2.2222815), ComplexOperations.arcsin(new Complex(0.0, 4.56)));
+        // imaginary part equals to zero
+        assertEquals(new Complex(1.5707963, -0.6658635), ComplexOperations.arcsin(new Complex(1.23, 0.0)));
+        // real and imaginary part equals to zero
+        assertEquals(new Complex(0.0, 0.0), ComplexOperations.arcsin(new Complex(0.0, 0.0)));
+    }
+
+    /**
+     * Test of arccos method, of class CompleOperations.
+     *
+     * @throws OperationDenied When an exception is thrown.
+     */
+    @Test
+    public void testArccos() throws OperationDenied {
+        System.out.println("arccos");
+
+        // real and imaginary part positive
+        assertEquals(new Complex(1.3128066, -2.2551804), ComplexOperations.arccos(new Complex(1.23, 4.56)));
+        // real and imaginary part negative
+        assertEquals(new Complex(1.8287845, 2.2551835), ComplexOperations.arccos(new Complex(-1.23, -4.56)));
+        // real part positive and imaginary part negative
+        assertEquals(new Complex(1.3128081, 2.2551835), ComplexOperations.arccos(new Complex(1.23, -4.56)));
+        // real part negative and imaginary part positive
+        assertEquals(new Complex(1.828786, -2.2551804), ComplexOperations.arccos(new Complex(-1.23, 4.56)));
+        // real part equals to zero
+        assertEquals(new Complex(1.5707963, -2.2222815), ComplexOperations.arccos(new Complex(0.0, 4.56)));
+        // imaginary part equals to zero
+        assertEquals(new Complex(0.0, 0.6658636), ComplexOperations.arccos(new Complex(1.23, 0.0)));
+        // real and imaginary part equals to zero
+        assertEquals(new Complex(1.5707963, 0.0), ComplexOperations.arccos(new Complex(0.0, 0.0)));
+    }
+
 }

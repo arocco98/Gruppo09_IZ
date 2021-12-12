@@ -310,50 +310,49 @@ public class ComplexOperations {
 
     /**
      * This method calculates the arc sine of a Complex number
+     *
      * @param complex The input Complex number to calculate arc sine
      * @return The arc sine of c
      */
-    public static Complex arcsin(Complex complex) {
+    public static Complex arcsin(Complex complex) throws OperationDenied {
 
-        double realPart = complex.getReal();
-        double imaginaryPart = complex.getImaginary();
-        double real;
-        double imaginary;
+        Complex operand1 = new Complex(0.0, -1.0);
+        Complex exponentialPart = ComplexOperations.exp(ComplexOperations.complexProd(new Complex(0.0, 0.5), new Complex(ComplexOperations.arg(ComplexOperations.complexSub(new Complex(1.0, 0.0), ComplexOperations.pow(complex, 2))), 0.0)));
+        Complex modulusPart = ComplexOperations.sqrt(new Complex(ComplexOperations.mod(ComplexOperations.complexSub(new Complex(1.0, 0.0), ComplexOperations.pow(complex, 2))), 0.0));
+        Complex izPart = ComplexOperations.complexProd(new Complex(0.0, 1.0), complex);
+        Complex lnPart = ComplexOperations.log(ComplexOperations.complexSum(izPart, ComplexOperations.complexProd(modulusPart, exponentialPart)));
 
-        double a = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) - Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
-        double b = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) + Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
+        Complex result = ComplexOperations.complexProd(operand1, lnPart);
+        double realPart = result.getReal();
+        double imaginaryPart = result.getImaginary();
 
-        real = Math.asin(a);
-        imaginary = Math.log(b + Math.sqrt(Math.pow(b, 2) - 1));
+        result.setReal(new BigDecimal(realPart).setScale(7, RoundingMode.HALF_UP).doubleValue());
+        result.setImaginary(new BigDecimal(imaginaryPart).setScale(7, RoundingMode.HALF_UP).doubleValue());
 
-        real = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP).doubleValue();
-        imaginary = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP).doubleValue();
-
-        return new Complex(real, imaginary);
+        return result;
     }
 
     /**
      * This method calculates the arc cosine of a Complex number
+     *
      * @param complex The input Complex number to calculate arc cosine
      * @return The arc cosine of c
      */
-    public static Complex arccos(Complex complex) {
+    public static Complex arccos(Complex complex) throws OperationDenied {
+        Complex operand1 = new Complex(0.0, -1.0);
+        Complex exponentialPart = ComplexOperations.exp(ComplexOperations.complexProd(new Complex(0.0, 0.5), new Complex(ComplexOperations.arg(ComplexOperations.complexSub(new Complex(1.0, 0.0), ComplexOperations.pow(complex, 2))), 0.0)));
+        Complex modulusPart = ComplexOperations.sqrt(new Complex(ComplexOperations.mod(ComplexOperations.complexSub(new Complex(1.0, 0.0), ComplexOperations.pow(complex, 2))), 0.0));
+        Complex iModulusPart = ComplexOperations.complexProd(new Complex(0.0, 1.0), modulusPart);
+        Complex lnPart = ComplexOperations.log(ComplexOperations.complexSum(complex, ComplexOperations.complexProd(iModulusPart, exponentialPart)));
 
-        double realPart = complex.getReal();
-        double imaginaryPart = complex.getImaginary();
-        double real;
-        double imaginary;
+        Complex result = ComplexOperations.complexProd(operand1, lnPart);
+        double realPart = result.getReal();
+        double imaginaryPart = result.getImaginary();
 
-        double a = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) - Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
-        double b = (Math.sqrt(Math.pow(1 + realPart, 2) + Math.pow(imaginaryPart, 2)) + Math.sqrt(Math.pow(1 - realPart, 2) + Math.pow(imaginaryPart, 2))) / 2;
+        result.setReal(new BigDecimal(realPart).setScale(7, RoundingMode.HALF_UP).doubleValue());
+        result.setImaginary(new BigDecimal(imaginaryPart).setScale(7, RoundingMode.HALF_UP).doubleValue());
 
-        real = Math.acos(a);
-        imaginary = Math.log(b + Math.sqrt(Math.pow(b, 2) - 1));
-
-        real = new BigDecimal(real).setScale(7, RoundingMode.HALF_UP).doubleValue();
-        imaginary = new BigDecimal(imaginary).setScale(7, RoundingMode.HALF_UP).doubleValue();
-
-        return new Complex(real, -imaginary);
+        return result;
     }
 
     /**
