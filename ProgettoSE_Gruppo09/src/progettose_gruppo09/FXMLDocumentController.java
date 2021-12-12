@@ -18,8 +18,6 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,7 +30,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -58,16 +55,30 @@ public class FXMLDocumentController implements Initializable {
         private Character key;
         private Complex value;
 
+        /**
+         * Constructor of MyEntry class
+         */
         public MyEntry() {
             this.key = null;
             this.value = null;
         }
 
+        /**
+         * Constructor of MyEntry class
+         */
         public MyEntry(Character character, Complex complex) {
             this.key = character;
             this.value = complex;
         }
 
+        /**
+         * Returns a set of MyEntry created using the set of entry passed as
+         * argument.
+         *
+         * @param entrySet The entry set.
+         * @return A set of MyEntry objects containing the same element as
+         * entrySet.
+         */
         public Set<MyEntry<Character, Complex>> fromEntrySet(Set<Entry<Character, Complex>> entrySet) {
             Set<MyEntry<Character, Complex>> set = new TreeSet<>();
             for (Entry<Character, Complex> entry : entrySet) {
@@ -76,22 +87,43 @@ public class FXMLDocumentController implements Initializable {
             return set;
         }
 
+        /**
+         * Getter of the key attribute.
+         *
+         * @return The key of MyEntry object.
+         */
         @Override
         public Character getKey() {
             return this.key;
         }
 
+        /**
+         * Getter of the value attribute.
+         *
+         * @return The value of MyEntry object.
+         */
         @Override
         public Complex getValue() {
             return this.value;
         }
 
+        /**
+         * Setter of Value attribute.
+         *
+         * @param value The new value of value attribute.
+         * @return The new value inserted.
+         */
         @Override
         public Complex setValue(Complex value) {
             this.value = value;
             return this.getValue();
         }
 
+        /**
+         * String representation of the object.
+         *
+         * @return A string representation of the object.
+         */
         @Override
         public String toString() {
             if (this.getValue() == null) {
@@ -100,6 +132,14 @@ public class FXMLDocumentController implements Initializable {
             return this.getKey() + ":\t" + this.getValue();
         }
 
+        /**
+         * Compare the object to the one passed as parameter.
+         *
+         * @param o The object to compare.
+         * @return 0, if the key are equals; a value greater than 0 if the
+         * object key is alphabetically greater than the object key; otherwise a
+         * value less than 0.
+         */
         @Override
         public int compareTo(Character o) {
             return this.key.toString().compareTo(o.toString());
@@ -168,8 +208,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button arctangentButton;
     @FXML
-    private MenuItem saveFunctionButton; // BIND!!!
-    @FXML
     private Button inVarBtn;
     @FXML
     private Button outVarBtn;
@@ -207,7 +245,7 @@ public class FXMLDocumentController implements Initializable {
     private TanCommand tanCommand = null;
     private ArcsinCommand asinCommand = null;
     private ArccosCommand acosCommand = null;
-    //private ArctanCommand atanCommand = null;
+    private ArctanCommand atanCommand = null;
 
     // variables 
     private Variables variables = new Variables();
@@ -320,7 +358,7 @@ public class FXMLDocumentController implements Initializable {
         tanCommand = new TanCommand(stack);
         asinCommand = new ArcsinCommand(stack);
         acosCommand = new ArccosCommand(stack);
-        //atancommand = new ArctanCommand(stack);
+        atanCommand = new ArctanCommand(stack);
     }
 
     /**
@@ -362,18 +400,38 @@ public class FXMLDocumentController implements Initializable {
         });
     }
 
+    /**
+     * Getter method of the stack attribute.
+     *
+     * @return The stack attribute.
+     */
     public ComplexStack getStack() {
         return stack;
     }
 
+    /**
+     * Getter method of the variables attribute.
+     *
+     * @return The variables attribute.
+     */
     public Variables getVariables() {
         return variables;
     }
 
+    /**
+     * Getter method of the functions attribute.
+     *
+     * @return The functions attribute.
+     */
     public ArrayList<Function> getFunctions() {
         return functions;
     }
 
+    /**
+     * Setter method of the functions attribute.
+     *
+     * @param functions The new functions value.
+     */
     public void setFunctions(ArrayList<Function> functions) {
         this.functions = functions;
     }
@@ -516,127 +574,6 @@ public class FXMLDocumentController implements Initializable {
         refreshStack();
     }
 
-    @FXML
-    private void modulus(ActionEvent event) {
-        try {
-            modCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform modulus with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void arg(ActionEvent event) {
-        try {
-            argCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform argument with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void power(ActionEvent event) {
-        try {
-            powCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform power, insufficient number of elements");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void exponential(ActionEvent event) {
-        try {
-            expCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform exponential with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void naturalLogarithm(ActionEvent event) {
-        try {
-            logCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform natural logarithm with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void sine(ActionEvent event) {
-        try {
-            sinCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform sine with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void cosine(ActionEvent event) {
-        try {
-            cosCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform cosine with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void tangent(ActionEvent event) {
-        try {
-            tanCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform tangent with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void arcsin(ActionEvent event) {
-        try {
-            asinCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform arc sine with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void arccos(ActionEvent event) {
-        try {
-            acosCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform arc cosine with empty stack");
-        }
-        // refreshing the listView
-        refreshStack();
-    }
-
-    @FXML
-    private void arctan(ActionEvent event) {
-        /*try {
-            atanCommand.execute();
-        } catch (Exception ex) {
-            showError("Cannot perform arc sine with empty stack");
-        }*/
-        // refreshing the listView
-        refreshStack();
-    }
-
     /**
      * Execute the inversion sign of the last complex number in the stack when
      * button "+-" is clicked
@@ -655,6 +592,193 @@ public class FXMLDocumentController implements Initializable {
     }
 
     /**
+     * Execute the modulus of the last complex number in the stack when "mod" is
+     * clicked.
+     *
+     * @param event Button 'mod' clicked.
+     */
+    @FXML
+    private void modulus(ActionEvent event) {
+        try {
+            modCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform modulus with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the argument of the last complex number in the stack when "mod"
+     * is clicked.
+     *
+     * @param event Button 'arg' clicked.
+     */
+    @FXML
+    private void arg(ActionEvent event) {
+        try {
+            argCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform argument with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the power of the second complex number in the stack elevated by
+     * the first element when "pow" is clicked.
+     *
+     * @param event Button 'pow' clicked.
+     */
+    @FXML
+    private void power(ActionEvent event) {
+        try {
+            powCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform power, insufficient number of elements");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the exponential of the last complex number in the stack when
+     * "exp" is clicked.
+     *
+     * @param event Button 'exp' clicked.
+     */
+    @FXML
+    private void exponential(ActionEvent event) {
+        try {
+            expCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform exponential with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the natural logarithm of the last complex number in the stack
+     * when "log" is clicked.
+     *
+     * @param event Button 'log' clicked.
+     */
+    @FXML
+    private void naturalLogarithm(ActionEvent event) {
+        try {
+            logCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform natural logarithm with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the sine of the last complex number in the stack when "sin" is
+     * clicked.
+     *
+     * @param event Button 'sin' clicked.
+     */
+    @FXML
+    private void sine(ActionEvent event) {
+        try {
+            sinCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform sine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the cosine of the last complex number in the stack when "cos" is
+     * clicked.
+     *
+     * @param event Button 'cos' clicked.
+     */
+    @FXML
+    private void cosine(ActionEvent event) {
+        try {
+            cosCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform cosine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the tangent of the last complex number in the stack when "tan" is
+     * clicked.
+     *
+     * @param event Button 'tan' clicked.
+     */
+    @FXML
+    private void tangent(ActionEvent event) {
+        try {
+            tanCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform tangent with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the arc sine of the last complex number in the stack when
+     * "arcsin" is clicked.
+     *
+     * @param event Button 'arcsin' clicked.
+     */
+    @FXML
+    private void arcsin(ActionEvent event) {
+        try {
+            asinCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform arc sine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the arc cosine of the last complex number in the stack when
+     * "arccos" is clicked.
+     *
+     * @param event Button 'arccos' clicked.
+     */
+    @FXML
+    private void arccos(ActionEvent event) {
+        try {
+            acosCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform arc cosine with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
+     * Execute the arc tangent of the last complex number in the stack when
+     * "arctan" is clicked.
+     *
+     * @param event Button 'arctan' clicked.
+     */
+    @FXML
+    private void arctan(ActionEvent event) {
+        try {
+            atanCommand.execute();
+        } catch (Exception ex) {
+            showError("Cannot perform arc tangent with empty stack");
+        }
+        // refreshing the listView
+        refreshStack();
+    }
+
+    /**
      * Execute the clear of the stack when button "Clear" is clicked
      *
      * @param event button 'Clear' clicked
@@ -663,6 +787,7 @@ public class FXMLDocumentController implements Initializable {
     private void clear(ActionEvent event) {
         try {
             Alert dialog = new Alert(AlertType.CONFIRMATION, "Are you sure you want to clear the stack?", ButtonType.YES, ButtonType.CANCEL);
+            dialog.setTitle("Confirm");
             dialog.showAndWait();
 
             if (dialog.getResult() == ButtonType.YES) {
@@ -771,6 +896,12 @@ public class FXMLDocumentController implements Initializable {
         variablesComboBox.getSelectionModel().select(index);
     }
 
+    /**
+     * Method of combobox, it is called when the user select a variable. This
+     * method update the view of the variables button.
+     *
+     * @param event When a combo item is selected.
+     */
     @FXML
     private void selectedItemChanged(ActionEvent event) {
         updateText(inVarBtn, ">");
@@ -791,6 +922,8 @@ public class FXMLDocumentController implements Initializable {
             errorLabel.setText("");
             saveVariablesCommand.execute();
             Alert dialog = new Alert(AlertType.INFORMATION, "Variables saved correctly", ButtonType.OK);
+            dialog.setTitle("Information");
+            dialog.setHeaderText("Save completed");
             dialog.showAndWait();
         } catch (Exception ex) {
             showError("Error during save the variables");
@@ -809,9 +942,13 @@ public class FXMLDocumentController implements Initializable {
             errorLabel.setText("");
             restoreVariablesCommand.execute();
             Alert dialog = new Alert(AlertType.INFORMATION, "Variables restored correctly", ButtonType.OK);
+            dialog.setTitle("Information");
+            dialog.setHeaderText("Restore completed");
             dialog.showAndWait();
         } catch (StackSizeException ex) {
             Alert dialog = new Alert(AlertType.ERROR, "No variables to restore", ButtonType.OK);
+            dialog.setTitle("Error");
+            dialog.setHeaderText("Error during the restore operation");
             dialog.show();
         } catch (VariablesNameException ex) {
         }
@@ -1027,15 +1164,23 @@ public class FXMLDocumentController implements Initializable {
                 refreshFunctionCommands();
             } catch (FileNotFoundException ex) {
                 Alert dialog = new Alert(AlertType.ERROR, "File not found", ButtonType.OK);
+                dialog.setTitle("Error");
+                dialog.setHeaderText("Error during loading the file");
                 dialog.show();
             } catch (IOException ex) {
                 Alert dialog = new Alert(AlertType.ERROR, "During loading file", ButtonType.OK);
+                dialog.setTitle("Error");
+                dialog.setHeaderText("Error during loading the file");
                 dialog.show();
             } catch (NoMatchFoundException ex) {
                 Alert dialog = new Alert(AlertType.ERROR, "File content not valid", ButtonType.OK);
+                dialog.setTitle("Error");
+                dialog.setHeaderText("Error during loading the file");
                 dialog.show();
             } catch (FunctionNameAlreadyExistsException ex) {
                 Alert dialog = new Alert(AlertType.ERROR, "Function name already exists, use a different name", ButtonType.OK);
+                dialog.setTitle("Error");
+                dialog.setHeaderText("Error during loading the file");
                 dialog.show();
             }
         }

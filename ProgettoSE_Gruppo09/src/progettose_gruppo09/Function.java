@@ -141,7 +141,7 @@ public class Function {
             } else if (string.matches("arccos$")) { // the string is an arc cosine operation
                 commands.add(new ArccosCommand(stack));
             } else if (string.matches("arctan$")) { // the string is an arc tangent operation
-                //commands.add(new ArctanCommand(stack));
+                commands.add(new ArctanCommand(stack));
             } else if (string.matches("clear$")) { // the string is a clear operation
                 commands.add(new ClearCommand(stack));
             } else if (string.matches("drop$")) { // the string is a drop operation
