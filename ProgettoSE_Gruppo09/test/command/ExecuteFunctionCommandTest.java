@@ -2,6 +2,8 @@ package command;
 
 import exceptions.VariablesNameException;
 import java.util.ArrayList;
+import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import progettose_gruppo09.Complex;
@@ -59,6 +61,10 @@ public class ExecuteFunctionCommandTest {
 
         ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ drop dup dup"), stack, variables, savedVariables);
         instance.execute();
+
+        assertEquals(stack.size(), 5);
+        assertEquals(stack.peek(), new Complex(0.0, 4.56));
+
     }
 
     /**
@@ -70,6 +76,7 @@ public class ExecuteFunctionCommandTest {
         System.out.println("Test of execute method, of class ExecuteFunctionCommand, when it throws an exception.");
 
         ExecuteFunctionCommand instance = new ExecuteFunctionCommand(new Function("function", "+ - * / drop sqrt"), stack, variables, savedVariables);
+        // expected to throw an exception because the stack doesn't have enough elements
         instance.execute();
     }
 }

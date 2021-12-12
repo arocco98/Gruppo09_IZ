@@ -16,7 +16,7 @@ public class VariablesTest {
      */
     @Test
     public void testGetVariables() {
-        System.out.println("getVariables");
+        System.out.println("Test of getVariables method, of class Variables.");
         // instantiating variables
         Variables instance = new Variables();
         HashMap<Character, Complex> expResult = new HashMap<>();
